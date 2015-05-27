@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension name="dimensionless"/>
-  <Component name="StdwaSymm">
+  <DynamicsProperties name="StdwaSymm">
     <Definition url="/Users/tclose/git/pype9/test/pynn_models/stdwa_symmClass.xml">StdwaSymmClass</Definition>
     <Property units="unitless" name="a">
       <SingleValue>0.001</SingleValue>
@@ -18,7 +18,7 @@
     <Property units="unitless" name="wmax">
       <SingleValue>1.0</SingleValue>
     </Property>
-  </Component>
+  </DynamicsProperties>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>

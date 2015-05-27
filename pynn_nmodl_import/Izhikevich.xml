@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="Izhikevich">
+    <Parameter dimension="per_time" name="a"/>
+    <Parameter dimension="per_time" name="const1_2"/>
+    <Parameter dimension="voltage" name="c"/>
+    <Parameter dimension="per_time" name="b"/>
+    <Parameter dimension="voltage_per_time" name="d"/>
+    <Parameter dimension="current_time_per_voltage" name="Cm"/>    
+    <Parameter dimension="voltage" name="vthresh"/>
+    <EventReceivePort name="incoming_spike"/>
+    <AnalogReceivePort dimension="voltage" name="weight"/>
+    <AnalogReducePort operator="+" dimension="current" name="iExt"/>
+    <EventSendPort name="spike"/>
+    <StateVariable dimension="voltage_per_time" name="u"/>
+    <StateVariable dimension="voltage" name="v"/>
+    <Regime name="subthreshold">
+      <TimeDerivative variable="u">
+        <MathInline>a*(b*v - u)</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="v">
+        <MathInline>-const1*v*v + const2*v + const3 - u + iExt/Cm</MathInline>
+      </TimeDerivative>
+      <OnEvent target_regime="regime_0" port="incoming_spike">
+        <StateAssignment variable="v">
+          <MathInline>v + weight</MathInline>
+        </StateAssignment>
+      </OnEvent>
+      <OnCondition target_regime="regime_0">
+        <Trigger>
+          <MathInline>v &gt; vthresh</MathInline>
+        </Trigger>
+        <StateAssignment variable="u">
+          <MathInline>d + u</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="v">
+          <MathInline>c</MathInline>
+        </StateAssignment>
+        <OutputEvent port="spike"/>
+      </OnCondition>
+    </Regime>
+    <Constant units="per_mV_ms" name="const1" value="0.04"/>
+    <Constant units="per_ms" name="const2" value="5.0"/>
+    <Constant units="mV_per_ms" name="const3" value="140.0"/>    
+  </Dynamics>
+  <DynamicsProperties name="PyNNIzhikevichProperties">
+    <Definition>Izhikevich</Definition>
+    <Property units="nF" name="Cm">
+      <SingleValue>0.001</SingleValue>
+    </Property>
+    <Property units="per_ms" name="a">
+      <SingleValue>0.02</SingleValue>
+    </Property>
+    <Property units="per_ms" name="b">
+      <SingleValue>0.2</SingleValue>
+    </Property>
+    <Property units="mV" name="c">
+      <SingleValue>-65.0</SingleValue>
+    </Property>
+    <Property units="mV_per_ms" name="d">
+      <SingleValue>2.0</SingleValue>
+    </Property>
+    <Property units="mV" name="vthresh">
+      <SingleValue>30.0</SingleValue>
+    </Property>
+  </DynamicsProperties>
+  <Dimension name="per_time_voltage" i="1" l="-2" m="-1" t="2"/>
+  <Dimension i="2" l="-2" m="-1" t="4" name="current_time_per_voltage"/>
+  <Dimension i="1" name="current"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/>  
+  <Unit symbol="mV_per_ms" dimension="voltage_per_time" power="0"/>
+  <Unit symbol="nF" dimension="capacitance" power="-9"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="per_ms" dimension="per_time" power="3"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
+</NineML>

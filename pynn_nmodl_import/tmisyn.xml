@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Component name="tmisyn">
+  <DynamicsProperties name="tmisyn">
     <Definition url="/Users/tclose/git/pype9/test/pynn_models/tmisynClass.xml">tmisynClass</Definition>
     <Property units="ms" name="tau">
       <SingleValue>3.0</SingleValue>
     </Property>
-  </Component>
+  </DynamicsProperties>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>
 </NineML>

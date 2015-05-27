@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="ExpISyn">
+    <Parameter dimension="time" name="tau"/>
+    <EventReceivePort name="incoming_spike"/>
+    <AnalogReceivePort dimension="current" name="weight"/>
+    <AnalogSendPort dimension="current" name="i"/>
+    <StateVariable dimension="current" name="i"/>
+    <Regime name="regime_0">
+      <TimeDerivative variable="i">
+        <MathInline>-i/tau</MathInline>
+      </TimeDerivative>
+      <OnEvent target_regime="regime_0" port="incoming_spike">
+        <StateAssignment variable="i">
+          <MathInline>i - weight</MathInline>
+        </StateAssignment>
+      </OnEvent>
+    </Regime>
+  </Dynamics>  
+  <DynamicsProperties name="PyNNExpISynPropertis">
+    <Definition>ExpISyn</Definition>
+    <Property units="ms" name="tau">
+      <SingleValue>0.1</SingleValue>
+    </Property>
+  </DynamicsProperties>
+  <Dimension name="time" t="1"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>  
+</NineML>

@@ -3,13 +3,13 @@
   <Dimension i="1" name="current"/>
   <Dimension name="time" t="1"/>
   <Dynamics name="tmisynClass">
+    <Parameter dimension="time" name="tau"/>
+    <AnalogSendPort dimension="current" name="i"/>
+    <StateVariable dimension="current" name="i"/>
     <Regime name="regime_0">
       <TimeDerivative variable="i">
         <MathInline>-i/tau</MathInline>
       </TimeDerivative>
     </Regime>
-    <Parameter dimension="time" name="tau"/>
-    <StateVariable dimension="current" name="i"/>
-    <AnalogSendPort dimension="current" name="i"/>
   </Dynamics>
 </NineML>

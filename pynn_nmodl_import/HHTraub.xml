@@ -1,11 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dimension i="2" l="-4" m="-1" t="3" name="conductanceDensity"/>
-  <Dimension name="time" t="1"/>
-  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
-  <Dimension i="1" name="currentDensity" l="-2"/>
-  <Dimension name="dimensionless"/>
-  <Dynamics name="hh_traubClass">
+  <Dynamics name="HHTraub">
+    <Parameter dimension="voltage" name="el"/>
+    <Parameter dimension="conductanceDensity" name="gkbar"/>
+    <Parameter dimension="conductanceDensity" name="gnabar"/>
+    <Parameter dimension="voltage" name="vT"/>
+    <Parameter dimension="voltage" name="unitmV"/>
+    <Parameter dimension="conductanceDensity" name="gl"/>
+    <Parameter dimension="time" name="unitms"/>
+    <AnalogReceivePort dimension="voltage" name="ena"/>
+    <AnalogReceivePort dimension="voltage" name="ek"/>
+    <AnalogReceivePort dimension="voltage" name="v"/>
+    <AnalogSendPort dimension="currentDensity" name="ik"/>
+    <AnalogSendPort dimension="currentDensity" name="il"/>
+    <AnalogSendPort dimension="currentDensity" name="ina"/>
+    <StateVariable dimension="dimensionless" name="h"/>
+    <StateVariable dimension="dimensionless" name="m"/>
+    <StateVariable dimension="dimensionless" name="n"/>
+    <Regime name="regime_0">
+      <TimeDerivative variable="h">
+        <MathInline>(-h + hinf)/(htau*unitms)</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="m">
+        <MathInline>(-m + minf)/(mtau*unitms)</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="n">
+        <MathInline>(-n + ninf)/(ntau*unitms)</MathInline>
+      </TimeDerivative>
+    </Regime>
     <Alias name="vtrap_u__d__unitmV__m__40_5">
       <MathInline>((abs(u/(5*unitmV) - 8) &lt; 1.0e-6) ? ( -1/2*u/unitmV + 25 ) : ( (u/unitmV - 40)/(exp((1/5)*u/unitmV - 8) - 1) ))</MathInline>
     </Alias>
@@ -78,32 +100,37 @@
     <Alias name="vtrap_13__m__u__d__unitmV_4">
       <MathInline>((abs(-u/(4*unitmV) + 13/4) &lt; 1.0e-6) ? ( (1/2)*u/unitmV - 5/2 ) : ( (-u/unitmV + 13)/(exp(-1/4*u/unitmV + 13/4) - 1) ))</MathInline>
     </Alias>
-    <Regime name="regime_0">
-      <TimeDerivative variable="h">
-        <MathInline>(-h + hinf)/(htau*unitms)</MathInline>
-      </TimeDerivative>
-      <TimeDerivative variable="m">
-        <MathInline>(-m + minf)/(mtau*unitms)</MathInline>
-      </TimeDerivative>
-      <TimeDerivative variable="n">
-        <MathInline>(-n + ninf)/(ntau*unitms)</MathInline>
-      </TimeDerivative>
-    </Regime>
-    <Parameter dimension="voltage" name="el"/>
-    <Parameter dimension="conductanceDensity" name="gkbar"/>
-    <Parameter dimension="conductanceDensity" name="gnabar"/>
-    <Parameter dimension="voltage" name="vT"/>
-    <Parameter dimension="voltage" name="unitmV"/>
-    <Parameter dimension="conductanceDensity" name="gl"/>
-    <Parameter dimension="time" name="unitms"/>
-    <StateVariable dimension="dimensionless" name="h"/>
-    <StateVariable dimension="dimensionless" name="m"/>
-    <StateVariable dimension="dimensionless" name="n"/>
-    <AnalogSendPort dimension="currentDensity" name="ik"/>
-    <AnalogSendPort dimension="currentDensity" name="il"/>
-    <AnalogSendPort dimension="currentDensity" name="ina"/>
-    <AnalogReceivePort dimension="voltage" name="ena"/>
-    <AnalogReceivePort dimension="voltage" name="ek"/>
-    <AnalogReceivePort dimension="voltage" name="v"/>
-  </Dynamics>
+  </Dynamics>  
+  <DynamicsProperties name="HHTraubProperties">
+    <Definition>HHTraub</Definition>
+    <Property units="mV" name="el">
+      <SingleValue>-60.0</SingleValue>
+    </Property>
+    <Property units="S_per_cm2" name="gkbar">
+      <SingleValue>0.006</SingleValue>
+    </Property>
+    <Property units="S_per_cm2" name="gl">
+      <SingleValue>1e-05</SingleValue>
+    </Property>
+    <Property units="S_per_cm2" name="gnabar">
+      <SingleValue>0.02</SingleValue>
+    </Property>
+    <Property units="mV" name="unitmV">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="ms" name="unitms">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="mV" name="vT">
+      <SingleValue>-63.0</SingleValue>
+    </Property>
+  </DynamicsProperties>
+  <Dimension i="2" l="-4" m="-1" t="3" name="conductanceDensity"/>
+  <Dimension name="time" t="1"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="1" name="currentDensity" l="-2"/>
+  <Dimension name="dimensionless"/>  
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="S_per_cm2" dimension="conductanceDensity" power="4"/>
 </NineML>

@@ -3,6 +3,24 @@
   <Dimension name="dimensionless"/>
   <Dimension name="time" t="1"/>
   <Dynamics name="StdwaSoftClass">
+    <Parameter dimension="dimensionless" name="wprune"/>
+    <Parameter dimension="dimensionless" name="allow_update_on_post"/>
+    <Parameter dimension="time" name="tauLTP"/>
+    <Parameter dimension="dimensionless" name="aLTD"/>
+    <Parameter dimension="dimensionless" name="wmax"/>
+    <Parameter dimension="dimensionless" name="wmin"/>
+    <Parameter dimension="time" name="tauLTD"/>
+    <Parameter dimension="dimensionless" name="aLTP"/>
+    <EventReceivePort name="incoming_spike"/>
+    <AnalogReceivePort dimension="dimensionless" name="w"/>
+    <AnalogSendPort dimension="dimensionless" name="wsyn"/>
+    <StateVariable dimension="time" name="tlast_post"/>
+    <StateVariable dimension="time" name="tlast_pre"/>
+    <StateVariable dimension="dimensionless" name="deltaw"/>
+    <StateVariable dimension="time" name="interval"/>
+    <StateVariable dimension="dimensionless" name="M"/>
+    <StateVariable dimension="dimensionless" name="P"/>
+    <StateVariable dimension="dimensionless" name="wsyn"/>
     <Regime name="regime_0">
       <OnEvent target_regime="regime_0" port="incoming_spike">
         <StateAssignment variable="tlast_post">
@@ -28,23 +46,5 @@
         </StateAssignment>
       </OnEvent>
     </Regime>
-    <Parameter dimension="dimensionless" name="wprune"/>
-    <Parameter dimension="dimensionless" name="allow_update_on_post"/>
-    <Parameter dimension="time" name="tauLTP"/>
-    <Parameter dimension="dimensionless" name="aLTD"/>
-    <Parameter dimension="dimensionless" name="wmax"/>
-    <Parameter dimension="dimensionless" name="wmin"/>
-    <Parameter dimension="time" name="tauLTD"/>
-    <Parameter dimension="dimensionless" name="aLTP"/>
-    <StateVariable dimension="time" name="tlast_post"/>
-    <StateVariable dimension="time" name="tlast_pre"/>
-    <StateVariable dimension="dimensionless" name="deltaw"/>
-    <StateVariable dimension="time" name="interval"/>
-    <StateVariable dimension="dimensionless" name="M"/>
-    <StateVariable dimension="dimensionless" name="P"/>
-    <StateVariable dimension="dimensionless" name="wsyn"/>
-    <AnalogSendPort dimension="dimensionless" name="wsyn"/>
-    <EventReceivePort name="incoming_spike"/>
-    <AnalogReceivePort dimension="dimensionless" name="w"/>
   </Dynamics>
 </NineML>

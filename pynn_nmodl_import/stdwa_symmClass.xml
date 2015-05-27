@@ -2,9 +2,20 @@
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension name="dimensionless"/>
   <Dynamics name="StdwaSymmClass">
-    <Alias name="tas">
-      <MathInline>tau_a*tau_a</MathInline>
-    </Alias>
+    <Parameter dimension="dimensionless" name="a"/>
+    <Parameter dimension="time" name="tau_b"/>
+    <Parameter dimension="dimensionless" name="wmax"/>
+    <Parameter dimension="dimensionless" name="allow_update_on_post"/>
+    <Parameter dimension="time" name="tau_a"/>
+    <EventReceivePort name="incoming_spike"/>
+    <AnalogReceivePort dimension="dimensionless" name="w"/>
+    <AnalogSendPort dimension="dimensionless" name="wsyn"/>
+    <StateVariable dimension="time" name="tlast_post"/>
+    <StateVariable dimension="dimensionless" name="f"/>
+    <StateVariable dimension="dimensionless" name="deltaw"/>
+    <StateVariable dimension="time" name="interval"/>
+    <StateVariable dimension="time" name="tlast_pre"/>
+    <StateVariable dimension="dimensionless" name="wsyn"/>
     <Regime name="regime_0">
       <OnEvent target_regime="regime_0" port="incoming_spike">
         <StateAssignment variable="tlast_post">
@@ -27,20 +38,9 @@
         </StateAssignment>
       </OnEvent>
     </Regime>
-    <Parameter dimension="dimensionless" name="a"/>
-    <Parameter dimension="time" name="tau_b"/>
-    <Parameter dimension="dimensionless" name="wmax"/>
-    <Parameter dimension="dimensionless" name="allow_update_on_post"/>
-    <Parameter dimension="time" name="tau_a"/>
-    <StateVariable dimension="time" name="tlast_post"/>
-    <StateVariable dimension="dimensionless" name="f"/>
-    <StateVariable dimension="dimensionless" name="deltaw"/>
-    <StateVariable dimension="time" name="interval"/>
-    <StateVariable dimension="time" name="tlast_pre"/>
-    <StateVariable dimension="dimensionless" name="wsyn"/>
-    <AnalogSendPort dimension="dimensionless" name="wsyn"/>
-    <EventReceivePort name="incoming_spike"/>
-    <AnalogReceivePort dimension="dimensionless" name="w"/>
+    <Alias name="tas">
+      <MathInline>tau_a*tau_a</MathInline>
+    </Alias>
   </Dynamics>
   <Dimension name="time" t="1"/>
 </NineML>

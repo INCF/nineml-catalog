@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension name="per_time" t="-1"/>
-  <Component name="StdwaVogels2011">
+  <DynamicsProperties name="StdwaVogels2011">
     <Definition url="/Users/tclose/git/pype9/test/pynn_models/stdwa_vogels2011Class.xml">StdwaVogels2011Class</Definition>
     <Property units="unitless" name="allow_update_on_post">
       <SingleValue>1.0</SingleValue>
@@ -21,7 +21,7 @@
     <Property units="unitless" name="wmin">
       <SingleValue>0.0</SingleValue>
     </Property>
-  </Component>
+  </DynamicsProperties>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>
