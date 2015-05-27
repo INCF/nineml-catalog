@@ -1,36 +1,45 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dynamics name="IFRefrac">
+  <Dynamics name="AdExpIaF">
+    <Parameter dimension="conductance" name="a"/>
+    <Parameter dimension="voltage" name="EL"/>
     <Parameter dimension="voltage" name="vspike"/>
     <Parameter dimension="capacitance" name="cm"/>
+    <Parameter dimension="voltage" name="vpeak"/>
     <Parameter dimension="time" name="spikewidth"/>
     <Parameter dimension="time" name="trefrac"/>
     <Parameter dimension="voltage" name="vreset"/>
-    <Parameter dimension="conductance" name="g_zero"/>
-    <Parameter dimension="conductance" name="g_on"/>
+    <Parameter dimension="current" name="b"/>
+    <Parameter dimension="time" name="tauw"/>
+    <Parameter dimension="voltage" name="delta"/>
+    <Parameter dimension="conductance" name="GL"/>
     <Parameter dimension="voltage" name="vthresh"/>
     <AnalogReducePort operator="+" dimension="current" name="iExt"/>
     <EventSendPort name="spike"/>
     <AnalogSendPort dimension="current" name="i"/>
     <StateVariable dimension="time" name="last_transition"/>
-    <StateVariable dimension="conductance" name="g"/>
+    <StateVariable dimension="conductance" name="grefrac"/>
+    <StateVariable dimension="current" name="w"/>
     <StateVariable dimension="voltage" name="v"/>
     <Regime name="regime_0">
+      <TimeDerivative variable="w">
+        <MathInline>(a*(-EL + v) - w)/tauw</MathInline>
+      </TimeDerivative>
       <TimeDerivative variable="v">
         <MathInline>(i + iExt)/cm</MathInline>
       </TimeDerivative>
       <OnCondition target_regime="regime_1">
         <Trigger>
-          <MathInline>v &gt; vthresh</MathInline>
+          <MathInline>v &gt; vspike</MathInline>
         </Trigger>
         <StateAssignment variable="last_transition">
           <MathInline>t</MathInline>
         </StateAssignment>
-        <StateAssignment variable="g">
-          <MathInline>g_on</MathInline>
+        <StateAssignment variable="w">
+          <MathInline>b + w</MathInline>
         </StateAssignment>
         <StateAssignment variable="v">
-          <MathInline>vspike</MathInline>
+          <MathInline>vpeak</MathInline>
         </StateAssignment>
         <OutputEvent port="spike"/>
       </OnCondition>
@@ -43,8 +52,8 @@
         <StateAssignment variable="last_transition">
           <MathInline>t</MathInline>
         </StateAssignment>
-        <StateAssignment variable="g">
-          <MathInline>((trefrac &gt; spikewidth) ? ( g ) : ( g_zero ))</MathInline>
+        <StateAssignment variable="grefrac">
+          <MathInline>gon</MathInline>
         </StateAssignment>
         <StateAssignment variable="v">
           <MathInline>vreset</MathInline>
@@ -56,40 +65,63 @@
         <Trigger>
           <MathInline>t &gt; last_transition - spikewidth + trefrac</MathInline>
         </Trigger>
-        <StateAssignment variable="g">
-          <MathInline>g_zero</MathInline>
-        </StateAssignment>
         <StateAssignment variable="v">
           <MathInline>vreset</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="grefrac">
+          <MathInline>gzero</MathInline>
         </StateAssignment>
       </OnCondition>
     </Regime>
     <Alias name="i">
-      <MathInline>g*(v - vreset)</MathInline>
+      <MathInline>iexp + irefrac + w</MathInline>
     </Alias>
-  </Dynamics>
-  <DynamicsProperties name="IFRefracProperties">
-    <Definition>IFRefrac</Definition>
+    <Alias name="iexp">
+      <MathInline>-GL*delta*exp((v - vthresh)/delta)</MathInline>
+    </Alias>
+    <Alias name="irefrac">
+      <MathInline>grefrac*(v - vreset)</MathInline>
+    </Alias>
+    <Constant units="uS" name="gzero" value="0.0"/>
+    <Constant units="uS" name="gon" value="1e6"/>
+  </Dynamics>  
+  <DynamicsProperties name="AdExpIaFProperties">
+    <Definition>AdExpIaF</Definition>
+    <Property units="mV" name="EL">
+      <SingleValue>-70.6</SingleValue>
+    </Property>
+    <Property units="uS" name="GL">
+      <SingleValue>0.03</SingleValue>
+    </Property>
+    <Property units="uS" name="a">
+      <SingleValue>0.004</SingleValue>
+    </Property>
+    <Property units="nA" name="b">
+      <SingleValue>0.0805</SingleValue>
+    </Property>
     <Property units="uF" name="cm">
       <SingleValue>1.0</SingleValue>
     </Property>
-    <Property units="uS" name="g_on">
-      <SingleValue>1e+12</SingleValue>
-    </Property>
-    <Property units="uS" name="g_zero">
-      <SingleValue>0.0</SingleValue>
+    <Property units="mV" name="delta">
+      <SingleValue>2.0</SingleValue>
     </Property>
     <Property units="ms" name="spikewidth">
       <SingleValue>1e-12</SingleValue>
     </Property>
+    <Property units="ms" name="tauw">
+      <SingleValue>144.0</SingleValue>
+    </Property>
     <Property units="ms" name="trefrac">
       <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="mV" name="vpeak">
+      <SingleValue>0.0</SingleValue>
     </Property>
     <Property units="mV" name="vreset">
       <SingleValue>-60.0</SingleValue>
     </Property>
     <Property units="mV" name="vspike">
-      <SingleValue>40.0</SingleValue>
+      <SingleValue>-40.0</SingleValue>
     </Property>
     <Property units="mV" name="vthresh">
       <SingleValue>-50.0</SingleValue>
@@ -100,8 +132,9 @@
   <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension name="time" t="1"/>
-  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
-  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
-  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
-  <Dimension name="time" t="1"/>
+  <Unit symbol="nA" dimension="current" power="-9"/>
+  <Unit symbol="uS" dimension="conductance" power="-6"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>  
 </NineML>
