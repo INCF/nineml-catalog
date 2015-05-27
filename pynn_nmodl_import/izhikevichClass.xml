@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dimension name="per_time" t="-1"/>
+  <Dimension i="2" l="-2" m="-1" t="4" name="current_time_per_voltage"/>
+  <Dimension i="1" name="current"/>
+  <Dimension i="1" l="-2" m="-1" t="3" name="per_voltage"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/>
+  <Dynamics name="IzhikevichClass">
+    <AnalogReducePort operator="+" dimension="current" name="iExt"/>
+    <Alias name="i">
+      <MathInline>-Cm*(const1*const1_2*(v*v) + const2*v + const3 - u)</MathInline>
+    </Alias>
+    <Regime name="regime_0">
+      <OnCondition target_regime="regime_0">
+        <Trigger>
+          <MathInline>v &gt; vthresh</MathInline>
+        </Trigger>
+        <OutputEvent port="spike"/>
+        <StateAssignment variable="u">
+          <MathInline>d + u</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="v">
+          <MathInline>c</MathInline>
+        </StateAssignment>
+      </OnCondition>
+      <TimeDerivative variable="u">
+        <MathInline>a*(b*v - u)</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="v">
+        <MathInline>(i + iExt)/cm</MathInline>
+      </TimeDerivative>
+      <OnEvent target_regime="regime_0" port="incoming_spike">
+        <StateAssignment variable="v">
+          <MathInline>v + weight</MathInline>
+        </StateAssignment>
+      </OnEvent>
+    </Regime>
+    <Parameter dimension="per_time" name="a"/>
+    <Parameter dimension="per_time" name="const1_2"/>
+    <Parameter dimension="voltage" name="c"/>
+    <Parameter dimension="per_time" name="b"/>
+    <Parameter dimension="voltage_per_time" name="d"/>
+    <Parameter dimension="current_time_per_voltage" name="Cm"/>
+    <Parameter dimension="current_time_per_voltage" name="cm"/>
+    <Parameter dimension="per_voltage" name="const1"/>
+    <Parameter dimension="voltage_per_time" name="const3"/>
+    <Parameter dimension="per_time" name="const2"/>
+    <Parameter dimension="voltage" name="vthresh"/>
+    <EventSendPort name="spike"/>
+    <StateVariable dimension="voltage_per_time" name="u"/>
+    <StateVariable dimension="voltage" name="v"/>
+    <AnalogSendPort dimension="current" name="i"/>
+    <EventReceivePort name="incoming_spike"/>
+    <AnalogReceivePort dimension="voltage" name="weight"/>
+  </Dynamics>
+</NineML>

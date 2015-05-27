@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="StdwaSAClass">
+    <Regime name="regime_0">
+      <OnEvent target_regime="regime_0" port="incoming_spike">
+        <StateAssignment variable="tlast_post">
+          <MathInline>((w &gt;= 0) ? ( tlast_post ) : ( t ))</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="tlast_pre">
+          <MathInline>((w &gt;= 0) ? ( t ) : ( tlast_pre ))</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="deltaw">
+          <MathInline>((allow_update_on_post || w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( M*wmax*exp(interval/tauLTD) + deltaw ) : ( P*wmax*exp(-interval/tauLTP) + deltaw )))</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="interval">
+          <MathInline>((w &gt;= 0) ? ( -t + tlast_post ) : ( t - tlast_pre ))</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="M">
+          <MathInline>((w &gt;= 0) ? ( M ) : ( M*exp((-t + tlast_post)/tauLTD) - aLTD ))</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="P">
+          <MathInline>((w &gt;= 0) ? ( P*exp((-t + tlast_pre)/tauLTP) + aLTP ) : ( P ))</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="wsyn">
+          <MathInline>(((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &lt; wmin) ? ( wmin ) : (((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((allow_update_on_post || w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
+        </StateAssignment>
+      </OnEvent>
+    </Regime>
+    <Parameter dimension="dimensionless" name="allow_update_on_post"/>
+    <Parameter dimension="time" name="tauLTP"/>
+    <Parameter dimension="dimensionless" name="aLTD"/>
+    <Parameter dimension="dimensionless" name="wmax"/>
+    <Parameter dimension="dimensionless" name="wmin"/>
+    <Parameter dimension="time" name="tauLTD"/>
+    <Parameter dimension="dimensionless" name="aLTP"/>
+    <StateVariable dimension="time" name="tlast_post"/>
+    <StateVariable dimension="time" name="tlast_pre"/>
+    <StateVariable dimension="dimensionless" name="deltaw"/>
+    <StateVariable dimension="time" name="interval"/>
+    <StateVariable dimension="dimensionless" name="M"/>
+    <StateVariable dimension="dimensionless" name="P"/>
+    <StateVariable dimension="dimensionless" name="wsyn"/>
+    <AnalogSendPort dimension="dimensionless" name="wsyn"/>
+    <EventReceivePort name="incoming_spike"/>
+    <AnalogReceivePort dimension="dimensionless" name="w"/>
+  </Dynamics>
+  <Dimension name="dimensionless"/>
+  <Dimension name="time" t="1"/>
+</NineML>

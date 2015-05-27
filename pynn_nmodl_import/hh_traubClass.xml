@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dimension i="2" l="-4" m="-1" t="3" name="conductanceDensity"/>
+  <Dimension name="time" t="1"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="1" name="currentDensity" l="-2"/>
+  <Dimension name="dimensionless"/>
+  <Dynamics name="hh_traubClass">
+    <Alias name="vtrap_u__d__unitmV__m__40_5">
+      <MathInline>((abs(u/(5*unitmV) - 8) &lt; 1.0e-6) ? ( -1/2*u/unitmV + 25 ) : ( (u/unitmV - 40)/(exp((1/5)*u/unitmV - 8) - 1) ))</MathInline>
+    </Alias>
+    <Alias name="minf">
+      <MathInline>alpha__tmp/sum__tmp</MathInline>
+    </Alias>
+    <Alias name="ik">
+      <MathInline>gk*(-ek + v)</MathInline>
+    </Alias>
+    <Alias name="il">
+      <MathInline>gl*(-el + v)</MathInline>
+    </Alias>
+    <Alias name="mtau">
+      <MathInline>1.0/sum__tmp</MathInline>
+    </Alias>
+    <Alias name="beta__tmp1">
+      <MathInline>4/(exp(-1/5*u/unitmV + 8) + 1)</MathInline>
+    </Alias>
+    <Alias name="gk">
+      <MathInline>gkbar*(n*n*n*n)</MathInline>
+    </Alias>
+    <Alias name="ina">
+      <MathInline>gna*(-ena + v)</MathInline>
+    </Alias>
+    <Alias name="ntau">
+      <MathInline>1.0/sum</MathInline>
+    </Alias>
+    <Alias name="sum">
+      <MathInline>alpha + beta</MathInline>
+    </Alias>
+    <Alias name="hinf">
+      <MathInline>alpha__tmp1/sum__tmp1</MathInline>
+    </Alias>
+    <Alias name="htau">
+      <MathInline>1.0/sum__tmp1</MathInline>
+    </Alias>
+    <Alias name="beta__tmp">
+      <MathInline>0.28*vtrap_u__d__unitmV__m__40_5</MathInline>
+    </Alias>
+    <Alias name="sum__tmp">
+      <MathInline>alpha__tmp + beta__tmp</MathInline>
+    </Alias>
+    <Alias name="beta">
+      <MathInline>0.5*exp(-1/40*u/unitmV + 1/4)</MathInline>
+    </Alias>
+    <Alias name="alpha__tmp1">
+      <MathInline>0.128*exp(-1/18*u/unitmV + 17/18)</MathInline>
+    </Alias>
+    <Alias name="alpha">
+      <MathInline>0.032*vtrap_15__m__u__d__unitmV_5</MathInline>
+    </Alias>
+    <Alias name="vtrap_15__m__u__d__unitmV_5">
+      <MathInline>((abs(-u/(5*unitmV) + 3) &lt; 1.0e-6) ? ( (1/2)*u/unitmV - 5/2 ) : ( (-u/unitmV + 15)/(exp(-1/5*u/unitmV + 3) - 1) ))</MathInline>
+    </Alias>
+    <Alias name="sum__tmp1">
+      <MathInline>alpha__tmp1 + beta__tmp1</MathInline>
+    </Alias>
+    <Alias name="alpha__tmp">
+      <MathInline>0.32*vtrap_13__m__u__d__unitmV_4</MathInline>
+    </Alias>
+    <Alias name="gna">
+      <MathInline>gnabar*h*(m*m*m)</MathInline>
+    </Alias>
+    <Alias name="u">
+      <MathInline>v - vT</MathInline>
+    </Alias>
+    <Alias name="ninf">
+      <MathInline>alpha/sum</MathInline>
+    </Alias>
+    <Alias name="vtrap_13__m__u__d__unitmV_4">
+      <MathInline>((abs(-u/(4*unitmV) + 13/4) &lt; 1.0e-6) ? ( (1/2)*u/unitmV - 5/2 ) : ( (-u/unitmV + 13)/(exp(-1/4*u/unitmV + 13/4) - 1) ))</MathInline>
+    </Alias>
+    <Regime name="regime_0">
+      <TimeDerivative variable="h">
+        <MathInline>(-h + hinf)/(htau*unitms)</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="m">
+        <MathInline>(-m + minf)/(mtau*unitms)</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="n">
+        <MathInline>(-n + ninf)/(ntau*unitms)</MathInline>
+      </TimeDerivative>
+    </Regime>
+    <Parameter dimension="voltage" name="el"/>
+    <Parameter dimension="conductanceDensity" name="gkbar"/>
+    <Parameter dimension="conductanceDensity" name="gnabar"/>
+    <Parameter dimension="voltage" name="vT"/>
+    <Parameter dimension="voltage" name="unitmV"/>
+    <Parameter dimension="conductanceDensity" name="gl"/>
+    <Parameter dimension="time" name="unitms"/>
+    <StateVariable dimension="dimensionless" name="h"/>
+    <StateVariable dimension="dimensionless" name="m"/>
+    <StateVariable dimension="dimensionless" name="n"/>
+    <AnalogSendPort dimension="currentDensity" name="ik"/>
+    <AnalogSendPort dimension="currentDensity" name="il"/>
+    <AnalogSendPort dimension="currentDensity" name="ina"/>
+    <AnalogReceivePort dimension="voltage" name="ena"/>
+    <AnalogReceivePort dimension="voltage" name="ek"/>
+    <AnalogReceivePort dimension="voltage" name="v"/>
+  </Dynamics>
+</NineML>

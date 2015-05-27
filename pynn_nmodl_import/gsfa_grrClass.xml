@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="GsfaGrrClass">
+    <Alias name="i">
+      <MathInline>0.001*g_r*(-E_r + v) + 0.001*g_s*(-E_s + v)</MathInline>
+    </Alias>
+    <Regime name="regime_0">
+      <OnCondition target_regime="regime_0">
+        <Trigger>
+          <MathInline>v &gt; vthresh</MathInline>
+        </Trigger>
+        <StateAssignment variable="g_s">
+          <MathInline>g_s + q_s</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="g_r">
+          <MathInline>g_r + q_r</MathInline>
+        </StateAssignment>
+      </OnCondition>
+      <TimeDerivative variable="g_s">
+        <MathInline>-g_s/tau_s</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="g_r">
+        <MathInline>-g_r/tau_r</MathInline>
+      </TimeDerivative>
+    </Regime>
+    <Parameter dimension="voltage" name="E_s"/>
+    <Parameter dimension="voltage" name="E_r"/>
+    <Parameter dimension="conductance" name="q_s"/>
+    <Parameter dimension="conductance" name="q_r"/>
+    <Parameter dimension="time" name="tau_r"/>
+    <Parameter dimension="time" name="tau_s"/>
+    <Parameter dimension="voltage" name="vthresh"/>
+    <StateVariable dimension="conductance" name="g_s"/>
+    <StateVariable dimension="conductance" name="g_r"/>
+    <AnalogSendPort dimension="current" name="i"/>
+    <AnalogReceivePort dimension="voltage" name="v"/>
+  </Dynamics>
+  <Dimension i="1" name="current"/>
+  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension name="time" t="1"/>
+</NineML>

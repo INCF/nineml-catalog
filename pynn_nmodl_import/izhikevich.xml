@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dimension name="per_time" t="-1"/>
+  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
+  <Component name="Izhikevich">
+    <Definition url="/Users/tclose/git/pype9/test/pynn_models/izhikevichClass.xml">IzhikevichClass</Definition>
+    <Property units="nF" name="Cm">
+      <SingleValue>0.001</SingleValue>
+    </Property>
+    <Property units="per_ms" name="a">
+      <SingleValue>0.02</SingleValue>
+    </Property>
+    <Property units="per_ms" name="b">
+      <SingleValue>0.2</SingleValue>
+    </Property>
+    <Property units="mV" name="c">
+      <SingleValue>-65.0</SingleValue>
+    </Property>
+    <Property units="uF" name="cm">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="per_mV" name="const1">
+      <SingleValue>0.04</SingleValue>
+    </Property>
+    <Property units="per_ms" name="const1_2">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="per_ms" name="const2">
+      <SingleValue>5.0</SingleValue>
+    </Property>
+    <Property units="mV_per_ms" name="const3">
+      <SingleValue>140.0</SingleValue>
+    </Property>
+    <Property units="mV_per_ms" name="d">
+      <SingleValue>2.0</SingleValue>
+    </Property>
+    <Property units="mV" name="vthresh">
+      <SingleValue>30.0</SingleValue>
+    </Property>
+  </Component>
+  <Unit symbol="mV_per_ms" dimension="voltage_per_time" power="0"/>
+  <Unit symbol="nF" dimension="capacitance" power="-9"/>
+  <Dimension i="1" l="-2" m="-1" t="3" name="per_voltage"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="per_ms" dimension="per_time" power="3"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
+  <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/>
+  <Unit symbol="per_mV" dimension="per_voltage" power="3"/>
+</NineML>

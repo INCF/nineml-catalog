@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dimension i="1" name="current"/>
+  <Dynamics name="ResetClass">
+    <AnalogReducePort operator="+" dimension="current" name="iExt"/>
+    <Regime name="regime_0">
+      <TimeDerivative variable="v">
+        <MathInline>iExt/cm</MathInline>
+      </TimeDerivative>
+      <OnEvent target_regime="regime_1" port="incoming_spike">
+        <OutputEvent port="spike"/>
+        <StateAssignment variable="last_transition">
+          <MathInline>t</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="v">
+          <MathInline>vspike</MathInline>
+        </StateAssignment>
+      </OnEvent>
+    </Regime>
+    <Regime name="regime_1">
+      <OnCondition target_regime="regime_0">
+        <Trigger>
+          <MathInline>t &gt; last_transition + spikewidth</MathInline>
+        </Trigger>
+        <StateAssignment variable="v">
+          <MathInline>vreset</MathInline>
+        </StateAssignment>
+      </OnCondition>
+    </Regime>
+    <Parameter dimension="voltage" name="vreset"/>
+    <Parameter dimension="voltage" name="vspike"/>
+    <Parameter dimension="time" name="spikewidth"/>
+    <Parameter dimension="capacitance" name="cm"/>
+    <EventSendPort name="spike"/>
+    <StateVariable dimension="time" name="last_transition"/>
+    <StateVariable dimension="voltage" name="v"/>
+    <EventReceivePort name="incoming_spike"/>
+  </Dynamics>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
+  <Dimension name="time" t="1"/>
+</NineML>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Component name="Reset">
+    <Definition url="/Users/tclose/git/pype9/test/pynn_models/resetClass.xml">ResetClass</Definition>
+    <Property units="uF" name="cm">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="ms" name="spikewidth">
+      <SingleValue>1e-12</SingleValue>
+    </Property>
+    <Property units="mV" name="vreset">
+      <SingleValue>-60.0</SingleValue>
+    </Property>
+    <Property units="mV" name="vspike">
+      <SingleValue>40.0</SingleValue>
+    </Property>
+  </Component>
+  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Dimension name="time" t="1"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
+</NineML>
