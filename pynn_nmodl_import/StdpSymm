@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dimension name="dimensionless"/>
-  <Dynamics name="StdwaSymmClass">
+  <Dynamics name="StdpSymm">
     <Parameter dimension="dimensionless" name="a"/>
     <Parameter dimension="time" name="tau_b"/>
     <Parameter dimension="dimensionless" name="wmax"/>
@@ -28,13 +27,13 @@
           <MathInline>((w &gt;= 0) ? ( t ) : ( tlast_pre ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="deltaw">
-          <MathInline>((allow_update_on_post || w &gt;= 0) ? ( 0.0 ) : ( a*f*wmax + deltaw ))</MathInline>
+          <MathInline>((w &gt;= 0) ? ( 0.0 ) : ( a*f*wmax + deltaw ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="interval">
           <MathInline>((w &gt;= 0) ? ( -t + tlast_post ) : ( t - tlast_pre ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="wsyn">
-          <MathInline>(((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &lt; 0) ? ( 0 ) : (((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((allow_update_on_post || w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
+          <MathInline>(((w &gt;= 0) &amp;&amp; wsyn &lt; 0) ? ( 0 ) : (((w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
         </StateAssignment>
       </OnEvent>
     </Regime>
@@ -42,5 +41,23 @@
       <MathInline>tau_a*tau_a</MathInline>
     </Alias>
   </Dynamics>
+  <DynamicsProperties name="StdpSymmProperties">
+    <Definition>StdpSymm</Definition>
+    <Property units="unitless" name="a">
+      <SingleValue>0.001</SingleValue>
+    </Property>
+    <Property units="ms" name="tau_a">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tau_b">
+      <SingleValue>15.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmax">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+  </DynamicsProperties>
   <Dimension name="time" t="1"/>
+  <Dimension name="dimensionless"/>  
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
 </NineML>

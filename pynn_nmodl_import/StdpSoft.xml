@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dimension name="dimensionless"/>
-  <Dimension name="time" t="1"/>
-  <Dynamics name="StdwaSoftClass">
+  <Dynamics name="StdpSoft">
     <Parameter dimension="dimensionless" name="wprune"/>
     <Parameter dimension="dimensionless" name="allow_update_on_post"/>
     <Parameter dimension="time" name="tauLTP"/>
@@ -47,4 +45,35 @@
       </OnEvent>
     </Regime>
   </Dynamics>
+  <DynamicsProperties name="StdpSoftProperties">
+    <Definition>StdwaSoft</Definition>
+    <Property units="unitless" name="aLTD">
+      <SingleValue>0.00106</SingleValue>
+    </Property>
+    <Property units="unitless" name="aLTP">
+      <SingleValue>0.001</SingleValue>
+    </Property>
+    <Property units="unitless" name="allow_update_on_post">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tauLTD">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tauLTP">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmax">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmin">
+      <SingleValue>0.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wprune">
+      <SingleValue>0.0</SingleValue>
+    </Property>
+  </DynamicsProperties>  
+  <Dimension name="dimensionless"/>
+  <Dimension name="time" t="1"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>  
 </NineML>

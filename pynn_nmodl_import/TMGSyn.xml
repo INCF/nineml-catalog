@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension i="1" name="current"/>
-  <Dynamics name="tmgsynClass">
+  <Dynamics name="TMGSyn">
     <Parameter dimension="time" name="tau"/>
     <Parameter dimension="voltage" name="e"/>
     <AnalogReceivePort dimension="voltage" name="v"/>
@@ -16,6 +16,17 @@
       <MathInline>g*(-e + v)</MathInline>
     </Alias>
   </Dynamics>
+  <DynamicsProperties name="TMGSynProperties">
+    <Definition>TMGSyn</Definition>
+    <Property units="mV" name="e">
+      <SingleValue>-90.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tau">
+      <SingleValue>3.0</SingleValue>
+    </Property>
+  </DynamicsProperties>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>    
   <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension name="time" t="1"/>

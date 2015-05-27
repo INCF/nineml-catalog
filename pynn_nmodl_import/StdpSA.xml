@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dynamics name="StdwaSAClass">
+  <Dynamics name="StdpSA">
     <Parameter dimension="dimensionless" name="allow_update_on_post"/>
     <Parameter dimension="time" name="tauLTP"/>
     <Parameter dimension="dimensionless" name="aLTD"/>
@@ -27,7 +27,7 @@
           <MathInline>((w &gt;= 0) ? ( t ) : ( tlast_pre ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="deltaw">
-          <MathInline>((allow_update_on_post || w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( M*wmax*exp(interval/tauLTD) + deltaw ) : ( P*wmax*exp(-interval/tauLTP) + deltaw )))</MathInline>
+          <MathInline>((w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( M*wmax*exp(interval/tauLTD) + deltaw ) : ( P*wmax*exp(-interval/tauLTP) + deltaw )))</MathInline>
         </StateAssignment>
         <StateAssignment variable="interval">
           <MathInline>((w &gt;= 0) ? ( -t + tlast_post ) : ( t - tlast_pre ))</MathInline>
@@ -39,11 +39,34 @@
           <MathInline>((w &gt;= 0) ? ( P*exp((-t + tlast_pre)/tauLTP) + aLTP ) : ( P ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="wsyn">
-          <MathInline>(((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &lt; wmin) ? ( wmin ) : (((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((allow_update_on_post || w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
+          <MathInline>(((w &gt;= 0) &amp;&amp; wsyn &lt; wmin) ? ( wmin ) : (((w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
         </StateAssignment>
       </OnEvent>
     </Regime>
   </Dynamics>
+  <DynamicsProperties name="StdpSAProperties">
+    <Definition>StdpSA</Definition>
+    <Property units="unitless" name="aLTD">
+      <SingleValue>0.00106</SingleValue>
+    </Property>
+    <Property units="unitless" name="aLTP">
+      <SingleValue>0.001</SingleValue>
+    </Property>
+    <Property units="ms" name="tauLTD">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tauLTP">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmax">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmin">
+      <SingleValue>0.0</SingleValue>
+    </Property>
+  </DynamicsProperties>  
   <Dimension name="dimensionless"/>
   <Dimension name="time" t="1"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>  
 </NineML>

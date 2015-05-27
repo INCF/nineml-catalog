@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension name="dimensionless"/>
-  <Dynamics name="StdwaVogels2011Class">
+  <Dynamics name="StdpVogels2011">
     <Parameter dimension="time" name="tau"/>
     <Parameter dimension="dimensionless" name="allow_update_on_post"/>
     <Parameter dimension="dimensionless" name="eta"/>
@@ -19,13 +19,13 @@
     <Regime name="regime_0">
       <OnEvent target_regime="regime_0" port="incoming_spike">
         <StateAssignment variable="deltaw">
-          <MathInline>((allow_update_on_post || w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( deltaw + eta*(-alpha__branch0 + exp(interval/tau)) ) : ( deltaw + eta*exp(-interval/tau) )))</MathInline>
+          <MathInline>((w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( deltaw + eta*(-alpha__branch0 + exp(interval/tau)) ) : ( deltaw + eta*exp(-interval/tau) )))</MathInline>
         </StateAssignment>
         <StateAssignment variable="tlast_post">
           <MathInline>((w &gt;= 0) ? ( tlast_post ) : ( t ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="wsyn">
-          <MathInline>(((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &lt; wmin) ? ( wmin ) : (((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((allow_update_on_post || w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
+          <MathInline>(((w &gt;= 0) &amp;&amp; wsyn &lt; wmin) ? ( wmin ) : (((w &gt;= 0) &amp;&amp; wsyn &gt; wmax) ? ( wmax ) : ((w &gt;= 0) ? ( deltaw + wsyn ) : ( wsyn ))))</MathInline>
         </StateAssignment>
         <StateAssignment variable="interval">
           <MathInline>((w &gt;= 0) ? ( -t + tlast_post ) : ( t - tlast_pre ))</MathInline>
@@ -39,6 +39,30 @@
       <MathInline>2*rho*tau</MathInline>
     </Alias>
   </Dynamics>
+  <DynamicsProperties name="StdpVogels2011Properties">
+    <Definition>StdpVogels2011</Definition>
+    <Property units="unitless" name="allow_update_on_post">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="eta">
+      <SingleValue>1e-10</SingleValue>
+    </Property>
+    <Property units="per_ms" name="rho">
+      <SingleValue>0.003</SingleValue>
+    </Property>
+    <Property units="ms" name="tau">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmax">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="unitless" name="wmin">
+      <SingleValue>0.0</SingleValue>
+    </Property>
+  </DynamicsProperties>  
   <Dimension name="per_time" t="-1"/>
   <Dimension name="time" t="1"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="per_ms" dimension="per_time" power="3"/>
 </NineML>
