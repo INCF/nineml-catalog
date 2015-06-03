@@ -26,7 +26,7 @@
         <MathInline>(a*(-EL + v) - w)/tauw</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="v">
-        <MathInline>(i + iExt)/Cm</MathInline>
+        <MathInline>-(i + iExt)/Cm</MathInline>
       </TimeDerivative>
       <OnCondition target_regime="regime_1">
         <Trigger>
