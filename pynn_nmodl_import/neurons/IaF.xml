@@ -37,7 +37,7 @@
     </Regime>
   </Dynamics>
   <DynamicsProperties name="IaFProperties">
-    <Definition>IaF</Definition>
+    <Definition name="IaF"/>
     <Property units="uF" name="cm">
       <SingleValue>1.0</SingleValue>
     </Property>

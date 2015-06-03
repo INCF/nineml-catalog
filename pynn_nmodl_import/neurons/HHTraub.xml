@@ -102,7 +102,7 @@
     </Alias>
   </Dynamics>  
   <DynamicsProperties name="HHTraubProperties">
-    <Definition>HHTraub</Definition>
+    <Definition name="HHTraub"/>
     <Property units="mV" name="el">
       <SingleValue>-60.0</SingleValue>
     </Property>

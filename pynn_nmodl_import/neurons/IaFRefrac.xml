@@ -69,7 +69,7 @@
     </Alias>
   </Dynamics>
   <DynamicsProperties name="IaFRefracProperties">
-    <Definition>IaFRefrac</Definition>
+    <Definition name="IaFRefrac"/>
     <Property units="uF" name="cm">
       <SingleValue>1.0</SingleValue>
     </Property>

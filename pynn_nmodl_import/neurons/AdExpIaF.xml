@@ -4,7 +4,7 @@
     <Parameter dimension="conductance" name="a"/>
     <Parameter dimension="voltage" name="EL"/>
     <Parameter dimension="voltage" name="vspike"/>
-    <Parameter dimension="capacitance" name="cm"/>
+    <Parameter dimension="capacitance" name="Cm"/>
     <Parameter dimension="voltage" name="vpeak"/>
     <Parameter dimension="time" name="spikewidth"/>
     <Parameter dimension="time" name="trefrac"/>
@@ -26,7 +26,7 @@
         <MathInline>(a*(-EL + v) - w)/tauw</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="v">
-        <MathInline>(i + iExt)/cm</MathInline>
+        <MathInline>(i + iExt)/Cm</MathInline>
       </TimeDerivative>
       <OnCondition target_regime="regime_1">
         <Trigger>
@@ -86,7 +86,7 @@
     <Constant units="uS" name="gon" value="1e6"/>
   </Dynamics>  
   <DynamicsProperties name="AdExpIaFProperties">
-    <Definition>AdExpIaF</Definition>
+    <Definition name="AdExpIaF"/>
     <Property units="mV" name="EL">
       <SingleValue>-70.6</SingleValue>
     </Property>
@@ -99,7 +99,7 @@
     <Property units="nA" name="b">
       <SingleValue>0.0805</SingleValue>
     </Property>
-    <Property units="uF" name="cm">
+    <Property units="uF" name="Cm">
       <SingleValue>1.0</SingleValue>
     </Property>
     <Property units="mV" name="delta">
