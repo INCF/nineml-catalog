@@ -99,8 +99,8 @@
     <Property units="nA" name="b">
       <SingleValue>0.0805</SingleValue>
     </Property>
-    <Property units="uF" name="Cm">
-      <SingleValue>1.0</SingleValue>
+    <Property units="pF" name="Cm">
+      <SingleValue>1</SingleValue>
     </Property>
     <Property units="mV" name="delta">
       <SingleValue>2.0</SingleValue>
@@ -136,5 +136,5 @@
   <Unit symbol="uS" dimension="conductance" power="-6"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
-  <Unit symbol="uF" dimension="capacitance" power="-6"/>  
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>  
 </NineML>
