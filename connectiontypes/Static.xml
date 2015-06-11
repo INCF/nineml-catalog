@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.incf.org/9ML/0.3">
-  <DynamicsClass name="Static">
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="Static">
     <AnalogPort name="weight" mode="send" dimension="dimensionless"/>
-    <Dynamics>
+    
       <StateVariable name="weight" dimension="dimensionless"/>
       <Regime name="default">
         <TimeDerivative variable="weight">
@@ -10,6 +10,5 @@
         </TimeDerivative>
       </Regime>
     </Dynamics>
-  </DynamicsClass>
   <Dimension name="dimensionless"/>
 </NineML>

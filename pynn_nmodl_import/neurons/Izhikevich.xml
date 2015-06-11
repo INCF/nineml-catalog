@@ -42,7 +42,7 @@
     <Constant units="per_ms" name="const2" value="5.0"/>
     <Constant units="mV_per_ms" name="const3" value="140.0"/>    
   </Dynamics>
-  <DynamicsProperties name="PyNNIzhikevichProperties">
+  <DynamicsProperties name="IzhikevichStd">
     <Definition name="Izhikevich"/>
     <Property units="pF" name="Cm">
       <SingleValue>1</SingleValue>

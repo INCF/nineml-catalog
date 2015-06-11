@@ -7,7 +7,7 @@
       them all as dimensionless.
     </Comment>
   </Annotations>
-  <DynamicsClass name="GuetigSTDP">
+  <Dynamics name="GuetigSTDP">
     <Parameter name="mu" dimension="dimensionless"/>
     <Parameter name="alpha" dimension="dimensionless"/>
     <Parameter name="tau_minus" dimension="dimensionless"/>
@@ -17,7 +17,7 @@
     <AnalogSendPort name="r" dimension="dimensionless"/>
     <AnalogSendPort name="o" dimension="dimensionless"/>
     <AnalogSendPort name="t" dimension="dimensionless"/>
-    <Dynamics>
+    
       <StateVariable name="W" dimension="dimensionless"/>
       <StateVariable name="r" dimension="dimensionless"/>
       <StateVariable name="o" dimension="dimensionless"/>
@@ -46,6 +46,5 @@
         </OnEvent>
       </Regime>
     </Dynamics>
-  </DynamicsClass>
   <Dimension name="dimensionless"/>
 </NineML>
