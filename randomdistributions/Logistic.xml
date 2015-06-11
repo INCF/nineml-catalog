@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <RandomDistribution name="LogisticDistribution">
-    <Parameter name="location"/>
-    <Parameter name="scale"/>
+    <Parameter name="location" dimension="dimensionless"/>
+    <Parameter name="scale" dimension="dimensionless"/>
     <RandomDistribution standardLibrary="http://www.uncertml.org/distributions/logistic.xml"/>
   </RandomDistribution>
 </NineML>

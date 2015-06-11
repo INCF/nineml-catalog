@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <RandomDistribution name="HypergeometricDistribution">
-    <Parameter name="numberOfSuccesses"/>
-    <Parameter name="numberOfTrials"/>
-    <Parameter name="populationSize"/>
+    <Parameter name="numberOfSuccesses" dimension="dimensionless"/>
+    <Parameter name="numberOfTrials" dimension="dimensionless"/>
+    <Parameter name="populationSize" dimension="dimensionless"/>
     <RandomDistribution standardLibrary="http://www.uncertml.org/distributions/hypergeometric.xml"/>
   </RandomDistribution>
 </NineML>

@@ -10,7 +10,7 @@ def check_dir(dir_name):
             try:
                 nineml.read(path)[fname[:-4]]
             except Exception, e:
-                print "----\n{}: {}\n".format(fname, e)
+                print "----\n{}: ({}) {}\n".format(fname, type(e), e)
                 
 check_dir(os.getcwd())
 # print nineml.read(

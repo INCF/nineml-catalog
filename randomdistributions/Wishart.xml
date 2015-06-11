@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <RandomDistribution name="WishartDistribution">
-    <Parameter name="degreesOfFreedom"/>
-    <Parameter name="scaleMatrix"/>
+    <Parameter name="degreesOfFreedom" dimension="dimensionless"/>
+    <Parameter name="scaleMatrix" dimension="dimensionless"/>
     <RandomDistribution standardLibrary="http://www.uncertml.org/distributions/wishart.xml"/>
   </RandomDistribution>
 </NineML>

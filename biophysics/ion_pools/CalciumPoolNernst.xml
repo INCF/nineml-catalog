@@ -8,6 +8,17 @@
   <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
   <Dimension name="currentDensity" i="1" l="-2"/>
   <Dimension name="concentration" l="-3" n="1"/>
+  <Dimension name="length" l="1"/>
+  <Dimension name="dimensionless"/>
+  <Dimension name="idealGasConstantDims" m="1" l="2" t="-2" n="-1" k="-1"/>
+  <Dimension name="charge_per_mole" t="1" i="1" n="-1"/>
+  <Unit symbol="mV" dimension="voltage" power="0"/>
+  <Unit symbol="mM" dimension="concentration" power="0"/>  
+  <Unit symbol="C_per_mol" dimension="charge_per_mole" power="0"/>
+  <Unit symbol="J_per_K_mol" dimension="idealGasConstantDims" power="0"/>  
+  <Unit symbol="celsius" dimension="temperature" power="0" offset="273.15"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="K" dimension="temperature" power="0"/>  
   <Dynamics name="CalciumPoolNernst">
     <Parameter name="diameter" dimension="length"/>
     <Parameter name="steadyStateInternalC" dimension="concentration"/>
@@ -18,57 +29,34 @@
     <AnalogReceivePort name="v" dimension="voltage"/>
     <AnalogSendPort name="i" dimension="currentDensity"/>
     <AnalogSendPort name="internalC" dimension="concentration"/>
-    
-      <StateVariable name="internalC">
-        <Initial>steadyStateInternalC</Initial>
-      </StateVariable>
-      <Regime name="default">
-        <TimeDerivative variable="internalC">
-          <MathInline>
-            -i / (2 * Faraday * diameter) - 
-            beta * (internalC - steadyStateInternalC)
-          </MathInline>
-        </TimeDerivative>
-      </Regime>
-      <Alias name="i">
-        <MathInline>g * (v - e_reversal)</MathInline>
-      </Alias>
-      <Alias name="e_reversal">
-        <MathML xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>    
-            <piece>
-              <ci>nerstUpperLimit</ci>
-              <apply><leq/><ci>internalC</ci><ci>zeroC</ci></apply>
-            </piece>
-            <otherwise>
-              <ci>nerstPotential</ci>
-            </otherwise>
-          </piecewise>
-        </MathML>
-      </Alias>
-      <Alias name="nernstPotential">
-        <MathInline>  
-          log(externalC / internalC) * UniversalGasConstant * 
-          (temperature - AbsoluteZero) / (Faraday * KValence)
+    <StateVariable name="internalC" dimension="concentration">
+      <Initial>steadyStateInternalC</Initial>
+    </StateVariable>
+    <Regime name="default">
+      <TimeDerivative variable="internalC">
+        <MathInline>
+          -i / (2 * Faraday * diameter) - 
+          beta * (internalC - steadyStateInternalC)
         </MathInline>
-      </Alias>
-      <Alias name="Faraday">
-        <Value units="C/mol">96485.309</Value>
-      </Alias>
-      <Alias name="UniversalGasConstant">
-        <Value units="J/(K * mol)">8.314472</Value>
-      </Alias>
-      <Alias name="AbsoluteZero">
-        <Value units="degC">−273.15</Value>
-      </Alias>
-      <Alias name="KValence">
-        <Value>1</Value>
-      </Alias>
-      <Alias name="zeroC">
-        <Value units="mM">0.0</Value>
-      </Alias>
-      <Alias name="nernstUpperLimit">
-        <Value units="mV">1e6</Value>
-      </Alias>
-    </Dynamics>
+      </TimeDerivative>
+    </Regime>
+    <Alias name="i">
+      <MathInline>g * (v - e_reversal)</MathInline>
+    </Alias>
+    <Alias name="e_reversal">
+      <MathInline>internalC &lt;= zeroConc ? nernstUpperLimit : nernstPotential</MathInline>
+    </Alias>
+    <Alias name="nernstPotential">
+      <MathInline>  
+        log(externalC / internalC) * UniversalGasConstant * 
+        (temperature - AbsoluteZero) / (Faraday * KValence)
+      </MathInline>
+    </Alias>
+    <Constant name="Faraday" value="96485.309" units="C_per_mol"/>
+    <Constant name="UniversalGasConstant" value="8.314472" units="J_per_K_mol"/>
+    <Constant name="AbsoluteZero" value="0" units="K"/>
+    <Constant name="KValence" value="1" units="unitless"/>
+    <Constant name="zeroConc" value="0.0" units="mM"/>
+    <Constant name="nernstUpperLimit" value="1e6" units="mV"/>
+  </Dynamics>
 </NineML>

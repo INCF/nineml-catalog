@@ -98,6 +98,7 @@
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
   <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension name="current" i="1"/>
   <Dimension name="time" t="1"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="ms" dimension="time" power="-3"/>

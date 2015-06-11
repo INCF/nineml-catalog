@@ -2,7 +2,6 @@
   <ConnectionRule name="ExplicitConnectionList">
     <Parameter name="sourceIndices" dimension="dimensionless"/>
     <Parameter name="destinationIndices" dimension="dimensionless"/>
-    <ConnectionRule standardLibary="http://nineml.net/standardlibraries/connectionrules/ExplicitConnectionList"/>
   </ConnectionRule>
   <Dimension name="dimensionless"/>
 </NineML>

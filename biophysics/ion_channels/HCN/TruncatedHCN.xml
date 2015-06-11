@@ -2,34 +2,37 @@
 <NineML xmlns="http://nineml.net/9ML/1.0" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://nineml.net/9ML/1.0../NineML_v0.3.xsd">
+    <Dimension name="time" t="1"/>
     <Dimension name="per_time" t="-1"/>
     <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
     <Dimension name="per_voltage" m="-1" l="-2" t="3" i="1"/>  
     <Dimension name="temperature" k="1"/>
+    <Dimension name="dimensionless"/>
     <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
     <Dimension name="currentDensity" i="1" l="-2"/>
     <Dimension name="concentration" l="-3" n="1"/>
+    <Unit symbol="ms" dimension="time" power="0"/>
     <Dynamics name="TruncatedHCN">
         <Parameter name="gbar" dimension="conductanceDensity"/>
         <Parameter name="e_reversal" dimension="voltage"/>
         <Parameter name="Ehalf" dimension="voltage"/>
         <Parameter name="c" dimension="per_voltage"/>
         <Parameter name="rA" dimension="per_voltage"/>
-        <Parameter name="rB"/>
-        <Parameter name="tCs"/>
+        <Parameter name="rB" dimension="dimensionless"/>
+        <Parameter name="tCs" dimension="dimensionless"/>
         <Parameter name="tDs" dimension="voltage"/>
         <Parameter name="tEs" dimension="per_voltage"/>
-        <Parameter name="tCf"/>
-        <Parameter name="tDf" dimension="per_voltage"/>
-        <Parameter name="tEf" dimension="voltage"/>
-        <Paramater name="upperTruncationVoltage" dimension="voltage"/>
-        <Paramater name="lowerTruncationVoltage" dimension="voltage"/>      
+        <Parameter name="tCf" dimension="dimensionless"/>
+        <Parameter name="tDf" dimension="voltage"/>
+        <Parameter name="tEf" dimension="per_voltage"/>
+        <Parameter name="upperTruncationVoltage" dimension="voltage"/>
+        <Parameter name="lowerTruncationVoltage" dimension="voltage"/>      
         <AnalogReceivePort name="v" dimension="voltage"/>
-        <AnalogSendPort name="g" dimension="conductanceDensity"/>        
-        <StateVariable name="o_slow">
+        <AnalogSendPort name="i" dimension="currentDensity"/>        
+        <StateVariable name="o_slow" dimension="dimensionless">
             <Initial>o_slow_inf</Initial>
         </StateVariable>
-        <StateVariable name="o_fast">
+        <StateVariable name="o_fast" dimension="dimensionless">
             <Initial>o_fast_inf</Initial>
         </StateVariable>
         <Regime name="default">            
@@ -46,10 +49,10 @@
             </MathInline>
         </Alias>
         <Alias name="tau_slow">
-            <MathInline>exp(tEs * (tCs * v - tDs))</MathInline>
+            <MathInline>one_ms * exp(tEs * (tCs * v - tDs))</MathInline>
         </Alias>
         <Alias name="tau_fast">
-            <MathInline>exp(tEf * (tCf * v - tDf))</MathInline>
+            <MathInline>one_ms * exp(tEf * (tCf * v - tDf))</MathInline>
         </Alias>
         <Alias name="o_slow_inf">
             <MathInline>(1 - trunc_r) * o_inf</MathInline>
@@ -61,10 +64,11 @@
             <MathInline>1 / (1 + exp((v - Ehalf) * c))</MathInline>
         </Alias>            
         <Alias name="trunc_r">
-            <MathInline>0.0 ? v &gt; upperTruncationVoltage : (1.0 ? v &lt; lowerTruncationVoltage : r)</MathInline>
+            <MathInline>v &gt; upperTruncationVoltage ? 0.0 : v &lt; lowerTruncationVoltage ? 1.0 : r</MathInline>
         </Alias>
         <Alias name="r">
             <MathInline>(rA * v) + rB</MathInline>
         </Alias>
+        <Constant name="one_ms" value="1.0" units="ms"/>
     </Dynamics>
 </NineML>

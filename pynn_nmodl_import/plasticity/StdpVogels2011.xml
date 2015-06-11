@@ -3,7 +3,6 @@
   <Dimension name="dimensionless"/>
   <Dynamics name="StdpVogels2011">
     <Parameter dimension="time" name="tau"/>
-    <Parameter dimension="dimensionless" name="allow_update_on_post"/>
     <Parameter dimension="dimensionless" name="eta"/>
     <Parameter dimension="per_time" name="rho"/>
     <Parameter dimension="dimensionless" name="wmax"/>

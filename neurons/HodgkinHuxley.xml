@@ -5,7 +5,10 @@
   <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
   <Dimension name="specificCapacitance" m="-1" l="-4" t="4" i="2"/>
   <Dimension name="current" i="1"/>
+  <Dimension name="currentDensity" i="1" l="-2"/>
   <Dimension name="temperature" k="1"/>
+  <Dimension name="dimensionless"/>
+  <Unit symbol="K" dimension="temperature" power="0"/>
   <Dynamics name="HodgkinHuxley">
     <Annotations>
       <Description>This class is a </Description></Annotations>
@@ -35,18 +38,18 @@
     <Parameter name="eNa" dimension="voltage"/>
     <Parameter name="C" dimension="specificCapacitance"/>
     <Parameter name="T" dimension="temperature"/>
+    <Parameter name="thresh" dimension="voltage"/>
     <AnalogSendPort name="v" dimension="voltage"/>
-    <AnalogSendPort name="iK" dimension="current"/>
-    <AnalogReceivePort name="injectedCurrent" dimension="current"/>
-    <EventReceivePort name="incomingSpike"/>
+    <AnalogSendPort name="iK" dimension="currentDensity"/>
+    <AnalogReducePort name="iExt" dimension="current" operator="+"/>
     <EventSendPort name="outgoingSpike"/>
     <StateVariable name="v" dimension="voltage"/>
-    <StateVariable name="m"/>
-    <StateVariable name="h"/>
-    <StateVariable name="n"/>
-    <Regime name="single">
+    <StateVariable name="m" dimension="dimensionless"/>
+    <StateVariable name="h" dimension="dimensionless"/>
+    <StateVariable name="n" dimension="dimensionless"/>
+    <Regime name="default">
       <TimeDerivative variable="v">
-        <MathInline>(iNa + iK + iLeak + injectedCurrent) / C</MathInline>
+        <MathInline>(iNa + iK + iLeak + iExt) / C</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="m">
         <MathInline>(m_inf - m) / m_tau</MathInline>
@@ -58,17 +61,11 @@
         <MathInline>(n_inf - n) / n_tau</MathInline>
         <Annotations><Description>And time-derivatives too</Description></Annotations>
       </TimeDerivative>
-      <OnEvent port="incomingSpike">
-        <StateAssignment variable="v">
-          <Annotations><Description>Even State assignments can be annotated</Description></Annotations>
-          <MathInline>v + 5</MathInline>
-        </StateAssignment>
-      </OnEvent>
-      <OnCondition>
+      <OnCondition target_regime="default">
         <Trigger>
-          <MathInline>v &gt; -20</MathInline>
+          <MathInline>v &gt; thresh</MathInline>
         </Trigger>
-        <EventOut port="outgoingSpike"/>
+        <OutputEvent port="outgoingSpike"/>
       </OnCondition>
     </Regime>
     <Alias name="iK">
@@ -90,7 +87,7 @@
       <MathInline>h_alpha / (h_alpha + h_beta)</MathInline>
     </Alias>
     <Alias name="h_tau">
-      <MathInline>1.0 / (h_alpha + h_beta) * T / 300</MathInline>
+      <MathInline>1.0 / (h_alpha + h_beta) * T / temperature_reference</MathInline>
     </Alias>
     <Alias name="n_inf">
       <MathInline>n_alpha / (n_alpha + n_beta)</MathInline>
@@ -116,5 +113,6 @@
     <Alias name="n_beta">
       <MathInline>n_beta_A * exp(-(v - n_beta_V0) / n_beta_K)</MathInline>
     </Alias>
+    <Constant name="temperature_reference" value="300" units="K"/>
   </Dynamics>
 </NineML>

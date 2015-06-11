@@ -8,86 +8,65 @@
   <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
   <Dimension name="currentDensity" i="1" l="-2"/>
   <Dimension name="concentration" l="-3" n="1"/>
+  <Dimension name="dimensionless"/>
+  <Dimension name="idealGasConstantDims" m="1" l="2" t="-2" n="-1" k="-1"/>
+  <Dimension name="charge_per_mole" t="1" i="1" n="-1"/>
+  <Dimension name="length" l="1"/>
+  <Unit symbol="mV" dimension="voltage" power="0"/>
+  <Unit symbol="mM" dimension="concentration" power="0"/>  
+  <Unit symbol="C_per_mol" dimension="charge_per_mole" power="0"/>
+  <Unit symbol="J_per_K_mol" dimension="idealGasConstantDims" power="0"/>  
+  <Unit symbol="celsius" dimension="temperature" power="0" offset="273.15"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="K" dimension="temperature" power="0"/>
   <Dynamics name="DecayingIonPools">
     <Parameter name="diameter" dimension="length"/>
     <Parameter name="steadyStateInternal" dimension="concentration"/>
     <Parameter name="steadyStateExternal" dimension="concentration"/>
-    <Parameter name="ionValence"/>
-    <Parameter name="beta" dimension="per_time"/>    
+    <Parameter name="ionValence" dimension="dimensionless"/>
+    <Parameter name="beta" dimension="per_time"/>
+    <Parameter name="g" dimension="conductanceDensity"/>
     <AnalogReceivePort name="temperature" dimension="temperature"/>
-    <AnalogReceivePort name="g" dimension="conductanceDensity"/>
+    <AnalogReceivePort name="v" dimension="voltage"/>
     <AnalogSendPort name="i" dimension="currentDensity"/>
-    
-      <StateVariable name="internalC">
-        <Initial>steadyStateInternal</Initial>
-      </StateVariable>
-      <StateVariable name="externalC">
-        <Initial>steadyStateExternal</Initial>
-      </StateVariable>
-      <Alias name="i">
-        g * (v - e_reversal)
-      </Alias>
-      <Regime name="default">
-        <TimeDerivative variable="internalC">
-          <MathInline>
-            -i / (ionValence * Faraday * diameter) - 
-            beta * (internalC - steadyStateInternal)
-          </MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="externalC">
-          <MathInline>
-            i / (ionValence * Faraday * diameter) -  
-            beta * (externalC - steadyStateExternal)
-          </MathInline>
-        </TimeDerivative>
-      </Regime>
-      <Alias name="e_reversal">
-        <MathML xmlns="http://www.w3.org/1998/Math/MathML">
-          <piecewise>
-            <piece>
-              <ci>nerstLowerLimit</ci>
-              <apply><leq/><ci>externalC</ci><ci>zeroC</ci></apply>
-            </piece>            
-            <piece>
-              <ci>nerstUpperLimit</ci>
-              <apply>
-                <and/>
-                <apply><leq/><ci>internalC</ci><ci>zeroC</ci></apply>
-                <apply><gt/><ci>externalC</ci><ci>zeroC</ci></apply>
-              </apply>
-            </piece>
-            <otherwise>
-              <ci>nerstPotential</ci>
-            </otherwise>
-          </piecewise>
-        </MathML>
-      </Alias>
-      <Alias name="nernstPotential">
-        <MathInline>  
-          log(externalC / internalC) * UniversalGasConstant * 
-          (temperature - AbsoluteZero) / (Faraday * KValence)
+    <StateVariable name="internalC" dimension="concentration">
+      <Initial>steadyStateInternal</Initial>
+    </StateVariable>
+    <StateVariable name="externalC" dimension="concentration">
+      <Initial>steadyStateExternal</Initial>
+    </StateVariable>
+    <Alias name="i">
+      <MathInline>g * (v - e_reversal)</MathInline>
+    </Alias>
+    <Regime name="default">
+      <TimeDerivative variable="internalC">
+        <MathInline>
+          -i / (ionValence * Faraday * diameter) - 
+          beta * (internalC - steadyStateInternal)
         </MathInline>
-      </Alias>
-      <Alias name="Faraday">
-        <Value units="C/mol">96485.309</Value>
-      </Alias>
-      <Alias name="UniversalGasConstant">
-        <Value units="J/(K * mol)">8.314472</Value>
-      </Alias>
-      <Alias name="AbsoluteZero">
-        <Value units="K">−273.15</Value>
-      </Alias>
-      <Alias name="KValence">
-        <Value>1</Value>
-      </Alias>
-      <Alias name="zeroC">
-        <Value units="mM">0.0</Value>
-      </Alias>            
-      <Alias name="nernstLowerLimit">
-        <Value units="mV">-1e6</Value>
-      </Alias>      
-      <Alias name="nernstUpperLimit">
-        <Value units="mV">1e6</Value>
-      </Alias>
-    </Dynamics>
+      </TimeDerivative>
+      <TimeDerivative variable="externalC">
+        <MathInline>
+          i / (ionValence * Faraday * diameter) -  
+          beta * (externalC - steadyStateExternal)
+        </MathInline>
+      </TimeDerivative>
+    </Regime>
+    <Alias name="e_reversal">
+      <MathInline>externalC &lt;= zeroC ? nernstLowerLimit : internalC &lt;= zeroC ? nernstUpperLimit : nernstPotential</MathInline>
+    </Alias>
+    <Alias name="nernstPotential">
+      <MathInline>  
+        log(externalC / internalC) * UniversalGasConstant * 
+        (temperature - AbsoluteZero) / (Faraday * KValence)
+      </MathInline>
+    </Alias>
+    <Constant name="Faraday" value="96485.309" units="C_per_mol"/>
+    <Constant name="UniversalGasConstant" value="8.314472" units="J_per_K_mol"/>
+    <Constant name="AbsoluteZero" value="0" units="K"/>
+    <Constant name="KValence" value="1" units="unitless"/>
+    <Constant name="zeroC" value="0.0" units="mM"/>            
+    <Constant name="nernstLowerLimit" value="-1e6" units="mV"/>      
+    <Constant name="nernstUpperLimit" value="1e6" units="mV"/>
+  </Dynamics>
 </NineML>

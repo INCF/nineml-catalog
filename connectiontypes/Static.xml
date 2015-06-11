@@ -1,14 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dynamics name="Static">
-    <AnalogPort name="weight" mode="send" dimension="dimensionless"/>
-    
-      <StateVariable name="weight" dimension="dimensionless"/>
-      <Regime name="default">
-        <TimeDerivative variable="weight">
-          <MathInline>0.0</MathInline>
-        </TimeDerivative>
-      </Regime>
-    </Dynamics>
+    <Parameter name="w" dimension="dimensionless"/>
+    <AnalogSendPort name="weight" dimension="dimensionless"/>
+    <Alias name="weight"><MathInline>w</MathInline></Alias>
+  </Dynamics>
   <Dimension name="dimensionless"/>
 </NineML>

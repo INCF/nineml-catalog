@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <RandomDistribution name="InverseGammaDistribution">
-    <Parameter name="shape"/>
-    <Parameter name="scale"/>
+    <Parameter name="shape" dimension="dimensionless"/>
+    <Parameter name="scale" dimension="dimensionless"/>
     <RandomDistribution>
       <StandarLibrary definition="http://www.uncertml.org/distributions/inverse-gamma.xml">InverseGammaDistribution</StandarLibrary>
     </RandomDistribution>

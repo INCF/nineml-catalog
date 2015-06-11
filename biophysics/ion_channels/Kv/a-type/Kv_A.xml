@@ -7,6 +7,9 @@
   <Dimension name="temperature" k="1"/>
   <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
   <Dimension name="currentDensity" i="1" l="-2"/>
+  <Dimension name="dimensionless"/>
+  <Unit symbol="celsius" dimension="temperature" power="0" offset="273.15"/>
+  <Unit symbol="K" dimension="temperature" power="0"/>
   <Dynamics name="Kv_A">
     <Parameter name="Aalpha_a" dimension="per_time"/>
     <Parameter name="Kalpha_a" dimension="voltage"/>
@@ -28,53 +31,52 @@
     <AnalogReceivePort name="temperature" dimension="temperature"/>
     <AnalogReceivePort name="v" dimension="voltage"/>
     <AnalogSendPort name="g" dimension="conductanceDensity"/>
-    
-      <StateVariable name="m">
-        <Initial>m_inf</Initial>
-      </StateVariable>
-      <StateVariable name="h">
-        <Initial>h_inf</Initial>
-      </StateVariable>
-      <Alias name="g">
-        <MathInline>gbar * m * m * m * h</MathInline>
-      </Alias>
-      <Regime name="default">
-        <TimeDerivative variable="m">
-          <MathInline>(m_inf - m) / m_tau</MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="h">
-          <MathInline>(h_inf - h) / h_tau</MathInline>
-        </TimeDerivative>
-      </Regime>
-      <Alias name="Q10">
-        <MathInline>pow(3, ((temperature - 25.5) / 10))</MathInline>
-      </Alias>
-      <Alias name="m_inf">
-        <MathInline>1 / (1 + exp((v - V0_ainf) / K_ainf))</MathInline>
-      </Alias>
-      <Alias name="tau_a">
-        <MathInline>1 / (alpha_a + beta_a)</MathInline>
-      </Alias>
-      <Alias name="h_inf">
-        <MathInline>1 / (1 + exp((v - V0_binf) / K_binf))</MathInline>
-      </Alias>
-      <Alias name="h_tau">
-        <MathInline>1 / (alpha_b + beta_b)</MathInline>
-      </Alias>
-      <Alias name="alpha_a">
-        <MathInline>Q10 * Aalpha_a * sigm((v - V0alpha_a)
-          Kalpha_a)</MathInline>
-      </Alias>
-      <Alias name="beta_a">
-        <MathInline>Q10 * (Abeta_a / exp((v - V0beta_a) /
-          Kbeta_a))</MathInline>
-      </Alias>
-      <Alias name="alpha_b">
-        <MathInline>Q10 * Aalpha_b * sigm((v - V0alpha_b)
-          Kalpha_b)</MathInline>
-      </Alias>
-      <Alias name="beta_b">
-        <MathInline>Q10 * Abeta_b * sigm((v - V0beta_b) Kbeta_b)</MathInline>
-      </Alias>
-    </Dynamics>
+    <StateVariable name="a" dimension="dimensionless">
+      <Initial>a_inf</Initial>
+    </StateVariable>
+    <StateVariable name="b" dimension="dimensionless">
+      <Initial>b_inf</Initial>
+    </StateVariable>
+    <Alias name="g">
+      <MathInline>gbar * a * a * a * b</MathInline>
+    </Alias>
+    <Regime name="default">
+      <TimeDerivative variable="a">
+        <MathInline>(a_inf - a) / a_tau</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="b">
+        <MathInline>(b_inf - b) / b_tau</MathInline>
+      </TimeDerivative>
+    </Regime>
+    <Alias name="Q10">
+      <MathInline>pow(3, ((temperature - reference_temperature) / ten_degrees))</MathInline>
+    </Alias>
+    <Alias name="a_inf">
+      <MathInline>1 / (1 + exp((v - V0_ainf) / K_ainf))</MathInline>
+    </Alias>
+    <Alias name="a_tau">
+      <MathInline>1 / (alpha_a + beta_a)</MathInline>
+    </Alias>
+    <Alias name="b_inf">
+      <MathInline>1 / (1 + exp((v - V0_binf) / K_binf))</MathInline>
+    </Alias>
+    <Alias name="b_tau">
+      <MathInline>1 / (alpha_b + beta_b)</MathInline>
+    </Alias>
+    <Alias name="alpha_a">
+      <MathInline>Q10 * Aalpha_a / (exp((v - V0alpha_a)/Kalpha_a) + 1)</MathInline>
+    </Alias>
+    <Alias name="beta_a">
+      <MathInline>Q10 * (Abeta_a / exp((v - V0beta_a) /
+        Kbeta_a))</MathInline>
+    </Alias>
+    <Alias name="alpha_b">
+      <MathInline>Q10 * Aalpha_b /(exp((v - V0alpha_b)/Kalpha_b) + 1)</MathInline>
+    </Alias>
+    <Alias name="beta_b">
+      <MathInline>Q10 * Abeta_b /(exp((v - V0beta_b)/Kbeta_b) + 1)</MathInline>
+    </Alias>
+    <Constant name="reference_temperature" value="25.5" units="celsius"/>
+    <Constant name="ten_degrees" value="10" units="K"/>
+  </Dynamics>
 </NineML>
