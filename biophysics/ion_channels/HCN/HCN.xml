@@ -28,7 +28,7 @@
         <StateVariable name="o_fast">
             <Initial>o_fast_inf</Initial>
         </StateVariable>            
-        <Regime>
+        <Regime name="default">
             <TimeDerivative variable="o_slow">
                 <MathInline>(o_slow_inf - o_slow) / tau_slow</MathInline>
             </TimeDerivative>

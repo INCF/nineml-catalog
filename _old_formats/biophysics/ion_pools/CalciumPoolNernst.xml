@@ -23,7 +23,7 @@
       <StateVariable name="internalC">
         <Initial>steadyStateInternalC</Initial>
       </StateVariable>
-      <Regime>
+      <Regime name="default">
         <TimeDerivative variable="internalC">
           <MathInline>
             -i / (2 * Faraday * diameter) - 

@@ -132,7 +132,7 @@
             <ComponentDynamics name="LeakDyn" component="Leak">
                 <ReceivePort name="v">v</ReceivePort>
             </ComponentDynamics>            
-            <Regime>
+            <Regime name="default">
                 <TimeDerivative variable="v">
                     <MathInline>
                         (iNav + iNaP + iKv + iHCN1 + iHCN2 + iLeak) / C

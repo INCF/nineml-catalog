@@ -5,7 +5,10 @@
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
   <Dimension name="temperature" k="1"/>
+  <Dimension name="dimensionless"/>
   <Dimension name="currentDensity" i="1" l="-2"/>
+  <Unit symbol="celsius" dimension="temperature" power="0" offset="273.15"/>
+  <Unit symbol="K" dimension="temperature" power="0"/>
   <Dynamics name="Cav_HA">
     <Parameter name="Aalpha_m" dimension="per_time"/>
     <Parameter name="Kalpha_m" dimension="voltage"/>
@@ -23,16 +26,16 @@
     <AnalogReceivePort name="temperature" dimension="temperature"/>
     <AnalogReceivePort name="v" dimension="voltage"/>
     <AnalogSendPort name="g" dimension="conductanceDensity"/>
-      <StateVariable name="m">
+      <StateVariable name="m" dimension="dimensionless">
         <Initial>m_inf</Initial>
       </StateVariable>
-      <StateVariable name="h">
+      <StateVariable name="h" dimension="dimensionless">
         <Initial>h_inf</Initial>
       </StateVariable>
       <Alias name="g">
         <MathInline>gbar * m * m * h</MathInline>
       </Alias>
-      <Regime>
+      <Regime name="default">
         <TimeDerivative variable="m">
           <MathInline>(m_inf - m) / m_tau</MathInline>
         </TimeDerivative>
@@ -41,7 +44,7 @@
         </TimeDerivative>
       </Regime>
       <Alias name="Q10">
-        <MathInline>pow(3, (temperature - 20) / 10)</MathInline>
+        <MathInline>pow(3, (temperature - temperature_reference) / ten_degrees)</MathInline>
       </Alias>
       <Alias name="m_inf">
         <MathInline>alpha_m / (alpha_m + beta_m)</MathInline>
@@ -67,5 +70,7 @@
       <Alias name="beta_h">
         <MathInline>Q10 * Abeta_h * exp((v - V0beta_h) / Kbeta_h)</MathInline>
       </Alias>
+      <Constant name="temperature_reference" value="20" units="celsius"/>
+      <Constant name="ten_degrees" value="10" units="K"/>
     </Dynamics>
 </NineML>

@@ -34,7 +34,7 @@
       <Alias name="g">
        <MathInline>gbar * O</MathInline>
       </Alias>
-      <Regime>
+      <Regime name="default">
         <TimeDerivative variable="C1">
           <MathInline>from_C2_to_C1 + from_I1_to_C1 - from_C1_to_C2 - from_C1_to_I1 - parity_check</MathInline>
         </TimeDerivative>

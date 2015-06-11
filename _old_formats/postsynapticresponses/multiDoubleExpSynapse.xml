@@ -31,7 +31,7 @@
             <Alias name="i">
                  <MathInline>(g2 - g1) * (v - eReversal)</MathInline>
             </Alias>
-            <Regime>
+            <Regime name="default">
                 <TimeDerivative variable="g1">
                     <MathInline>-g1 / tau1</MathInline>
                 </TimeDerivative>

@@ -31,7 +31,7 @@
       <StateVariable name="h">
         <Initial>h_inf</Initial>
       </StateVariable>
-      <Regime>
+      <Regime name="default">
         <TimeDerivative variable="m">
           <MathInline>(m_inf - m) / m_tau</MathInline>
         </TimeDerivative>

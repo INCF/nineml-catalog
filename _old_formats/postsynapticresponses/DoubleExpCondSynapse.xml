@@ -15,7 +15,7 @@
     
       <StateVariable name="g1" dimension="conductanceDensity"/>
       <StateVariable name="g2" dimension="conductanceDensity"/>
-      <Regime>
+      <Regime name="default">
         <TimeDerivative variable="g1">
           <MathInline>-g1 / tau1</MathInline>
         </TimeDerivative>

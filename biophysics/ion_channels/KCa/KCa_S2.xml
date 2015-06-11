@@ -27,7 +27,7 @@
       <Alias name="i">
         <MathInline>gbar * (o1 + o2)(v - e_revseral)</MathInline>
       </Alias>
-      <Regime>
+      <Regime name="default">
         <Alias name="parity_check">
           <MathInline> (c1 + c2 + c3 + c4 + o2 + o1) </MathInline>
         </Alias>
