@@ -43,8 +43,8 @@
     <Constant units="mV_per_ms" name="const3" value="140.0"/>    
   </Dynamics>
   <DynamicsProperties name="Izhikevich2003Properties">
-    <Definition name="Izhikevich"/>
-    <Property units="pF" name="Cm">
+    <Definition name="Izhikevich2003"/>
+    <Property units="nF" name="Cm">
       <SingleValue>1</SingleValue>
     </Property>
     <Property units="per_ms" name="a">
@@ -74,7 +74,7 @@
   <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/> 
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
   <Unit symbol="mV_per_ms" dimension="voltage_per_time" power="0"/>
-  <Unit symbol="pF" dimension="capacitance" power="-12"/>
+  <Unit symbol="nF" dimension="capacitance" power="-9"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="per_ms" dimension="per_time" power="3"/>
   <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
