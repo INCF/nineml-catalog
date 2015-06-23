@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dynamics name="Izhikevich">
+  <Dynamics name="Izhikevich2003">
     <Parameter dimension="per_time" name="a"/>
     <Parameter dimension="voltage" name="c"/>
     <Parameter dimension="per_time" name="b"/>
@@ -42,7 +42,7 @@
     <Constant units="per_ms" name="const2" value="5.0"/>
     <Constant units="mV_per_ms" name="const3" value="140.0"/>    
   </Dynamics>
-  <DynamicsProperties name="IzhikevichProperties">
+  <DynamicsProperties name="Izhikevich2003Properties">
     <Definition name="Izhikevich"/>
     <Property units="pF" name="Cm">
       <SingleValue>1</SingleValue>
