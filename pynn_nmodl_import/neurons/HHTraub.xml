@@ -2,22 +2,27 @@
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dynamics name="HHTraub">
     <Parameter dimension="voltage" name="el"/>
-    <Parameter dimension="conductanceDensity" name="gkbar"/>
-    <Parameter dimension="conductanceDensity" name="gnabar"/>
+    <Parameter dimension="conductance" name="gkbar"/>
+    <Parameter dimension="conductance" name="gnabar"/>
     <Parameter dimension="voltage" name="vT"/>
     <Parameter dimension="voltage" name="unitmV"/>
-    <Parameter dimension="conductanceDensity" name="gl"/>
+    <Parameter dimension="conductance" name="gl"/>
     <Parameter dimension="time" name="unitms"/>
+    <Parameter name="C" dimension="capacitance"/>    
     <AnalogReceivePort dimension="voltage" name="ena"/>
     <AnalogReceivePort dimension="voltage" name="ek"/>
-    <AnalogReceivePort dimension="voltage" name="v"/>
-    <AnalogSendPort dimension="currentDensity" name="ik"/>
-    <AnalogSendPort dimension="currentDensity" name="il"/>
-    <AnalogSendPort dimension="currentDensity" name="ina"/>
+    <AnalogSendPort dimension="current" name="ik"/>
+    <AnalogSendPort dimension="current" name="il"/>
+    <AnalogSendPort dimension="current" name="ina"/>
+    <AnalogReducePort name="iExt" dimension="current" operator="+"/>    
+    <StateVariable dimension="voltage" name="v"/>
     <StateVariable dimension="dimensionless" name="h"/>
     <StateVariable dimension="dimensionless" name="m"/>
     <StateVariable dimension="dimensionless" name="n"/>
     <Regime name="regime_0">
+      <TimeDerivative variable="v">
+        <MathInline>(ina + ik + il + iExt) / C</MathInline>
+      </TimeDerivative>      
       <TimeDerivative variable="h">
         <MathInline>(-h + hinf)/(htau*unitms)</MathInline>
       </TimeDerivative>
@@ -106,14 +111,14 @@
     <Property units="mV" name="el">
       <SingleValue>-60.0</SingleValue>
     </Property>
-    <Property units="S_per_cm2" name="gkbar">
-      <SingleValue>0.006</SingleValue>
+    <Property units="S" name="gkbar">
+      <SingleValue>6</SingleValue>
     </Property>
-    <Property units="S_per_cm2" name="gl">
-      <SingleValue>1e-05</SingleValue>
+    <Property units="S" name="gl">
+      <SingleValue>1e-02</SingleValue>
     </Property>
-    <Property units="S_per_cm2" name="gnabar">
-      <SingleValue>0.02</SingleValue>
+    <Property units="S" name="gnabar">
+      <SingleValue>20</SingleValue>
     </Property>
     <Property units="mV" name="unitmV">
       <SingleValue>1.0</SingleValue>
@@ -124,13 +129,18 @@
     <Property units="mV" name="vT">
       <SingleValue>-63.0</SingleValue>
     </Property>
+    <Property units="uF" name="C">
+      <SingleValue>1.0</SingleValue>
+    </Property>
   </DynamicsProperties>
-  <Dimension i="2" l="-4" m="-1" t="3" name="conductanceDensity"/>
+  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
   <Dimension name="time" t="1"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
-  <Dimension i="1" name="currentDensity" l="-2"/>
+  <Dimension i="1" name="current"/>
   <Dimension name="dimensionless"/>  
+  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
-  <Unit symbol="S_per_cm2" dimension="conductanceDensity" power="4"/>
+  <Unit symbol="S" dimension="conductance" power="0"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
 </NineML>
