@@ -9,10 +9,19 @@
   <Dimension name="currentDensity" i="1" l="-2"/>
   <Dimension name="temperature" k="1"/>
   <Dimension name="dimensionless"/>
+  <Unit symbol="per_ms" dimension="per_time" power="3"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="per_ms_mV" dimension="per_time_voltage" power="-6"/>
+  <Unit symbol="uS" dimension="conductance" power="-6"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
+  <Unit symbol="nA" dimension="current" power="-3"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="S" dimension="conductance" power="0"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
   <Unit symbol="K" dimension="temperature" power="0"/>
   <Dynamics name="HodgkinHuxley">
-    <Annotations>
-      <Description>This class is a </Description></Annotations>
     <Parameter name="m_alpha_A" dimension="per_time_voltage"/>
     <Parameter name="m_alpha_V0" dimension="voltage"/>
     <Parameter name="m_alpha_K" dimension="voltage"/>
@@ -114,4 +123,87 @@
     </Alias>
     <Constant name="temperature_reference" value="300" units="K"/>
   </Dynamics>
+  <DynamicsProperties name="HodgkinHuxleyProperties">
+    <Property name="m_alpha_A" units="per_ms_mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="m_alpha_V0" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="m_alpha_K" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="m_beta_A" units="per_ms">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="m_beta_V0" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="m_beta_K" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="h_alpha_A" units="per_ms">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="h_alpha_V0" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="h_alpha_K" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="h_beta_A" units="per_ms">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="h_beta_V0" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="h_beta_K" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="n_alpha_A" units="per_ms_mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="n_alpha_V0" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="n_alpha_K" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="n_beta_A" units="per_ms">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="n_beta_V0" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="n_beta_K" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="gbarNa" units="uS">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="gbarK" units="uS">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="gLeak" units="uS">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="eLeak" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="eK" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="eNa" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="C" units="uF">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="T" units="K">
+      <SingleValue></SingleValue>
+    </Property>
+    <Property name="thresh" units="mV">
+      <SingleValue></SingleValue>
+    </Property>
+  </DynamicsProperties>
 </NineML>
