@@ -17,8 +17,8 @@
       </OnEvent>
     </Regime>
   </Dynamics>  
-  <DynamicsProperties name="PyNNExpISynPropertis">
-    <Definition>ExpISyn</Definition>
+  <DynamicsProperties name="PyNNExpISynProperties">
+    <Definition name="ExpISyn"/>
     <Property units="ms" name="tau">
       <SingleValue>0.1</SingleValue>
     </Property>

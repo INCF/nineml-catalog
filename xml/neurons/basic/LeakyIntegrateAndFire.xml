@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="LeakyIntegrateAndFire">
+    <AnalogSendPort name="v" dimension="voltage"/>
+    <AnalogReducePort operator="+" name="iExt" dimension="current"/>
+    <EventSendPort name="spikeoutput"/>
+    <Parameter dimension="capacitance" name="Cm"/>
+    <Parameter dimension="time" name="refactory_period"/>
+    <Parameter dimension="conductance" name="g_leak"/>
+    <Parameter dimension="voltage" name="v_reset"/>
+    <Parameter dimension="voltage" name="e_leak"/>
+    <Parameter dimension="voltage" name="v_threshold"/>
+    <Regime name="subthresholdregime">
+      <TimeDerivative variable="v">
+        <MathInline>(g_leak*(e_leak - v) + iExt)/Cm</MathInline>
+      </TimeDerivative>
+      <OnCondition target_regime="refractoryregime">
+        <StateAssignment variable="end_refractory">
+          <MathInline>t + refactory_period</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="v">
+          <MathInline>v_reset</MathInline>
+        </StateAssignment>
+        <OutputEvent port="spikeoutput"/>
+        <Trigger>
+          <MathInline>v &gt; v_threshold</MathInline>
+        </Trigger>
+      </OnCondition>
+    </Regime>
+    <Regime name="refractoryregime">
+      <OnCondition target_regime="subthresholdregime">
+        <Trigger>
+          <MathInline>t &gt; end_refractory</MathInline>
+        </Trigger>
+      </OnCondition>
+    </Regime>
+    <StateVariable dimension="voltage" name="v"/>
+    <StateVariable dimension="time" name="end_refractory"/>
+  </Dynamics>
+  <DynamicsProperties name="LeakyIntegrateAndFireProperties">
+    <Annotations>
+      <Comment>Parameters are taken from the Brunel 2000 model</Comment>
+    </Annotations>
+    <Definition name="LeakyIntegrateAndFire"/>
+    <Property name="v_reset" units="mV">
+      <SingleValue>-70</SingleValue>
+    </Property>
+    <Property name="refactory_period" units="ms">
+      <SingleValue>2</SingleValue>
+    </Property>
+    <Property name="Cm" units="pF">
+      <SingleValue>250</SingleValue>
+    </Property>
+    <Property name="g_leak" units="nS">
+      <SingleValue>25</SingleValue>
+    </Property>
+    <Property name="v_threshold" units="mV">
+      <SingleValue>-55</SingleValue>
+    </Property>
+    <Property name="e_leak" units="mV">
+      <SingleValue>-70</SingleValue>
+    </Property>
+  </DynamicsProperties>  
+  <Dimension name="time" t="1"/>
+  <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
+  <Dimension name="conductance" m="-1" l="-2" t="3" i="2"/>
+  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
+  <Dimension name="current" i="1"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="nS" dimension="conductance" power="-9"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
+</NineML>

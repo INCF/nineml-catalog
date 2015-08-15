@@ -4,7 +4,7 @@
     <Parameter name="m_alpha_A" dimension="per_time_voltage"/>
     <Parameter name="m_alpha_V0" dimension="voltage"/>
     <Parameter name="m_alpha_K" dimension="voltage"/>
-    <Parameter name="m_beta_A" dimension="per_time"/>
+    <Parameter name="m_beta_A" dimension="per_time_voltage"/>
     <Parameter name="m_beta_V0" dimension="voltage"/>
     <Parameter name="m_beta_K" dimension="voltage"/>
     <Parameter name="h_alpha_A" dimension="per_time"/>
@@ -26,8 +26,8 @@
     <Parameter name="eK" dimension="voltage"/>
     <Parameter name="eNa" dimension="voltage"/>
     <Parameter name="C" dimension="capacitance"/>
-    <Parameter name="T" dimension="temperature"/>
-    <Parameter name="thresh" dimension="voltage"/>
+    <Parameter name="v_rest" dimension="voltage"/>
+    <Parameter name="v_threshold" dimension="voltage"/>
     <AnalogReducePort name="iExt" dimension="current" operator="+"/>
     <EventSendPort name="outgoingSpike"/>
     <StateVariable name="v" dimension="voltage"/>
@@ -36,7 +36,7 @@
     <StateVariable name="n" dimension="dimensionless"/>
     <Regime name="default">
       <TimeDerivative variable="v">
-        <MathInline>(iNa + iK + iLeak + iExt) / C</MathInline>
+        <MathInline>(iExt - iNa - iK - iLeak) / C</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="m">
         <MathInline>(m_inf - m) / m_tau</MathInline>
@@ -46,11 +46,10 @@
       </TimeDerivative>
       <TimeDerivative variable="n">
         <MathInline>(n_inf - n) / n_tau</MathInline>
-        <Annotations><Description>And time-derivatives too</Description></Annotations>
       </TimeDerivative>
       <OnCondition target_regime="default">
         <Trigger>
-          <MathInline>v &gt; thresh</MathInline>
+          <MathInline>v &gt; v_threshold</MathInline>
         </Trigger>
         <OutputEvent port="outgoingSpike"/>
       </OnCondition>
@@ -64,43 +63,45 @@
     <Alias name="iLeak">
       <MathInline>gLeak * (v - eLeak)</MathInline>
     </Alias>
+    <Alias name="u">
+      <MathInline>v - v_rest</MathInline>
+    </Alias>
     <Alias name="m_inf">
       <MathInline>m_alpha / (m_alpha + m_beta)</MathInline>
     </Alias>
     <Alias name="m_tau">
-      <MathInline>1.0 / (m_alpha + m_beta)</MathInline>
+      <MathInline>1 / (m_alpha + m_beta)</MathInline>
     </Alias>
     <Alias name="h_inf">
       <MathInline>h_alpha / (h_alpha + h_beta)</MathInline>
     </Alias>
     <Alias name="h_tau">
-      <MathInline>1.0 / (h_alpha + h_beta) * T / temperature_reference</MathInline>
+      <MathInline>1 / (h_alpha + h_beta)</MathInline>
     </Alias>
     <Alias name="n_inf">
       <MathInline>n_alpha / (n_alpha + n_beta)</MathInline>
     </Alias>
     <Alias name="n_tau">
-      <MathInline>1.0 / (n_alpha + n_beta)</MathInline>
+      <MathInline>1 / (n_alpha + n_beta)</MathInline>
     </Alias>      
     <Alias name="m_alpha">
-      <MathInline>m_alpha_A * (v - m_alpha_V0) / (1.0 - exp(-(v - m_alpha_V0) / m_alpha_K))</MathInline>
+      <MathInline>m_alpha_A * (m_alpha_V0 - u) / (exp((m_alpha_V0 - u) / m_alpha_K) - 1)</MathInline>
     </Alias>
     <Alias name="m_beta">
-      <MathInline>m_beta_A * exp(-(v - m_beta_V0) / m_beta_K)</MathInline>
-    </Alias>
-    <Alias name="h_alpha">
-      <MathInline>h_alpha_A * exp(-(v - h_alpha_V0) / h_alpha_K)</MathInline>
-    </Alias>
-    <Alias name="h_beta">
-      <MathInline>h_beta_A / (1.0 + exp (-(v - h_beta_V0) / h_beta_K))</MathInline>
+      <MathInline>m_beta_A * (u - m_beta_V0) / (exp((u - m_beta_V0) / m_beta_K) - 1)</MathInline>
     </Alias>
     <Alias name="n_alpha">
-      <MathInline>n_alpha_A * (v - n_alpha_V0) / (1 - exp(-(v - n_alpha_V0) / n_alpha_K))</MathInline>
+      <MathInline>n_alpha_A * (n_alpha_V0 - u) / (exp((n_alpha_V0 - u) / n_alpha_K) - 1)</MathInline>
     </Alias>
     <Alias name="n_beta">
-      <MathInline>n_beta_A * exp(-(v - n_beta_V0) / n_beta_K)</MathInline>
+      <MathInline>n_beta_A * exp((n_beta_V0 - u) / n_beta_K)</MathInline>
+    </Alias>    
+    <Alias name="h_alpha">
+      <MathInline>h_alpha_A * exp((h_alpha_V0 - u) / h_alpha_K)</MathInline>
     </Alias>
-    <Constant name="temperature_reference" value="300" units="K"/>
+    <Alias name="h_beta">
+      <MathInline>h_beta_A / (1 + exp ((h_beta_V0 - u) / h_beta_K))</MathInline>
+    </Alias>
   </Dynamics>
   <DynamicsProperties name="HodgkinHuxleyProperties">
     <Definition name="HodgkinHuxley"/>
@@ -113,7 +114,7 @@
     <Property name="m_alpha_K" units="mV">
       <SingleValue>4</SingleValue>
     </Property>
-    <Property name="m_beta_A" units="per_ms">
+    <Property name="m_beta_A" units="per_ms_mV">
       <SingleValue>0.28</SingleValue>
     </Property>
     <Property name="m_beta_V0" units="mV">
@@ -158,13 +159,13 @@
     <Property name="n_beta_K" units="mV">
       <SingleValue>40</SingleValue>
     </Property>
-    <Property name="gbarNa" units="uS">
+    <Property name="gbarNa" units="nS">
       <SingleValue>20000</SingleValue>
     </Property>
-    <Property name="gbarK" units="uS">
+    <Property name="gbarK" units="nS">
       <SingleValue>6000</SingleValue>
     </Property>
-    <Property name="gLeak" units="uS">
+    <Property name="gLeak" units="nS">
       <SingleValue>10</SingleValue>
     </Property>
     <Property name="eLeak" units="mV">
@@ -176,13 +177,13 @@
     <Property name="eNa" units="mV">
       <SingleValue>50</SingleValue>
     </Property>
-    <Property name="C" units="uF">
+    <Property name="C" units="pF">
       <SingleValue>200</SingleValue>
     </Property>
-    <Property name="T" units="K">
-      <SingleValue>-63</SingleValue>
+    <Property name="v_rest" units="mV">
+      <SingleValue>-63.0</SingleValue>
     </Property>
-    <Property name="thresh" units="mV">
+    <Property name="v_threshold" units="mV">
       <SingleValue>-20</SingleValue>
     </Property>
   </DynamicsProperties>
@@ -197,9 +198,9 @@
   <Dimension name="dimensionless"/>
   <Unit symbol="per_ms" dimension="per_time" power="3"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
-  <Unit symbol="per_ms_mV" dimension="per_time_voltage" power="-6"/>
-  <Unit symbol="uS" dimension="conductance" power="-6"/>
-  <Unit symbol="uF" dimension="capacitance" power="-6"/>
+  <Unit symbol="per_ms_mV" dimension="per_time_voltage" power="6"/>
+  <Unit symbol="nS" dimension="conductance" power="-9"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
   <Unit symbol="nA" dimension="current" power="-3"/>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
