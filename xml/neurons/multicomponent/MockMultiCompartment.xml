@@ -14,8 +14,10 @@
         <SubComponent name="PyramidalNa">
           <Component>
             <Prototype url="http://nineml.net/9ML/2.0/catalog/channels">HHPyramidalNa</Prototype>
-            <Property name="gbar" units="uS">
-              <SingleValue>0.0036</SingleValue>
+            <Property name="gbar">
+              <Quantity units="uS">
+                <SingleValue>0.0036</SingleValue>
+              </Quantity>
             </Property>
           </Component>
           <PortConnection port="V">
@@ -25,8 +27,10 @@
         <SubComponent name="PyramidalK">
           <Component>
             <Prototype url="http://nineml.net/9ML/2.0/catalog/channels">HHPyramidalK</Prototype>
-            <Property name="gbar" units="uS">
-              <SingleValue>0.0025</SingleValue>
+            <Property name="gbar">
+              <Quantity units="uS">
+                <SingleValue>0.0025</SingleValue>
+              </Quantity>
             </Property>
           </Component>
           <PortConnection port="V">
@@ -36,8 +40,10 @@
         <SubComponent name="Kv4">
           <Component>
             <Prototype url="http://nineml.net/9ML/2.0/catalog/channels">HHPyramidalK</Prototype>
-            <Property name="gbar" units="uS">
-              <SingleValue>0.0025</SingleValue>
+            <Property name="gbar">
+              <Quantity units="uS">
+                <SingleValue>0.0025</SingleValue>
+              </Quantity>
             </Property>
           </Component>
           <PortConnection port="V">
@@ -47,11 +53,15 @@
         <SubComponent name="leak">
           <Component>
             <Definition url="http://nineml.net/9ML/2.0/catalog/channels">Leak</Definition>
-            <Property name="g" units="uS">
-              <SingleValue>0.001</SingleValue>
+            <Property name="g">
+              <Quantity units="uS">
+                <SingleValue>0.001</SingleValue>
+              </Quantity>
             </Property>
-            <Property name="e_rev" units="mV">
-              <SingleValue>-21</SingleValue>
+            <Property name="e_rev">
+              <Quantity units="mV">
+                <SingleValue>-21</SingleValue>
+              </Quantity>
             </Property>
           </Component>
           <PortConnection port="V">
@@ -62,17 +72,25 @@
           <Component>
             <Definition url="http://nineml.net/9ML/2.0/catalog/channels/basicCompartment.9ml"
               >BasicCompartment</Definition>
-            <Property name="length" units="um">
-              <SingleValue>15.0</SingleValue>
+            <Property name="length">
+              <Quantity units="um">
+                <SingleValue>15.0</SingleValue>
+              </Quantity>
             </Property>
-            <Property name="axialResistance" units="ohm_per_cm">
-              <SingleValue>100.0</SingleValue>
+            <Property name="axialResistance">
+              <Quantity units="ohm_per_cm">
+                <SingleValue>100.0</SingleValue>
+              </Quantity>
             </Property>
-            <Property name="diameter" units="um">
-              <SingleValue>15.0</SingleValue>
+            <Property name="diameter">
+              <Quantity units="um">
+                <SingleValue>15.0</SingleValue>
+              </Quantity>
             </Property>
-            <Property name="C" units="uF">
-              <SingleValue>1.0</SingleValue>
+            <Property name="C">
+              <Quantity units="uF">
+                <SingleValue>1.0</SingleValue>
+              </Quantity>
             </Property>
           </Component>
           <PortConnection port="i">

@@ -105,86 +105,140 @@
   </Dynamics>
   <DynamicsProperties name="HodgkinHuxleyProperties">
     <Definition name="HodgkinHuxley"/>
-    <Property name="m_alpha_A" units="per_ms_mV">
-      <SingleValue>0.32</SingleValue>
+    <Property name="m_alpha_A">
+      <Quantity units="per_ms_mV">
+        <SingleValue>0.32</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="m_alpha_V0" units="mV">
-      <SingleValue>13</SingleValue>
+    <Property name="m_alpha_V0">
+      <Quantity units="mV">
+        <SingleValue>13</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="m_alpha_K" units="mV">
-      <SingleValue>4</SingleValue>
+    <Property name="m_alpha_K">
+      <Quantity units="mV">
+        <SingleValue>4</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="m_beta_A" units="per_ms_mV">
-      <SingleValue>0.28</SingleValue>
+    <Property name="m_beta_A">
+      <Quantity units="per_ms_mV">
+        <SingleValue>0.28</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="m_beta_V0" units="mV">
-      <SingleValue>40</SingleValue>
+    <Property name="m_beta_V0">
+      <Quantity units="mV">
+        <SingleValue>40</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="m_beta_K" units="mV">
-      <SingleValue>5</SingleValue>
+    <Property name="m_beta_K">
+      <Quantity units="mV">
+        <SingleValue>5</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="h_alpha_A" units="per_ms">
-      <SingleValue>0.128</SingleValue>
+    <Property name="h_alpha_A">
+      <Quantity units="per_ms">
+        <SingleValue>0.128</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="h_alpha_V0" units="mV">
-      <SingleValue>17</SingleValue>
+    <Property name="h_alpha_V0">
+      <Quantity units="mV">
+        <SingleValue>17</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="h_alpha_K" units="mV">
-      <SingleValue>18</SingleValue>
+    <Property name="h_alpha_K">
+      <Quantity units="mV">
+        <SingleValue>18</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="h_beta_A" units="per_ms">
-      <SingleValue>4</SingleValue>
+    <Property name="h_beta_A">
+      <Quantity units="per_ms">
+        <SingleValue>4</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="h_beta_V0" units="mV">
-      <SingleValue>40</SingleValue>
+    <Property name="h_beta_V0">
+      <Quantity units="mV">
+        <SingleValue>40</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="h_beta_K" units="mV">
-      <SingleValue>5</SingleValue>
+    <Property name="h_beta_K">
+      <Quantity units="mV">
+        <SingleValue>5</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="n_alpha_A" units="per_ms_mV">
-      <SingleValue>0.032</SingleValue>
+    <Property name="n_alpha_A">
+      <Quantity units="per_ms_mV">
+        <SingleValue>0.032</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="n_alpha_V0" units="mV">
-      <SingleValue>15</SingleValue>
+    <Property name="n_alpha_V0">
+      <Quantity units="mV">
+        <SingleValue>15</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="n_alpha_K" units="mV">
-      <SingleValue>5</SingleValue>
+    <Property name="n_alpha_K">
+      <Quantity units="mV">
+        <SingleValue>5</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="n_beta_A" units="per_ms">
-      <SingleValue>0.5</SingleValue>
+    <Property name="n_beta_A">
+      <Quantity units="per_ms">
+        <SingleValue>0.5</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="n_beta_V0" units="mV">
-      <SingleValue>10</SingleValue>
+    <Property name="n_beta_V0">
+      <Quantity units="mV">
+        <SingleValue>10</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="n_beta_K" units="mV">
-      <SingleValue>40</SingleValue>
+    <Property name="n_beta_K">
+      <Quantity units="mV">
+        <SingleValue>40</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="gbarNa" units="nS">
-      <SingleValue>20000</SingleValue>
+    <Property name="gbarNa">
+      <Quantity units="nS">
+        <SingleValue>20000</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="gbarK" units="nS">
-      <SingleValue>6000</SingleValue>
+    <Property name="gbarK">
+      <Quantity units="nS">
+        <SingleValue>6000</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="gLeak" units="nS">
-      <SingleValue>10</SingleValue>
+    <Property name="gLeak">
+      <Quantity units="nS">
+        <SingleValue>10</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="eLeak" units="mV">
-      <SingleValue>-60</SingleValue>
+    <Property name="eLeak">
+      <Quantity units="mV">
+        <SingleValue>-60</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="eK" units="mV">
-      <SingleValue>-90</SingleValue>
+    <Property name="eK">
+      <Quantity units="mV">
+        <SingleValue>-90</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="eNa" units="mV">
-      <SingleValue>50</SingleValue>
+    <Property name="eNa">
+      <Quantity units="mV">
+        <SingleValue>50</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="C" units="pF">
-      <SingleValue>200</SingleValue>
+    <Property name="C">
+      <Quantity units="pF">
+        <SingleValue>200</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="v_rest" units="mV">
-      <SingleValue>-63.0</SingleValue>
+    <Property name="v_rest">
+      <Quantity units="mV">
+        <SingleValue>-63.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property name="v_threshold" units="mV">
-      <SingleValue>-20</SingleValue>
+    <Property name="v_threshold">
+      <Quantity units="mV">
+        <SingleValue>-20</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension name="per_time" t="-1"/>
