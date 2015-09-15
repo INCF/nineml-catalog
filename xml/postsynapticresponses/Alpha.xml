@@ -26,8 +26,10 @@
   </Dynamics>
   <DynamicsProperties name="AlphaProperties">
     <Definition name="Alpha"/>
-    <Property units="ms" name="tau">
-      <SingleValue>0.1</SingleValue>
+    <Property name="tau">
+      <Quantity units="ms">
+        <SingleValue>0.1</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension i="1" name="current"/>

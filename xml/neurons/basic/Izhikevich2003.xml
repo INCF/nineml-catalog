@@ -44,26 +44,40 @@
   </Dynamics>
   <DynamicsProperties name="Izhikevich2003Properties">
     <Definition name="Izhikevich2003"/>
-    <Property units="pF" name="Cm">
-      <SingleValue>1</SingleValue>
+    <Property name="Cm">
+      <Quantity units="pF">
+        <SingleValue>1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_ms" name="a">
-      <SingleValue>0.02</SingleValue>
+    <Property name="a">
+      <Quantity units="per_ms">
+        <SingleValue>0.02</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_ms" name="b">
-      <SingleValue>0.2</SingleValue>
+    <Property name="b">
+      <Quantity units="per_ms">
+        <SingleValue>0.2</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="c">
-      <SingleValue>-65.0</SingleValue>
+    <Property name="c">
+      <Quantity units="mV">
+        <SingleValue>-65.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV_per_ms" name="d">
-      <SingleValue>2.0</SingleValue>
+    <Property name="d">
+      <Quantity units="mV_per_ms">
+        <SingleValue>2.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="vthresh">
-      <SingleValue>30.0</SingleValue>
+    <Property name="vthresh">
+      <Quantity units="mV">
+        <SingleValue>30.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="weight">
-      <SingleValue>5</SingleValue>
+    <Property name="weight">
+      <Quantity units="mV">
+        <SingleValue>5</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension name="per_time_voltage" i="1" l="-2" m="-1" t="2"/>

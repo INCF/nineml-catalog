@@ -13,8 +13,10 @@
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>  
   <DynamicsProperties name="PyNNGapProperties">
     <Definition>Gap</Definition>
-    <Property units="uS" name="g">
-      <SingleValue>0.0</SingleValue>
+    <Property name="g">
+      <Quantity units="uS">
+        <SingleValue>0.0</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension i="1" name="current"/>

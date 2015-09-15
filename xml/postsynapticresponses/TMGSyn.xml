@@ -18,11 +18,15 @@
   </Dynamics>
   <DynamicsProperties name="TMGSynProperties">
     <Definition>TMGSyn</Definition>
-    <Property units="mV" name="e">
-      <SingleValue>-90.0</SingleValue>
+    <Property name="e">
+      <Quantity units="mV">
+        <SingleValue>-90.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="tau">
-      <SingleValue>3.0</SingleValue>
+    <Property name="tau">
+      <Quantity units="ms">
+        <SingleValue>3.0</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Unit symbol="ms" dimension="time" power="-3"/>

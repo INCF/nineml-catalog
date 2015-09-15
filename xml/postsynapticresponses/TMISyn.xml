@@ -12,8 +12,10 @@
   </Dynamics>
   <DynamicsProperties name="TMISynProperties">
     <Definition>TMISyn</Definition>
-    <Property units="ms" name="tau">
-      <SingleValue>3.0</SingleValue>
+    <Property name="tau">
+      <Quantity units="ms">
+        <SingleValue>3.0</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension i="1" name="current"/>

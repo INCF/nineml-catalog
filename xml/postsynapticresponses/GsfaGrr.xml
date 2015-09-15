@@ -37,26 +37,40 @@
   </Dynamics>
   <DynamicsProperties name="PyNNGsfaGrrProperties">
     <Definition>GsfaGrr</Definition>
-    <Property units="mV" name="E_r">
-      <SingleValue>-70.0</SingleValue>
+    <Property name="E_r">
+      <Quantity units="mV">
+        <SingleValue>-70.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="E_s">
-      <SingleValue>-70.0</SingleValue>
+    <Property name="E_s">
+      <Quantity units="mV">
+        <SingleValue>-70.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nS" name="q_r">
-      <SingleValue>3214.0</SingleValue>
+    <Property name="q_r">
+      <Quantity units="nS">
+        <SingleValue>3214.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nS" name="q_s">
-      <SingleValue>14.48</SingleValue>
+    <Property name="q_s">
+      <Quantity units="nS">
+        <SingleValue>14.48</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="tau_r">
-      <SingleValue>1.97</SingleValue>
+    <Property name="tau_r">
+      <Quantity units="ms">
+        <SingleValue>1.97</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="tau_s">
-      <SingleValue>110.0</SingleValue>
+    <Property name="tau_s">
+      <Quantity units="ms">
+        <SingleValue>110.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="vthresh">
-      <SingleValue>-57.0</SingleValue>
+    <Property name="vthresh">
+      <Quantity units="mV">
+        <SingleValue>-57.0</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension i="1" name="current"/>

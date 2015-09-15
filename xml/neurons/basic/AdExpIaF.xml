@@ -53,38 +53,60 @@
   </Dynamics>  
   <DynamicsProperties name="AdExpIaFProperties">
     <Definition name="AdExpIaF"/>
-    <Property units="mV" name="EL">
-      <SingleValue>-70.6</SingleValue>
+    <Property name="EL">
+      <Quantity units="mV">
+        <SingleValue>-70.6</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="uS" name="GL">
-      <SingleValue>0.03</SingleValue>
+    <Property name="GL">
+      <Quantity units="uS">
+        <SingleValue>0.03</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="uS" name="a">
-      <SingleValue>0.004</SingleValue>
+    <Property name="a">
+      <Quantity units="uS">
+        <SingleValue>0.004</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nA" name="b">
-      <SingleValue>0.0805</SingleValue>
+    <Property name="b">
+      <Quantity units="nA">
+        <SingleValue>0.0805</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="pF" name="Cm">
-      <SingleValue>1</SingleValue>
+    <Property name="Cm">
+      <Quantity units="pF">
+        <SingleValue>1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="delta">
-      <SingleValue>2.0</SingleValue>
+    <Property name="delta">
+      <Quantity units="mV">
+        <SingleValue>2.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="tauw">
-      <SingleValue>144.0</SingleValue>
+    <Property name="tauw">
+      <Quantity units="ms">
+        <SingleValue>144.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="trefrac">
-      <SingleValue>1.0</SingleValue>
+    <Property name="trefrac">
+      <Quantity units="ms">
+        <SingleValue>1.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="vreset">
-      <SingleValue>-60.0</SingleValue>
+    <Property name="vreset">
+      <Quantity units="mV">
+        <SingleValue>-60.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="vspike">
-      <SingleValue>-40.0</SingleValue>
+    <Property name="vspike">
+      <Quantity units="mV">
+        <SingleValue>-40.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="vthresh">
-      <SingleValue>-50.0</SingleValue>
+    <Property name="vthresh">
+      <Quantity units="mV">
+        <SingleValue>-50.0</SingleValue>
+      </Quantity>
     </Property>
   </DynamicsProperties>
   <Dimension i="1" name="current"/>
