@@ -2,7 +2,7 @@
 <NineML xmlns="http://nineml.net/9ML/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://nineml.net/9ML/1.0/schema/NineML_v1.0.xsd">
   <ComponentClass name="IzhikevichClass">
-    <Parameter name="a" dimension="dimensionless"/>
+    <Parameter name="a" dimension="per_time"/>
     <Parameter name="b" dimension="conductance_per_voltage2"/>
     <Parameter name="c" dimension="voltage"/>
     <Parameter name="k" dimension="conductance_per_voltage"/>
@@ -10,7 +10,7 @@
     <Parameter name="Vt" dimension="voltage"/>
     <Parameter name="Vb" dimension="voltage"/>
     <Parameter name="Vpeak" dimension="voltage"/>
-    <Parameter name="Cm" dimension="specificCapacitance"/>
+    <Parameter name="Cm" dimension="capacitance"/>
     <AnalogReducePort name="iSyn" dimension="current" operator="+"/>
     <AnalogReceivePort name="iExt" dimension="current"/>
     <AnalogSendPort name="U" dimension="current"/>
@@ -26,7 +26,7 @@
         <TimeDerivative variable="V">
           <MathInline>V_deriv</MathInline>
         </TimeDerivative>
-        <OnCondition targetRegime="subthresholdRegime">
+        <OnCondition target_regime="subthresholdRegime">
           <Trigger>
             <MathInline>V &gt; Vpeak</MathInline>
           </Trigger>
@@ -38,7 +38,7 @@
           </StateAssignment>
           <OutputEvent port="spikeOutput"/>
         </OnCondition>
-        <OnCondition targetRegime="subVbRegime">
+        <OnCondition target_regime="subVbRegime">
           <Trigger>
             <MathInline>V &lt; Vb</MathInline>
           </Trigger>
@@ -51,7 +51,7 @@
         <TimeDerivative variable="V">
           <MathInline>V_deriv</MathInline>
         </TimeDerivative>
-        <OnCondition targetRegime="subthresholdRegime">
+        <OnCondition target_regime="subthresholdRegime">
           <Trigger>
             <MathInline>V &gt; Vb</MathInline>
           </Trigger>
@@ -96,11 +96,13 @@
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="conductance_per_voltage2" m="-3" l="-6" t="9" i="4"/>
   <Dimension name="conductance_per_voltage" m="-2" l="-4" t="6" i="3"/>
-  <Dimension name="specificCapacitance" m="-1" l="-4" t="4" i="2"/>
+  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
   <Dimension name="current" i="1"/>
+  <Dimension name="per_time" t="-1"/>
   <Unit symbol="none" dimension="dimensionless"/>
+  <Unit symbol="per_ms" dimension="per_time" power="0"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
-  <Unit symbol="uF" dimension="specificCapacitance" power="-6"/>
+  <Unit symbol="uF" dimension="capacitance" power="-6"/>
   <Unit symbol="pA" dimension="current" power="-12"/>
   <Unit symbol="uS_per_mV2" dimension="conductance_per_voltage2" power="0"/>
   <Unit symbol="uS_per_mV" dimension="conductance_per_voltage" power="0"/>
