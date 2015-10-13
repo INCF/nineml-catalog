@@ -38,7 +38,7 @@
     <Alias name="i">
       <MathInline>g * (v - e_reversal)</MathInline>
     </Alias>
-    <Regime name="default">
+    <Regime name="sole">
       <TimeDerivative variable="internalC">
         <MathInline>
           -i / (ionValence * Faraday * diameter) - 

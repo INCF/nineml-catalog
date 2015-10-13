@@ -38,7 +38,7 @@
     <StateVariable name="h" dimension="dimensionless">
       <Initial>h_inf</Initial>
     </StateVariable>
-    <Regime name="default">
+    <Regime name="sole">
       <TimeDerivative variable="m">
         <MathInline>(m_inf - m) / m_tau</MathInline>
       </TimeDerivative>

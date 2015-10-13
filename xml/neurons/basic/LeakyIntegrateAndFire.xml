@@ -10,11 +10,11 @@
     <Parameter dimension="voltage" name="v_reset"/>
     <Parameter dimension="voltage" name="e_leak"/>
     <Parameter dimension="voltage" name="v_threshold"/>
-    <Regime name="subthresholdregime">
+    <Regime name="subthreshold">
       <TimeDerivative variable="v">
         <MathInline>(g_leak*(e_leak - v) + iExt)/Cm</MathInline>
       </TimeDerivative>
-      <OnCondition target_regime="refractoryregime">
+      <OnCondition target_regime="refractory">
         <StateAssignment variable="end_refractory">
           <MathInline>t + refactory_period</MathInline>
         </StateAssignment>
@@ -27,8 +27,8 @@
         </Trigger>
       </OnCondition>
     </Regime>
-    <Regime name="refractoryregime">
-      <OnCondition target_regime="subthresholdregime">
+    <Regime name="refractory">
+      <OnCondition target_regime="subthreshold">
         <Trigger>
           <MathInline>t &gt; end_refractory</MathInline>
         </Trigger>

@@ -7,14 +7,14 @@
     <AnalogSendPort dimension="current" name="iSyn"/>
     <StateVariable dimension="current" name="a"/>
     <StateVariable dimension="current" name="b"/>
-    <Regime name="default">
+    <Regime name="sole">
       <TimeDerivative variable="a">
         <MathInline>(-a + b)/tau</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="b">
         <MathInline>-b/tau</MathInline>
       </TimeDerivative>
-      <OnEvent target_regime="default" port="spike">
+      <OnEvent target_regime="sole" port="spike">
         <StateAssignment variable="b">
           <MathInline>b + q</MathInline>
         </StateAssignment>

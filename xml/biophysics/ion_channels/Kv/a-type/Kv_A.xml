@@ -40,7 +40,7 @@
     <Alias name="g">
       <MathInline>gbar * a * a * a * b</MathInline>
     </Alias>
-    <Regime name="default">
+    <Regime name="sole">
       <TimeDerivative variable="a">
         <MathInline>(a_inf - a) / a_tau</MathInline>
       </TimeDerivative>

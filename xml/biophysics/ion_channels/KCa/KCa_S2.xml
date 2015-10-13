@@ -31,7 +31,7 @@
     <Alias name="i">
       <MathInline>gbar * (o1 + o2) * (v - e_reversal)</MathInline>
     </Alias>
-    <Regime name="default">
+    <Regime name="sole">
       <TimeDerivative variable="c1">
         <MathInline> from_c2_to_c1 - from_c1_to_c2</MathInline>
       </TimeDerivative>

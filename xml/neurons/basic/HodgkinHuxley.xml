@@ -34,7 +34,7 @@
     <StateVariable name="m" dimension="dimensionless"/>
     <StateVariable name="h" dimension="dimensionless"/>
     <StateVariable name="n" dimension="dimensionless"/>
-    <Regime name="default">
+    <Regime name="sole">
       <TimeDerivative variable="v">
         <MathInline>(iExt - iNa - iK - iLeak) / C</MathInline>
       </TimeDerivative>
@@ -47,7 +47,7 @@
       <TimeDerivative variable="n">
         <MathInline>(n_inf - n) / n_tau</MathInline>
       </TimeDerivative>
-      <OnCondition target_regime="default">
+      <OnCondition target_regime="sole">
         <Trigger>
           <MathInline>v &gt; v_threshold</MathInline>
         </Trigger>
