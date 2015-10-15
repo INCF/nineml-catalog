@@ -32,9 +32,6 @@
         <StateAssignment variable="V">
           <MathInline>c</MathInline>
         </StateAssignment>
-        <StateAssignment variable="U">
-          <MathInline>U</MathInline>
-        </StateAssignment>
         <OutputEvent port="spikeOutput"/>
       </OnCondition>
       <OnCondition target_regime="subVbRegime">
@@ -45,7 +42,7 @@
     </Regime>
     <Regime name="subVbRegime">
       <TimeDerivative variable="U">
-        <MathInline>- U * a</MathInline>
+        <MathInline>-U * a</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="V">
         <MathInline>V_deriv</MathInline>
@@ -61,10 +58,10 @@
     </Alias>
   </Dynamics>
   <DynamicsProperties name="Izhikevich2007Properties">
-    <Definition>Izhikevich2007</Definition>
+    <Definition name="Izhikevich2007"/>
     <Property name="a">
       <Quantity units="per_ms">
-        <SingleValue>0.02</SingleValue>
+        <SingleValue>0.2</SingleValue>
       </Quantity>
     </Property>
     <Property name="b">
