@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dimension name="dimensionless"/>
   <Dimension name="per_time" t="-1"/>
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
-  <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>
-  <Dimension name="specificCapacitance" m="-1" l="-4" t="4" i="2"/>
+  <Dimension name="conductance" m="-1" l="-2" t="3" i="2"/>
+  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
   <Dimension name="current" i="1"/>
   <Dimension name="temperature" k="1"/>
   <ComponentClass name="HodgkinHuxleyClass">
@@ -25,13 +26,13 @@
     <Parameter name="n_beta_A" dimension="per_time"/>
     <Parameter name="n_beta_V0" dimension="voltage"/>
     <Parameter name="n_beta_K" dimension="voltage"/>
-    <Parameter name="gbarNa" dimension="conductanceDensity"/>
-    <Parameter name="gbarK" dimension="conductanceDensity"/>
-    <Parameter name="gLeak" dimension="conductanceDensity"/>
+    <Parameter name="gbarNa" dimension="conductance"/>
+    <Parameter name="gbarK" dimension="conductance"/>
+    <Parameter name="gLeak" dimension="conductance"/>
     <Parameter name="eLeak" dimension="voltage"/>
     <Parameter name="eK" dimension="voltage"/>
     <Parameter name="eNa" dimension="voltage"/>
-    <Parameter name="C" dimension="specificCapacitance"/>
+    <Parameter name="C" dimension="capacitance"/>
     <Parameter name="T" dimension="temperature"/>
     <AnalogSendPort name="v" dimension="voltage"/>
     <AnalogSendPort name="iK" dimension="current"/>
@@ -41,10 +42,10 @@
     <Dynamics>
       <Annotations><Description>Dynamics are used to describe components that are added to the differential equation solver</Description></Annotations>
       <StateVariable name="v" dimension="voltage"/>
-      <StateVariable name="m"/>
-      <StateVariable name="h"/>
-      <StateVariable name="n"/>
-      <Regime name="single">
+      <StateVariable name="m" dimension="dimensionless"/>
+      <StateVariable name="h" dimension="dimensionless"/>
+      <StateVariable name="n" dimension="dimensionless"/>
+      <Regime name="sole">
         <TimeDerivative variable="v">
           <MathInline>(iNa + iK + iLeak + injectedCurrent) / C</MathInline>
         </TimeDerivative>
@@ -58,17 +59,17 @@
           <MathInline>(n_inf - n) / n_tau</MathInline>
           <Annotations><Description>And time-derivatives too</Description></Annotations>
         </TimeDerivative>
-        <OnEvent port="incomingSpike">
+        <OnEvent port="incomingSpike" target_regime="sole">
           <StateAssignment variable="v">
             <Annotations><Description>Even State assignments can be annotated</Description></Annotations>
             <MathInline>v + 5</MathInline>
           </StateAssignment>
         </OnEvent>
-        <OnCondition>
+        <OnCondition target_regime="sole">
           <Trigger>
             <MathInline>v &gt; -20</MathInline>
           </Trigger>
-          <EventOut port="outgoingSpike"/>
+          <OutputEvent port="outgoingSpike"/>
         </OnCondition>
       </Regime>
       <Alias name="iK">
