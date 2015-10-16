@@ -20,11 +20,9 @@
     </Dynamics>
   </ComponentClass>  
   <Component name="PyNNExpISynProperties">
-    <Definition name="ExpISyn"/>
-    <Property name="tau">
-      <Quantity units="ms">
-        <SingleValue>0.1</SingleValue>
-      </Quantity>
+    <Definition>ExpISyn</Definition>
+    <Property name="tau" units="ms">
+      <SingleValue>0.1</SingleValue>
     </Property>
   </Component>
   <Dimension name="time" t="1"/>

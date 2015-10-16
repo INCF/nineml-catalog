@@ -27,11 +27,9 @@
     </Dynamics>
   </ComponentClass>
   <Component name="AlphaProperties">
-    <Definition name="Alpha"/>
-    <Property name="tau">
-      <Quantity units="ms">
-        <SingleValue>0.1</SingleValue>
-      </Quantity>
+    <Definition>Alpha</Definition>
+    <Property name="tau" units="ms">
+      <SingleValue>0.1</SingleValue>
     </Property>
   </Component>
   <Dimension i="1" name="current"/>
