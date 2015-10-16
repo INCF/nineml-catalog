@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="Alpha">
+    <Parameter dimension="time" name="tau"/>
+    <EventReceivePort name="spike"/>
+    <AnalogReceivePort dimension="current" name="q"/>
+    <AnalogSendPort dimension="current" name="iSyn"/>
+    <Dynamics>
+      <StateVariable dimension="current" name="a"/>
+      <StateVariable dimension="current" name="b"/>
+      <Regime name="sole">
+        <TimeDerivative variable="a">
+          <MathInline>(-a + b)/tau</MathInline>
+        </TimeDerivative>
+        <TimeDerivative variable="b">
+          <MathInline>-b/tau</MathInline>
+        </TimeDerivative>
+        <OnEvent target_regime="sole" port="spike">
+          <StateAssignment variable="b">
+            <MathInline>b + q</MathInline>
+          </StateAssignment>
+        </OnEvent>
+      </Regime>
+      <Alias name="iSyn">
+        <MathInline>a</MathInline>
+      </Alias>
+    </Dynamics>
+  </ComponentClass>
+  <Component name="AlphaProperties">
+    <Definition name="Alpha"/>
+    <Property name="tau">
+      <Quantity units="ms">
+        <SingleValue>0.1</SingleValue>
+      </Quantity>
+    </Property>
+  </Component>
+  <Dimension i="1" name="current"/>
+  <Dimension name="time" t="1"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="nA" dimension="current" power="-9"/>
+</NineML>
