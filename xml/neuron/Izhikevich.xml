@@ -71,8 +71,8 @@
   </ComponentClass>
   <Component name="Izhikevich2007">
     <Definition>Izhikevich2007Class</Definition>
-    <Property name="a" units="none">
-      <SingleValue>0.02</SingleValue>
+    <Property name="a" units="per_ms">
+      <SingleValue>0.2</SingleValue>
     </Property>
     <Property name="b" units="uS_per_mV2">
       <SingleValue>0.025</SingleValue>
