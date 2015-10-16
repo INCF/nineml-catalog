@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NineML xmlns="http://nineml.net/9ML/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://nineml.net/9ML/1.0/schema/NineML_v1.0.xsd">
-  <ComponentClass name="IzhikevichClass">
+  <ComponentClass name="Izhikevich2007Class">
+    <Annotations>
+      <Comment>
+        Note that this version of the Izhikevich model is not the original
+        version from his 2003 manuscript. It appears in Izhikevich's 2007 book
+        "Dynamical Systems in Neuroscience".
+      </Comment>
+    </Annotations>
     <Parameter name="a" dimension="per_time"/>
     <Parameter name="b" dimension="conductance_per_voltage2"/>
     <Parameter name="c" dimension="voltage"/>
@@ -62,7 +69,7 @@
       </Alias>
     </Dynamics>
   </ComponentClass>
-  <Component name="Izhikevich">
+  <Component name="Izhikevich2007">
     <Definition>IzhikevichClass</Definition>
     <Property name="a" units="none">
       <SingleValue>0.02</SingleValue>
