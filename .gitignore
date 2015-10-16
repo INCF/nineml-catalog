@@ -2,3 +2,4 @@
 .project
 .pydevproject
 9build
+*.pyc
