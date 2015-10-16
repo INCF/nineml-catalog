@@ -70,7 +70,7 @@
     </Dynamics>
   </ComponentClass>
   <Component name="Izhikevich2007">
-    <Definition>IzhikevichClass</Definition>
+    <Definition>Izhikevich2007Class</Definition>
     <Property name="a" units="none">
       <SingleValue>0.02</SingleValue>
     </Property>
