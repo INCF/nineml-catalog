@@ -1,7 +1,7 @@
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="AllToAll">
+  <ComponentClass name="RandomFanOut">
     <Parameter name="probability" dimension="dimensionless"/>
-    <ConnectionRule standardLibrary="http://nineml.net/standardlibraries/connectionrules/AllToAll"/>
+    <ConnectionRule standardLibrary="http://nineml.net/standardlibraries/connectionrules/RandomFanOut"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>
