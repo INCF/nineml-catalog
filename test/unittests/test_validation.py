@@ -25,7 +25,7 @@ class TestLoadCatalog(TestCase):
                 elif f.endswith('.xml'):
                     yield pth
 
-    def test_load_all(self):
+    def test_load_and_validate_all(self):
         for p in self.iterate_xml_paths(os.path.join(self.repo_root, 'xml')):
             # Just check to see whether all elements of the document load
             # without error
