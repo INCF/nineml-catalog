@@ -1,15 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.incf.org/9ML/0.3">
+<NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="Static">
-    <AnalogSendPort name="weight" dimension="dimensionless"/>
+    <Parameter name="fixed_weight" dimension="current"/>
+    <AnalogSendPort name="weight" dimension="current"/>
     <Dynamics>
-      <StateVariable name="weight" dimension="dimensionless"/>
-      <Regime name="default">
-        <TimeDerivative variable="weight">
-          <MathInline>0.0</MathInline>
-        </TimeDerivative>
-      </Regime>
+      <Regime name="sole"/>
+      <Alias name="weight">
+        <MathInline>fixed_weight</MathInline>
+      </Alias>      
     </Dynamics>
   </ComponentClass>
-  <Dimension name="dimensionless"/>
+  <Dimension name="current" i="1"/>
 </NineML>

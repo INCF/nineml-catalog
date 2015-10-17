@@ -20,7 +20,7 @@
         </OnCondition>
       </Regime>
       <Regime name="subthreshold">
-        <TimeDerivative variable="V">
+        <TimeDerivative variable="v">
           <MathInline>(i_synaptic*R - v)/tau</MathInline>
         </TimeDerivative>
         <OnCondition target_regime="refractory">

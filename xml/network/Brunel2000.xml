@@ -40,7 +40,7 @@
     <Size>1000</Size>
     <Cell>
       <Component name="InhibitoryNeuron">
-        <Definition url="../neuron/LeakIntegrateAndFire.xml">LeakIntegrateAndFire</Definition>
+        <Definition url="../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
         <Property units="Mohm" name="R">
           <SingleValue>1.5</SingleValue>
         </Property>
@@ -82,10 +82,10 @@
   <Selection name="AllNeurons">
     <Concatenate>
       <Item index="0">
-        <Reference>Exc</Reference>
+        <Reference>Excitatory</Reference>
       </Item>
       <Item index="1">
-        <Reference>Inh</Reference>
+        <Reference>Inhibitory</Reference>
       </Item>
     </Concatenate>
   </Selection>  
@@ -123,9 +123,9 @@
     <Plasticity>
       <Component name="ExcitatoryPlasticity">
         <Definition url="../plasticity/Static.xml">Static</Definition>
-        <Initial units="nA" name="weight">
+        <Property units="nA" name="fixed_weight">
           <SingleValue>2.4</SingleValue>
-        </Initial>
+        </Property>
       </Component>
     </Plasticity>
     <Delay units="ms">
@@ -139,7 +139,7 @@
     </Source>
     <Destination>
       <Reference>AllNeurons</Reference>
-      <FromResponse send_port="Isyn" receive_port="Isyn"/>
+      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
       <Component name="RandomInConnectivity">
@@ -151,7 +151,7 @@
     </Connectivity>
     <Response>
       <Component name="PostSynapticResponse">
-        <Definition url="Alpha.xml">Alpha</Definition>
+        <Definition url="../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -167,9 +167,9 @@
     <Plasticity>
       <Component name="InhibitoryPlasticity">
         <Definition url="../plasticity/Static.xml">Static</Definition>
-        <Initial units="nA" name="weight">
+        <Property units="nA" name="fixed_weight">
           <SingleValue>-12.0</SingleValue>
-        </Initial>
+        </Property>
       </Component>
     </Plasticity>
     <Delay units="ms">
@@ -191,7 +191,7 @@
     </Connectivity>
     <Response>
       <Component name="PostSynapticResponse">
-        <Definition url="Alpha.xml">Alpha</Definition>
+        <Definition url="../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -207,9 +207,9 @@
     <Plasticity>
       <Component name="InputPlasticity">
         <Definition url="../plasticity/Static.xml">Static</Definition>
-        <Initial units="nA" name="weight">
+        <Property units="nA" name="fixed_weight">
           <SingleValue>2.4</SingleValue>
-        </Initial>
+        </Property>
       </Component>
     </Plasticity>
     <Delay units="ms">
