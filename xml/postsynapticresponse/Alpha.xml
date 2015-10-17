@@ -1,39 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="Alpha">
+  <ComponentClass name="AlphaPSR">
+    <AnalogSendPort dimension="current" name="a"/>
+    <AnalogSendPort dimension="current" name="i_synaptic"/>
+    <AnalogSendPort dimension="current" name="b"/>
+    <AnalogReceivePort dimension="current" name="weight"/>
+    <EventReceivePort name="input_spike"/>
     <Parameter dimension="time" name="tau"/>
-    <EventReceivePort name="spike"/>
-    <AnalogReceivePort dimension="current" name="q"/>
-    <AnalogSendPort dimension="current" name="iSyn"/>
     <Dynamics>
+      <Alias name="i_synaptic">
+        <MathInline>a</MathInline>
+      </Alias>
       <StateVariable dimension="current" name="a"/>
       <StateVariable dimension="current" name="b"/>
-      <Regime name="sole">
-        <TimeDerivative variable="a">
+      <Regime name="default">
+        <OnEvent target_regime="default" port="input_spike">
+          <StateAssignment variable="b">
+            <MathInline>b + weight</MathInline>
+          </StateAssignment>
+        </OnEvent>
+        <TimeDerivative variable="b">
           <MathInline>(-a + b)/tau</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="b">
-          <MathInline>-b/tau</MathInline>
+          <MathInline>-b/tau_syn</MathInline>
         </TimeDerivative>
-        <OnEvent target_regime="sole" port="spike">
-          <StateAssignment variable="b">
-            <MathInline>b + q</MathInline>
-          </StateAssignment>
-        </OnEvent>
       </Regime>
-      <Alias name="iSyn">
-        <MathInline>a</MathInline>
-      </Alias>
     </Dynamics>
   </ComponentClass>
-  <Component name="AlphaProperties">
-    <Definition>Alpha</Definition>
-    <Property name="tau" units="ms">
-      <SingleValue>0.1</SingleValue>
-    </Property>
-  </Component>
-  <Dimension i="1" name="current"/>
+  <Dimension name="current" i="1"/>
   <Dimension name="time" t="1"/>
-  <Unit symbol="ms" dimension="time" power="-3"/>
-  <Unit symbol="nA" dimension="current" power="-9"/>
 </NineML>
