@@ -39,7 +39,7 @@
       </Regime>
     </Dynamics>
   </ComponentClass>
-  <ComponentClass name="FastSpikingIzhikevich">
+  <ComponentClass name="IzhikevichFastSpiking">
     <Annotations>
       <Comment>
         Note that this version of the Izhikevich model is not the original
@@ -99,8 +99,8 @@
       </Alias>
     </Dynamics>
   </ComponentClass>
-  <Component name="FastSpikingIzhikevichDefault">
-    <Definition>FastSpikingIzhikevich</Definition>
+  <Component name="IzhikevichFastSpikingDefault">
+    <Definition>IzhikevichFastSpiking</Definition>
     <Property name="a" units="per_ms">
       <SingleValue>0.2</SingleValue>
     </Property>

@@ -30,7 +30,7 @@
     <Parameter dimension="conductance" name="gkbar"/>
     <Parameter dimension="voltage" name="h_alpha_V0"/>
     <AnalogSendPort dimension="voltage" name="V"/>
-    <AnalogReducePort operator="+" dimension="current" name="Isyn"/>
+    <AnalogReducePort operator="+" dimension="current" name="iSyn"/>
     <EventSendPort name="spikeoutput"/>    
     <Dynamics>
       <StateVariable dimension="dimensionless" name="h"/>
@@ -42,7 +42,7 @@
           <MathInline>(-h + hinf)/htau</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="V">
-          <MathInline>(Isyn + ik + il + ina)/C</MathInline>
+          <MathInline>(iSyn + ik + il + ina)/C</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="m">
           <MathInline>(-m + minf)/mtau</MathInline>
@@ -113,7 +113,6 @@
       </Alias>
     </Dynamics>
   </ComponentClass>
-  <Dimension name="dimensionless"/>
   <Component name="HodgkinHuxleyProperties">
     <Definition>HodgkinHuxley</Definition>
     <Property name="m_alpha_A" units="per_ms_mV">
