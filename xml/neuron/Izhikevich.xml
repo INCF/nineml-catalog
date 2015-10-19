@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NineML xmlns="http://nineml.net/9ML/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://nineml.net/9ML/1.0/schema/NineML_v1.0.xsd">
-  <ComponentClass name="FastSpikingIzhikevichClass">
+  <ComponentClass name="Izhikevich">
+    <Parameter dimension="per_time" name="a"/>
+    <Parameter dimension="voltage" name="c"/>
+    <Parameter dimension="per_time" name="b"/>
+    <Parameter dimension="voltage_per_time" name="d"/>
+    <Parameter dimension="capacitance" name="C_m"/>
+    <Parameter dimension="per_time" name="beta"/>
+    <Parameter dimension="per_time_voltage" name="alpha"/>
+    <Parameter dimension="voltage" name="theta"/>
+    <Parameter dimension="voltage_per_time" name="zeta"/>
+    <AnalogSendPort dimension="voltage" name="V"/>
+    <AnalogReducePort operator="+" dimension="current" name="Isyn"/>
+    <EventSendPort name="spike"/>    
+    <Dynamics>
+      <StateVariable dimension="voltage_per_time" name="U"/>
+      <StateVariable dimension="voltage" name="V"/>
+      <Regime name="subthreshold_regime">
+        <TimeDerivative variable="U">
+          <MathInline>a*(-U + V*b)</MathInline>
+        </TimeDerivative>
+        <TimeDerivative variable="V">
+          <MathInline>-U + V*beta + alpha*(V*V) + zeta + Isyn/C_m</MathInline>
+        </TimeDerivative>        
+        <OnCondition target_regime="subthreshold_regime">
+          <Trigger>
+            <MathInline>V &gt; theta</MathInline>
+          </Trigger>
+          <StateAssignment variable="U">
+            <MathInline>U + d</MathInline>
+          </StateAssignment>
+          <StateAssignment variable="V">
+            <MathInline>c</MathInline>
+          </StateAssignment>
+          <OutputEvent port="spike"/>
+        </OnCondition>
+      </Regime>
+    </Dynamics>
+  </ComponentClass>
+  <ComponentClass name="FastSpikingIzhikevich">
     <Annotations>
       <Comment>
         Note that this version of the Izhikevich model is not the original
@@ -69,8 +107,8 @@
       </Alias>
     </Dynamics>
   </ComponentClass>
-  <Component name="FastSpikingIzhikevich">
-    <Definition>FastSpikingIzhikevichClass</Definition>
+  <Component name="FastSpikingIzhikevichDefault">
+    <Definition>FastSpikingIzhikevich</Definition>
     <Property name="a" units="per_ms">
       <SingleValue>0.2</SingleValue>
     </Property>
@@ -99,6 +137,8 @@
       <SingleValue>20</SingleValue>
     </Property>
   </Component>
+  <Dimension i="1" l="-2" m="-1" t="2" name="per_time_voltage"/>
+  <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/>  
   <Dimension name="dimensionless"/>
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="conductance_per_voltage2" m="-3" l="-6" t="9" i="4"/>
