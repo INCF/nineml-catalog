@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="Static">
-    <Parameter name="fixed_weight" dimension="current"/>
-    <AnalogSendPort name="weight" dimension="current"/>
+    <Parameter name="weight" dimension="current"/>
+    <AnalogSendPort name="fixed_weight" dimension="current"/>
     <Dynamics>
       <Regime name="sole"/>
-      <Alias name="weight">
-        <MathInline>fixed_weight</MathInline>
+      <Alias name="fixed_weight">
+        <MathInline>weight</MathInline>
       </Alias>      
     </Dynamics>
   </ComponentClass>

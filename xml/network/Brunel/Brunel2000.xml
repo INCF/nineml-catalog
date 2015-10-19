@@ -7,11 +7,11 @@
       and Inhibitory Spiking Neurons". J. Comp. Neuro. 8:3, 183-208.
     </Comment>
   </Annotations>
-  <Population name="Excitatory">
+  <Population name="Ext">
     <Size>4000</Size>
     <Cell>
-      <Component name="ExcitatoryNeuron">
-        <Definition url="../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
+      <Component name="ExtNeuron">
+        <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
         <Property units="Mohm" name="R">
           <SingleValue>1.5</SingleValue>
         </Property>
@@ -36,11 +36,11 @@
       </Component>
     </Cell>
   </Population>
-  <Population name="Inhibitory">
+  <Population name="Inh">
     <Size>1000</Size>
     <Cell>
-      <Component name="InhibitoryNeuron">
-        <Definition url="../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
+      <Component name="InhNeuron">
+        <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
         <Property units="Mohm" name="R">
           <SingleValue>1.5</SingleValue>
         </Property>
@@ -69,7 +69,7 @@
     <Size>5000</Size>
     <Cell>
       <Component name="Stimulation">
-        <Definition url="../input/Poisson.xml">Poisson</Definition>
+        <Definition url="../../input/Poisson.xml">Poisson</Definition>
         <Property units="Hz" name="rate">
           <SingleValue>20000.0</SingleValue>
         </Property>
@@ -82,16 +82,16 @@
   <Selection name="AllNeurons">
     <Concatenate>
       <Item index="0">
-        <Reference>Excitatory</Reference>
+        <Reference>Ext</Reference>
       </Item>
       <Item index="1">
-        <Reference>Inhibitory</Reference>
+        <Reference>Inh</Reference>
       </Item>
     </Concatenate>
   </Selection>  
   <Projection name="Excitation">
     <Source>
-      <Reference>Excitatory</Reference>
+      <Reference>Ext</Reference>
     </Source>
     <Destination>
       <Reference>AllNeurons</Reference>
@@ -99,7 +99,7 @@
     </Destination>
     <Connectivity>
       <Component name="RandomExcitation">
-        <Definition url="../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
+        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
         <Property units="unitless" name="number">
           <SingleValue>400</SingleValue>
         </Property>
@@ -107,7 +107,7 @@
     </Connectivity>
     <Response>
       <Component name="SynapticResponse">
-        <Definition url="../postsynapticresponse/Alpha.xml">Alpha</Definition>
+        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -118,12 +118,12 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
-      <FromPlasticity send_port="weight" receive_port="weight"/>
+      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
-      <Component name="ExcitatoryPlasticity">
-        <Definition url="../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="fixed_weight">
+      <Component name="ExtPlasticity">
+        <Definition url="../../plasticity/Static.xml">Static</Definition>
+        <Property units="nA" name="weight">
           <SingleValue>2.4</SingleValue>
         </Property>
       </Component>
@@ -135,7 +135,7 @@
   <Unit symbol="nA" dimension="current" power="-9"/>
   <Projection name="Inhibition">
     <Source>
-      <Reference>Inhibitory</Reference>
+      <Reference>Inh</Reference>
     </Source>
     <Destination>
       <Reference>AllNeurons</Reference>
@@ -143,7 +143,7 @@
     </Destination>
     <Connectivity>
       <Component name="RandomInConnectivity">
-        <Definition url="../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
+        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
         <Property units="unitless" name="number">
           <SingleValue>100</SingleValue>
         </Property>
@@ -151,7 +151,7 @@
     </Connectivity>
     <Response>
       <Component name="PostSynapticResponse">
-        <Definition url="../postsynapticresponse/Alpha.xml">Alpha</Definition>
+        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -162,12 +162,12 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
-      <FromPlasticity send_port="weight" receive_port="weight"/>
+      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
-      <Component name="InhibitoryPlasticity">
-        <Definition url="../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="fixed_weight">
+      <Component name="InhPlasticity">
+        <Definition url="../../plasticity/Static.xml">Static</Definition>
+        <Property units="nA" name="weight">
           <SingleValue>-12.0</SingleValue>
         </Property>
       </Component>
@@ -186,12 +186,12 @@
     </Destination>
     <Connectivity>
       <Component name="OneToOne">
-        <Definition url="../connectionrule/OneToOne.xml">OneToOne</Definition>
+        <Definition url="../../connectionrule/OneToOne.xml">OneToOne</Definition>
       </Component>
     </Connectivity>
     <Response>
       <Component name="PostSynapticResponse">
-        <Definition url="../postsynapticresponse/Alpha.xml">Alpha</Definition>
+        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -202,12 +202,12 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
-      <FromPlasticity send_port="weight" receive_port="weight"/>
+      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
       <Component name="InputPlasticity">
-        <Definition url="../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="fixed_weight">
+        <Definition url="../../plasticity/Static.xml">Static</Definition>
+        <Property units="nA" name="weight">
           <SingleValue>2.4</SingleValue>
         </Property>
       </Component>

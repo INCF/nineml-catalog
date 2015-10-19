@@ -1,15 +1,17 @@
-from os import path
+import os.path
 import nineml
 
-xml_path = path.normpath(path.join(path.dirname(__file__), '..', 'xml'))
+xml_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..',
+                                         'xml'))
 
 
-def lookup(path_to_model):
+def lookup(path, name=None):
     """
     Retrieves a model from the catalog from the given path
     """
-    if isinstance(path_to_model, basestring):
-        path_to_model = path_to_model.split('/')
-    file_path = path.join(xml_path, *path_to_model[:-1]) + '.xml'
-    doc = nineml.read(file_path)
-    return doc[path_to_model[-1]]
+    doc = nineml.read(os.path.join(xml_path, *(path.split('/'))) + '.xml')
+    if name is not None:
+        elem = doc[name]
+    else:
+        elem = doc
+    return elem
