@@ -47,63 +47,55 @@
         "Dynamical Systems in Neuroscience".
       </Comment>
     </Annotations>
-    <Parameter name="a" dimension="per_time"/>
-    <Parameter name="b" dimension="conductance_per_voltage2"/>
-    <Parameter name="c" dimension="voltage"/>
-    <Parameter name="k" dimension="conductance_per_voltage"/>
-    <Parameter name="Vr" dimension="voltage"/>
-    <Parameter name="Vt" dimension="voltage"/>
-    <Parameter name="Vb" dimension="voltage"/>
-    <Parameter name="Vpeak" dimension="voltage"/>
-    <Parameter name="Cm" dimension="capacitance"/>
-    <AnalogReducePort name="iSyn" dimension="current" operator="+"/>
-    <AnalogReceivePort name="iExt" dimension="current"/>
-    <AnalogSendPort name="U" dimension="current"/>
-    <AnalogSendPort name="V" dimension="voltage"/>
+    <Parameter dimension="per_time" name="a"/>
+    <Parameter dimension="voltage" name="c"/>
+    <Parameter dimension="conductance_per_voltage2" name="b"/>
+    <Parameter dimension="capacitance" name="Cm"/>
+    <Parameter dimension="voltage" name="Vpeak"/>
+    <Parameter dimension="conductance_per_voltage" name="k"/>
+    <Parameter dimension="voltage" name="Vb"/>
+    <Parameter dimension="voltage" name="Vr"/>
+    <Parameter dimension="voltage" name="Vt"/>
+    <AnalogSendPort dimension="current" name="U"/>
+    <AnalogSendPort dimension="voltage" name="V"/>
+    <AnalogReducePort operator="+" dimension="current" name="iSyn"/>
+    <AnalogReducePort operator="+" dimension="current" name="iExt"/>
     <EventSendPort name="spikeOutput"/>
     <Dynamics>
-      <StateVariable name="V" dimension="voltage"/>
-      <StateVariable name="U" dimension="current"/>
-      <Regime name="subthresholdRegime">
+      <StateVariable dimension="current" name="U"/>
+      <StateVariable dimension="voltage" name="V"/>
+      <Regime name="subVb">
         <TimeDerivative variable="U">
-          <MathInline>a * (b * pow(V - Vb, 3) - U)</MathInline>
+          <MathInline>-U*a</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="V">
           <MathInline>V_deriv</MathInline>
         </TimeDerivative>
-        <OnCondition target_regime="subthresholdRegime">
+        <OnCondition target_regime="subthreshold">
+          <Trigger>
+            <MathInline>V &gt; Vb</MathInline>
+          </Trigger>
+        </OnCondition>
+      </Regime>
+      <Regime name="subthreshold">
+        <TimeDerivative variable="U">
+          <MathInline>a*(-U + b*((V - Vb)*(V - Vb)*(V - Vb)))</MathInline>
+        </TimeDerivative>
+        <TimeDerivative variable="V">
+          <MathInline>V_deriv</MathInline>
+        </TimeDerivative>        
+        <OnCondition target_regime="subthreshold">
           <Trigger>
             <MathInline>V &gt; Vpeak</MathInline>
           </Trigger>
           <StateAssignment variable="V">
             <MathInline>c</MathInline>
           </StateAssignment>
-          <StateAssignment variable="U">
-            <MathInline>U</MathInline>
-          </StateAssignment>
           <OutputEvent port="spikeOutput"/>
-        </OnCondition>
-        <OnCondition target_regime="subVbRegime">
-          <Trigger>
-            <MathInline>V &lt; Vb</MathInline>
-          </Trigger>
-        </OnCondition>
-      </Regime>
-      <Regime name="subVbRegime">
-        <TimeDerivative variable="U">
-          <MathInline>- U * a</MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="V">
-          <MathInline>V_deriv</MathInline>
-        </TimeDerivative>
-        <OnCondition target_regime="subthresholdRegime">
-          <Trigger>
-            <MathInline>V &gt; Vb</MathInline>
-          </Trigger>
         </OnCondition>
       </Regime>
       <Alias name="V_deriv">
-        <MathInline>(k * (V - Vr) * (V - Vt) - U + iSyn + iExt) / Cm</MathInline>
+        <MathInline>(-U + iExt + iSyn + k*(V - Vr)*(V - Vt))/Cm</MathInline>
       </Alias>
     </Dynamics>
   </ComponentClass>
