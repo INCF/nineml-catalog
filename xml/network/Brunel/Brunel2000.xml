@@ -1,75 +1,92 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <Annotations>
-    <Comment>
-      This file contains an implementation of the network described in
-      Brunel, N. 2000. "Dynamics of Sparsely Connected Networks of Excitatory
-      and Inhibitory Spiking Neurons". J. Comp. Neuro. 8:3, 183-208.
-    </Comment>
-  </Annotations>
-  <Population name="Ext">
+  <Population name="Exc">
     <Size>4000</Size>
     <Cell>
-      <Component name="ExtNeuron">
-        <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
+      <Component name="nrn">
+        <Definition url="BrunelIaF.xml">BrunelIaF</Definition>
         <Property units="Mohm" name="R">
           <SingleValue>1.5</SingleValue>
         </Property>
-        <Property units="mV" name="v_reset">
+        <Property units="mV" name="Vreset">
           <SingleValue>10.0</SingleValue>
         </Property>
         <Property units="ms" name="tau">
           <SingleValue>20.0</SingleValue>
         </Property>
-        <Property units="ms" name="refractory_period">
+        <Property units="ms" name="tau_rp">
           <SingleValue>2.0</SingleValue>
         </Property>
-        <Property units="mV" name="v_threshold">
+        <Property units="mV" name="theta">
           <SingleValue>20.0</SingleValue>
         </Property>
-        <Initial units="mV" name="v">
+        <Initial units="mV" name="V">
           <SingleValue>0.0</SingleValue>
         </Initial>
-        <Initial units="ms" name="refractory_end">
+        <Initial units="ms" name="t_rpend">
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
     </Cell>
   </Population>
-  <Population name="Inh">
-    <Size>1000</Size>
-    <Cell>
-      <Component name="InhNeuron">
-        <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
-        <Property units="Mohm" name="R">
-          <SingleValue>1.5</SingleValue>
+  <Projection name="Excitation">
+    <Source>
+      <Reference>Exc</Reference>
+    </Source>
+    <Destination>
+      <Reference>All neurons</Reference>
+      <FromResponse send_port="Isyn" receive_port="Isyn"/>
+    </Destination>
+    <Connectivity>
+      <Component name="RandomExc">
+        <Definition>RandomFanIn</Definition>
+        <Property units="unitless" name="number">
+          <SingleValue>400</SingleValue>
         </Property>
-        <Property units="mV" name="v_reset">
-          <SingleValue>10.0</SingleValue>
+      </Component>
+    </Connectivity>
+    <Response>
+      <Component name="syn">
+        <Definition url="AlphaPSR.xml">AlphaPSR</Definition>
+        <Property units="ms" name="tau_syn">
+          <SingleValue>0.1</SingleValue>
         </Property>
-        <Property units="ms" name="tau">
-          <SingleValue>20.0</SingleValue>
-        </Property>
-        <Property units="ms" name="refractory_period">
-          <SingleValue>2.0</SingleValue>
-        </Property>
-        <Property units="mV" name="v_threshold">
-          <SingleValue>20.0</SingleValue>
-        </Property>
-        <Initial units="mV" name="v">
+        <Initial units="nA" name="A">
           <SingleValue>0.0</SingleValue>
         </Initial>
-        <Initial units="ms" name="refractory_end">
+        <Initial units="nA" name="B">
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
-    </Cell>
-  </Population>
-  <Population name="Input">
+      <FromPlasticity send_port="weight" receive_port="q"/>
+    </Response>
+    <Plasticity>
+      <Component name="ExcitatoryPlasticity">
+        <Definition url="StaticConnection.xml">StaticConnection</Definition>
+        <Initial units="nA" name="weight">
+          <SingleValue>2.4</SingleValue>
+        </Initial>
+      </Component>
+    </Plasticity>
+    <Delay units="ms">
+      <SingleValue>1.5</SingleValue>
+    </Delay>
+  </Projection>
+  <Selection name="All neurons">
+    <Concatenate>
+      <Item index="0">
+        <Reference>Exc</Reference>
+      </Item>
+      <Item index="1">
+        <Reference>Inh</Reference>
+      </Item>
+    </Concatenate>
+  </Selection>
+  <Population name="Ext">
     <Size>5000</Size>
     <Cell>
-      <Component name="Stimulation">
-        <Definition url="../../input/Poisson.xml">Poisson</Definition>
+      <Component name="stim">
+        <Definition url="Poisson.xml">Poisson</Definition>
         <Property units="Hz" name="rate">
           <SingleValue>20000.0</SingleValue>
         </Property>
@@ -78,152 +95,128 @@
         </Initial>
       </Component>
     </Cell>
-  </Population>  
-  <Selection name="AllNeurons">
-    <Concatenate>
-      <Item index="0">
-        <Reference>Ext</Reference>
-      </Item>
-      <Item index="1">
-        <Reference>Inh</Reference>
-      </Item>
-    </Concatenate>
-  </Selection>  
-  <Projection name="Excitation">
-    <Source>
-      <Reference>Ext</Reference>
-    </Source>
-    <Destination>
-      <Reference>AllNeurons</Reference>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
-    </Destination>
-    <Connectivity>
-      <Component name="RandomExcitation">
-        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
-        <Property units="unitless" name="number">
-          <SingleValue>400</SingleValue>
-        </Property>
-      </Component>
-    </Connectivity>
-    <Response>
-      <Component name="SynapticResponse">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
-        <Property units="ms" name="tau">
-          <SingleValue>0.1</SingleValue>
-        </Property>
-        <Initial units="nA" name="a">
-          <SingleValue>0.0</SingleValue>
-        </Initial>
-        <Initial units="nA" name="b">
-          <SingleValue>0.0</SingleValue>
-        </Initial>
-      </Component>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
-    </Response>
-    <Plasticity>
-      <Component name="ExtPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="weight">
-          <SingleValue>2.4</SingleValue>
-        </Property>
-      </Component>
-    </Plasticity>
-    <Delay units="ms">
-      <SingleValue>1.5</SingleValue>
-    </Delay>
-  </Projection>
-  <Unit symbol="nA" dimension="current" power="-9"/>
+  </Population>
   <Projection name="Inhibition">
     <Source>
       <Reference>Inh</Reference>
     </Source>
     <Destination>
-      <Reference>AllNeurons</Reference>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
+      <Reference>All neurons</Reference>
+      <FromResponse send_port="Isyn" receive_port="Isyn"/>
     </Destination>
     <Connectivity>
-      <Component name="RandomInConnectivity">
-        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
+      <Component name="RandomInh">
+        <Definition>RandomFanIn</Definition>
         <Property units="unitless" name="number">
           <SingleValue>100</SingleValue>
         </Property>
       </Component>
     </Connectivity>
     <Response>
-      <Component name="PostSynapticResponse">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
-        <Property units="ms" name="tau">
+      <Component name="syn">
+        <Definition url="AlphaPSR.xml">AlphaPSR</Definition>
+        <Property units="ms" name="tau_syn">
           <SingleValue>0.1</SingleValue>
         </Property>
-        <Initial units="nA" name="a">
+        <Initial units="nA" name="A">
           <SingleValue>0.0</SingleValue>
         </Initial>
-        <Initial units="nA" name="b">
+        <Initial units="nA" name="B">
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
+      <FromPlasticity send_port="weight" receive_port="q"/>
     </Response>
     <Plasticity>
-      <Component name="InhPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="weight">
+      <Component name="InhibitoryPlasticity">
+        <Definition url="StaticConnection.xml">StaticConnection</Definition>
+        <Initial units="nA" name="weight">
           <SingleValue>-12.0</SingleValue>
-        </Property>
+        </Initial>
       </Component>
     </Plasticity>
     <Delay units="ms">
       <SingleValue>1.5</SingleValue>
     </Delay>
   </Projection>
-  <Projection name="InputProjection">
+  <Population name="Inh">
+    <Size>1000</Size>
+    <Cell>
+      <Component name="nrn">
+        <Definition url="BrunelIaF.xml">BrunelIaF</Definition>
+        <Property units="Mohm" name="R">
+          <SingleValue>1.5</SingleValue>
+        </Property>
+        <Property units="mV" name="Vreset">
+          <SingleValue>10.0</SingleValue>
+        </Property>
+        <Property units="ms" name="tau">
+          <SingleValue>20.0</SingleValue>
+        </Property>
+        <Property units="ms" name="tau_rp">
+          <SingleValue>2.0</SingleValue>
+        </Property>
+        <Property units="mV" name="theta">
+          <SingleValue>20.0</SingleValue>
+        </Property>
+        <Initial units="mV" name="V">
+          <SingleValue>0.0</SingleValue>
+        </Initial>
+        <Initial units="ms" name="t_rpend">
+          <SingleValue>0.0</SingleValue>
+        </Initial>
+      </Component>
+    </Cell>
+  </Population>
+  <Projection name="External">
     <Source>
-      <Reference>Input</Reference>
+      <Reference>Ext</Reference>
     </Source>
     <Destination>
-      <Reference>AllNeurons</Reference>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
+      <Reference>All neurons</Reference>
+      <FromResponse send_port="Isyn" receive_port="Isyn"/>
     </Destination>
     <Connectivity>
       <Component name="OneToOne">
-        <Definition url="../../connectionrule/OneToOne.xml">OneToOne</Definition>
+        <Definition>OneToOne</Definition>
       </Component>
     </Connectivity>
     <Response>
-      <Component name="PostSynapticResponse">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
-        <Property units="ms" name="tau">
+      <Component name="syn">
+        <Definition url="AlphaPSR.xml">AlphaPSR</Definition>
+        <Property units="ms" name="tau_syn">
           <SingleValue>0.1</SingleValue>
         </Property>
-        <Initial units="nA" name="a">
+        <Initial units="nA" name="A">
           <SingleValue>0.0</SingleValue>
         </Initial>
-        <Initial units="nA" name="b">
+        <Initial units="nA" name="B">
           <SingleValue>0.0</SingleValue>
         </Initial>
       </Component>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
+      <FromPlasticity send_port="weight" receive_port="q"/>
     </Response>
     <Plasticity>
-      <Component name="InputPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="weight">
+      <Component name="ExternalPlasticity">
+        <Definition url="StaticConnection.xml">StaticConnection</Definition>
+        <Initial units="nA" name="weight">
           <SingleValue>2.4</SingleValue>
-        </Property>
+        </Initial>
       </Component>
     </Plasticity>
     <Delay units="ms">
       <SingleValue>1.5</SingleValue>
     </Delay>
   </Projection>
-  <Dimension name="per_time" t="-1"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
-  <Dimension i="1" name="current"/>
+  <Dimension i="1" name="current"/>  
   <Dimension name="time" t="1"/>
+  <Dimension name="per_time" t="-1"/>
   <Dimension name="dimensionless"/>
-  <Unit symbol="Hz" dimension="per_time" power="0"/>
+  <Unit symbol="nA" dimension="current" power="-9"/>  
   <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="Hz" dimension="per_time" power="0"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Unit symbol="Mohm" dimension="resistance" power="6"/>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
