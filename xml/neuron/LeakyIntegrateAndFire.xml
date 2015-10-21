@@ -1,17 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension i="1" name="current"/>
+  <Dimension name="time" t="1"/>
   <ComponentClass name="LeakyIntegrateAndFire">
     <AnalogSendPort dimension="time" name="refractory_end"/>
     <AnalogSendPort dimension="voltage" name="v"/>
     <AnalogReducePort operator="+" dimension="current" name="i_synaptic"/>
     <EventSendPort name="spike_output"/>
-    <Parameter dimension="voltage" name="v_reset"/>
+    <Parameter dimension="time" name="refractory_period"/>
     <Parameter dimension="time" name="tau"/>
     <Parameter dimension="resistance" name="R"/>
-    <Parameter dimension="time" name="refractory_period"/>
+    <Parameter dimension="voltage" name="v_reset"/>
     <Parameter dimension="voltage" name="v_threshold"/>
     <Dynamics>
+      <StateVariable dimension="time" name="refractory_end"/>
+      <StateVariable dimension="voltage" name="v"/>
       <Regime name="refractory">
         <OnCondition target_regime="subthreshold">
           <Trigger>
@@ -21,26 +24,23 @@
       </Regime>
       <Regime name="subthreshold">
         <TimeDerivative variable="v">
-          <MathInline>(i_synaptic*R - v)/tau</MathInline>
+          <MathInline>(R*i_synaptic - v)/tau</MathInline>
         </TimeDerivative>
         <OnCondition target_regime="refractory">
           <Trigger>
             <MathInline>v &gt; v_threshold</MathInline>
           </Trigger>
           <OutputEvent port="spike_output"/>
+          <StateAssignment variable="refractory_end">
+            <MathInline>refractory_period + t</MathInline>
+          </StateAssignment>
           <StateAssignment variable="v">
             <MathInline>v_reset</MathInline>
           </StateAssignment>
-          <StateAssignment variable="refractory_end">
-            <MathInline>t + refractory_period</MathInline>
-          </StateAssignment>
         </OnCondition>
       </Regime>
-      <StateVariable dimension="time" name="refractory_end"/>
-      <StateVariable dimension="voltage" name="v"/>
     </Dynamics>
   </ComponentClass>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
-  <Dimension name="time" t="1"/>
 </NineML>

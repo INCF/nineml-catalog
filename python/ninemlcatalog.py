@@ -12,11 +12,7 @@ def lookup(path, name=None):
     """
     Retrieves a model from the catalog from the given path
     """
-    if isinstance(path, basestring):
-        if path.startswith('/'):
-            path = path[1:]
-        path = path.split('/')
-    doc = nineml.read(os.path.join(root, *path) + '.xml')
+    doc = nineml.read(get_full_path(path))
     if name is not None:
         elem = doc[name]
     else:
@@ -24,18 +20,19 @@ def lookup(path, name=None):
     return elem
 
 
-def save(document, path):
-    if not isinstance(document, nineml.Document):
-        raise NineMLCatalogError(
-            "Can only save nineml.Document objects")
-    if isinstance(path, basestring):
-        if path.startswith('/'):
-            path = path[1:]
-        path = path.split('/')
+def save(element, path, name=None):
+    if isinstance(element, nineml.Document):
+        document = element
+    else:
+        if name is None:
+            raise NineMLCatalogError(
+                "Can only save nineml.Document objects if name is not "
+                "provided")
+        document = lookup(path)
+        document[name] = element
+    full_path = get_full_path(path)
     # Deepcopy document so we can change the catalog urls to relative paths
     xml = document.to_xml()
-    # Get the relative url prefix to the root of the catalog
-    prefix = '/'.join(['..'] * (len(path) - 1))
     # Descend through the XML tree and change all 'url' attributes to be
     # relative to the document path
     stack = [xml]
@@ -43,8 +40,23 @@ def save(document, path):
         elem = stack.pop()
         try:
             url = elem.attrib['url']
-            if url.startswith(root + '/'):
-                url = os.path.join(prefix, url[(len(root) + 1):])
+            if url == path:  # is a local reference
+                url = None
+            elif url.startswith('.'):
+                if element.url.startswith(root):
+                    url_path = os.path.abspath(
+                        os.path.join(os.path.dirname(element.url), url))
+                    if not os.path.exists(url_path):
+                        raise NineMLCatalogError(
+                            "Reference to missing catalog entry '{}'"
+                            .format(url_path))
+                else:
+                    raise NineMLCatalogError(
+                        "Cannot save references to relative files outside the"
+                        "catalog '{}', please add them to the catalog first"
+                        .format(url))
+            elif url.startswith(root + '/'):  # references a catalog file
+                url = os.path.relpath(url, full_path)
             elif not (url.startswith('http://') or url.startswith('https://')):
                 raise NineMLCatalogError(
                     "Cannot save to NineML catalog as non-catalog or web url "
@@ -53,4 +65,12 @@ def save(document, path):
         except KeyError:
             pass
         stack.extend(elem.getchildren())
-    nineml.document.write_xml(xml, os.path.join(root, *path) + '.xml')
+    nineml.document.write_xml(xml, full_path)
+
+
+def get_full_path(path):
+    if isinstance(path, basestring):
+        if path.endswith('.xml'):
+            path = path[:-4]
+        path = path.strip('/').split('/')
+    return os.path.join(root, *path) + '.xml'

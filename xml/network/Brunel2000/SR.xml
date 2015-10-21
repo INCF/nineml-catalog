@@ -61,7 +61,7 @@
       <Component name="RandomExc">
         <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
         <Property units="unitless" name="number">
-          <SingleValue>400</SingleValue>
+          <SingleValue>400.0</SingleValue>
         </Property>
       </Component>
     </Connectivity>
@@ -93,7 +93,6 @@
     </Delay>
   </Projection>
   <Unit symbol="nA" dimension="current" power="-9"/>
-  <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
   <Dimension i="1" name="current"/>
@@ -116,49 +115,7 @@
       </Component>
     </Cell>
   </Population>
-  <Projection name="Inhibition">
-    <Source>
-      <Reference>Inh</Reference>
-    </Source>
-    <Destination>
-      <Reference>All</Reference>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
-    </Destination>
-    <Connectivity>
-      <Component name="RandomInh">
-        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
-        <Property units="unitless" name="number">
-          <SingleValue>100</SingleValue>
-        </Property>
-      </Component>
-    </Connectivity>
-    <Response>
-      <Component name="syn">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
-        <Property units="ms" name="tau">
-          <SingleValue>0.1</SingleValue>
-        </Property>
-        <Initial units="nA" name="a">
-          <SingleValue>0.0</SingleValue>
-        </Initial>
-        <Initial units="nA" name="b">
-          <SingleValue>0.0</SingleValue>
-        </Initial>
-      </Component>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
-    </Response>
-    <Plasticity>
-      <Component name="InhibitoryPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
-        <Property units="nA" name="weight">
-          <SingleValue>-7.2</SingleValue>
-        </Property>
-      </Component>
-    </Plasticity>
-    <Delay units="ms">
-      <SingleValue>1.5</SingleValue>
-    </Delay>
-  </Projection>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Population name="Inh">
     <Size>1000</Size>
     <Cell>
@@ -240,5 +197,48 @@
   <Dimension name="time" t="1"/>
   <Unit symbol="Mohm" dimension="resistance" power="6"/>
   <Dimension name="dimensionless"/>
+  <Projection name="Inhibition">
+    <Source>
+      <Reference>Inh</Reference>
+    </Source>
+    <Destination>
+      <Reference>All</Reference>
+      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
+    </Destination>
+    <Connectivity>
+      <Component name="RandomInh">
+        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
+        <Property units="unitless" name="number">
+          <SingleValue>100.0</SingleValue>
+        </Property>
+      </Component>
+    </Connectivity>
+    <Response>
+      <Component name="syn">
+        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
+        <Property units="ms" name="tau">
+          <SingleValue>0.1</SingleValue>
+        </Property>
+        <Initial units="nA" name="a">
+          <SingleValue>0.0</SingleValue>
+        </Initial>
+        <Initial units="nA" name="b">
+          <SingleValue>0.0</SingleValue>
+        </Initial>
+      </Component>
+      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
+    </Response>
+    <Plasticity>
+      <Component name="InhibitoryPlasticity">
+        <Definition url="../../plasticity/Static.xml">Static</Definition>
+        <Property units="nA" name="weight">
+          <SingleValue>-7.2</SingleValue>
+        </Property>
+      </Component>
+    </Plasticity>
+    <Delay units="ms">
+      <SingleValue>1.5</SingleValue>
+    </Delay>
+  </Projection>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
 </NineML>
