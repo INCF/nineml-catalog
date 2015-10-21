@@ -1,9 +1,7 @@
 import os.path
 import nineml
-from copy import deepcopy
 
-xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
-                                        'xml'))
+root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'xml'))
 
 
 class NineMLCatalogError(Exception):
@@ -18,7 +16,7 @@ def lookup(path, name=None):
         if path.startswith('/'):
             path = path[1:]
         path = path.split('/')
-    doc = nineml.read(os.path.join(xml_path, *path) + '.xml')
+    doc = nineml.read(os.path.join(root, *path) + '.xml')
     if name is not None:
         elem = doc[name]
     else:
@@ -35,26 +33,24 @@ def save(document, path):
             path = path[1:]
         path = path.split('/')
     # Deepcopy document so we can change the catalog urls to relative paths
-    document = deepcopy(document)
+    xml = document.to_xml()
     # Get the relative url prefix to the root of the catalog
     prefix = '/'.join(['..'] * (len(path) - 1))
-    _convert_to_relative_urls(document, prefix)
-    nineml.write(document, os.path.join(xml_path, *path) + '.xml')
-
-
-def _convert_to_relative_urls(elem, prefix):
-    try:
-        if elem.url.startswith(xml_path):
-            elem._url = os.path.join(prefix, elem.url[len(xml_path):])
-        elif not (elem.url.startswith('http://')
-                  or elem.url.startswith('https://')):
-            raise NineMLCatalogError(
-                "Cannot save to NineML catalog as non-catalog or web url "
-                "found in model '{}'".format(elem.url))
-    except AttributeError:  # if element doesn't have a url
-        pass
-    try:
-        for child in elem.elements:
-            _convert_to_relative_urls(child, prefix)
-    except AttributeError:  # if element doesn't have child elements
-        pass
+    # Descend through the XML tree and change all 'url' attributes to be
+    # relative to the document path
+    stack = [xml]
+    while stack:
+        elem = stack.pop()
+        try:
+            url = elem.attrib['url']
+            if url.startswith(root + '/'):
+                url = os.path.join(prefix, url[(len(root) + 1):])
+            elif not (url.startswith('http://') or url.startswith('https://')):
+                raise NineMLCatalogError(
+                    "Cannot save to NineML catalog as non-catalog or web url "
+                    "found in model '{}'".format(url))
+            elem.attrib['url'] = url
+        except KeyError:
+            pass
+        stack.extend(elem.getchildren())
+    nineml.document.write_xml(xml, os.path.join(root, *path) + '.xml')
