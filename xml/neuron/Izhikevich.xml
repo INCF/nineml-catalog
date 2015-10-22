@@ -54,18 +54,20 @@
     <Parameter dimension="per_time_voltage" name="alpha"/>
     <Parameter dimension="voltage_per_time" name="zeta"/>
     <Dynamics>
+      <StateVariable dimension="voltage_per_time" name="U"/>
+      <StateVariable dimension="voltage" name="V"/>
       <Regime name="subthreshold_regime">
         <OnCondition target_regime="subthreshold_regime">
           <Trigger>
             <MathInline>V &gt; theta</MathInline>
           </Trigger>
+          <OutputEvent port="spike"/>
           <StateAssignment variable="U">
             <MathInline>U + d</MathInline>
           </StateAssignment>
           <StateAssignment variable="V">
             <MathInline>c</MathInline>
           </StateAssignment>
-          <OutputEvent port="spike"/>
         </OnCondition>
         <TimeDerivative variable="U">
           <MathInline>a*(-U + V*b)</MathInline>
@@ -74,8 +76,6 @@
           <MathInline>-U + V*beta + alpha*(V*V) + zeta + Isyn/C_m</MathInline>
         </TimeDerivative>
       </Regime>
-      <StateVariable dimension="voltage_per_time" name="U"/>
-      <StateVariable dimension="voltage" name="V"/>
     </Dynamics>
   </ComponentClass>
   <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
@@ -85,7 +85,6 @@
     <AnalogSendPort dimension="current" name="U"/>
     <AnalogSendPort dimension="voltage" name="V"/>
     <AnalogReducePort operator="+" dimension="current" name="iSyn"/>
-    <AnalogReducePort operator="+" dimension="current" name="iExt"/>
     <EventSendPort name="spikeOutput"/>
     <Parameter dimension="per_time" name="a"/>
     <Parameter dimension="voltage" name="c"/>
@@ -97,6 +96,11 @@
     <Parameter dimension="voltage" name="Vr"/>
     <Parameter dimension="voltage" name="Vt"/>
     <Dynamics>
+      <StateVariable dimension="current" name="U"/>
+      <StateVariable dimension="voltage" name="V"/>
+      <Alias name="V_deriv">
+        <MathInline>(-U + iSyn + k*(V - Vr)*(V - Vt))/Cm</MathInline>
+      </Alias>
       <Regime name="subVb">
         <OnCondition target_regime="subthreshold">
           <Trigger>
@@ -115,10 +119,10 @@
           <Trigger>
             <MathInline>V &gt; Vpeak</MathInline>
           </Trigger>
+          <OutputEvent port="spikeOutput"/>
           <StateAssignment variable="V">
             <MathInline>c</MathInline>
           </StateAssignment>
-          <OutputEvent port="spikeOutput"/>
         </OnCondition>
         <TimeDerivative variable="U">
           <MathInline>a*(-U + b*((V - Vb)*(V - Vb)*(V - Vb)))</MathInline>
@@ -127,11 +131,6 @@
           <MathInline>V_deriv</MathInline>
         </TimeDerivative>
       </Regime>
-      <Alias name="V_deriv">
-        <MathInline>(-U + iExt + iSyn + k*(V - Vr)*(V - Vt))/Cm</MathInline>
-      </Alias>
-      <StateVariable dimension="current" name="U"/>
-      <StateVariable dimension="voltage" name="V"/>
     </Dynamics>
   </ComponentClass>
   <Dimension name="per_time" t="-1"/>

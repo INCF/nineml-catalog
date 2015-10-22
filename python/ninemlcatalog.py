@@ -8,7 +8,7 @@ class NineMLCatalogError(Exception):
     pass
 
 
-def lookup(path, name=None):
+def load(path, name=None):
     """
     Retrieves a model from the catalog from the given path
     """
@@ -28,7 +28,7 @@ def save(element, path, name=None):
             raise NineMLCatalogError(
                 "Can only save nineml.Document objects if name is not "
                 "provided")
-        document = lookup(path)
+        document = load(path)
         document[name] = element
     full_path = get_full_path(path)
     # Deepcopy document so we can change the catalog urls to relative paths

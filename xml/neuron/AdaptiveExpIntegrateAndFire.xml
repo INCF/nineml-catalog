@@ -47,7 +47,7 @@
     </Dynamics>
   </ComponentClass>
   <Component name="SampleAdaptiveExpIntegrateAndFire">
-    <Definition url=".">AdaptiveExpIntegrateAndFire</Definition>
+    <Definition>AdaptiveExpIntegrateAndFire</Definition>
     <Property units="pF" name="C_m">
       <SingleValue>1</SingleValue>
     </Property>
