@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="AdaptiveExpIntegrateAndFire">
+    <AnalogReducePort operator="+" dimension="current" name="Isyn"/>
+    <EventSendPort name="spikeoutput"/>
     <Parameter dimension="voltage" name="V_T"/>
     <Parameter dimension="per_voltage" name="a"/>
     <Parameter dimension="dimensionless" name="b"/>
@@ -12,8 +14,6 @@
     <Parameter dimension="voltage" name="Delta"/>
     <Parameter dimension="time" name="tau_w"/>
     <Parameter dimension="voltage" name="E_L"/>
-    <AnalogReducePort operator="+" dimension="current" name="Isyn"/>
-    <EventSendPort name="spikeoutput"/>    
     <Dynamics>
       <StateVariable dimension="dimensionless" name="w"/>
       <StateVariable dimension="voltage" name="V"/>
@@ -29,30 +29,76 @@
           <MathInline>(a*(-E_L + V) - w)/tau_w</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="V">
-          <MathInline>
-            Delta*g_L*exp(-w/S + (V - V_T)/Delta)/C_m + Isyn/C_m - g_L*(-E_L +
-            V)/C_m</MathInline>
-        </TimeDerivative>        
+          <MathInline>Delta*g_L*exp(-w/S + (V - V_T)/Delta)/C_m + Isyn/C_m - g_L*(-E_L + V)/C_m</MathInline>
+        </TimeDerivative>
         <OnCondition target_regime="refractoryregime">
           <Trigger>
             <MathInline>V &gt; V_T</MathInline>
           </Trigger>
-          <StateAssignment variable="w">s
+          <OutputEvent port="spikeoutput"/>
+          <StateAssignment variable="w">
             <MathInline>b + w</MathInline>
           </StateAssignment>
           <StateAssignment variable="V">
             <MathInline>E_L</MathInline>
           </StateAssignment>
-          <OutputEvent port="spikeoutput"/>
         </OnCondition>
       </Regime>
     </Dynamics>
   </ComponentClass>
+  <Component name="SampleAdaptiveExpIntegrateAndFire">
+    <Definition url=".">AdaptiveExpIntegrateAndFire</Definition>
+    <Property units="pF" name="C_m">
+      <SingleValue>1</SingleValue>
+    </Property>
+    <Property units="mV" name="Delta">
+      <SingleValue>1</SingleValue>
+    </Property>
+    <Property units="mV" name="E_L">
+      <SingleValue>-65</SingleValue>
+    </Property>
+    <Property units="unitless" name="S">
+      <SingleValue>0.1</SingleValue>
+    </Property>
+    <Property units="mV" name="V_T">
+      <SingleValue>-58</SingleValue>
+    </Property>
+    <Property units="per_mV" name="a">
+      <SingleValue>1</SingleValue>
+    </Property>
+    <Property units="unitless" name="b">
+      <SingleValue>2</SingleValue>
+    </Property>
+    <Property units="nS" name="g_L">
+      <SingleValue>0.1</SingleValue>
+    </Property>
+    <Property units="ms" name="tau_w">
+      <SingleValue>4</SingleValue>
+    </Property>
+    <Property units="ms" name="trefractory">
+      <SingleValue>0.25</SingleValue>
+    </Property>
+    <Property units="ms" name="tspike">
+      <SingleValue>0.5</SingleValue>
+    </Property>
+    <Initial units="mV" name="w">
+      <SingleValue>0.1</SingleValue>
+    </Initial>
+    <Initial units="mV" name="V">
+      <SingleValue>-70</SingleValue>
+    </Initial>
+  </Component>
+  <Dimension i="1" l="-2" m="-1" t="3" name="per_voltage"/>
+  <Dimension i="1" name="current"/>
+  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
+  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>
   <Dimension name="dimensionless"/>
-  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
-  <Dimension i="1" name="current"/>
-  <Dimension i="1" l="-2" m="-1" t="3" name="per_voltage"/>
-  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
+  <Unit symbol="nS" dimension="conductance" power="-9"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Unit symbol="per_mV" dimension="per_voltage" power="3"/>
 </NineML>

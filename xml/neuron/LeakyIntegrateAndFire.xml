@@ -1,7 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
+  <Component name="SampleLeakyIntegrateAndFire">
+    <Definition>LeakyIntegrateAndFire</Definition>
+    <Property units="Mohm" name="R">
+      <SingleValue>1.5</SingleValue>
+    </Property>
+    <Property units="ms" name="refractory_period">
+      <SingleValue>2.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tau">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="mV" name="v_reset">
+      <SingleValue>10.0</SingleValue>
+    </Property>
+    <Property units="mV" name="v_threshold">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Initial units="mV" name="V">
+      <SingleValue>-70</SingleValue>
+    </Initial>
+  </Component>
+  <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
   <Dimension i="1" name="current"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>
+  <Unit symbol="Mohm" dimension="resistance" power="6"/>
   <ComponentClass name="LeakyIntegrateAndFire">
     <AnalogSendPort dimension="time" name="refractory_end"/>
     <AnalogSendPort dimension="voltage" name="v"/>
@@ -13,8 +39,6 @@
     <Parameter dimension="voltage" name="v_reset"/>
     <Parameter dimension="voltage" name="v_threshold"/>
     <Dynamics>
-      <StateVariable dimension="time" name="refractory_end"/>
-      <StateVariable dimension="voltage" name="v"/>
       <Regime name="refractory">
         <OnCondition target_regime="subthreshold">
           <Trigger>
@@ -39,8 +63,8 @@
           </StateAssignment>
         </OnCondition>
       </Regime>
+      <StateVariable dimension="time" name="refractory_end"/>
+      <StateVariable dimension="voltage" name="v"/>
     </Dynamics>
   </ComponentClass>
-  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
-  <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
 </NineML>

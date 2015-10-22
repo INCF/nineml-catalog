@@ -1,55 +1,169 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
+  <Dimension name="per_time" t="-1"/>
+  <Component name="SampleHodgkinHuxley">
+    <Definition>HodgkinHuxley</Definition>
+    <Property units="pF" name="C">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="degC" name="celsius">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="mV" name="ek">
+      <SingleValue>-90</SingleValue>
+    </Property>
+    <Property units="mV" name="el">
+      <SingleValue>-65</SingleValue>
+    </Property>
+    <Property units="mV" name="ena">
+      <SingleValue>80</SingleValue>
+    </Property>
+    <Property units="nS" name="gkbar">
+      <SingleValue>30.0</SingleValue>
+    </Property>
+    <Property units="nS" name="gl">
+      <SingleValue>0.3</SingleValue>
+    </Property>
+    <Property units="nS" name="gnabar">
+      <SingleValue>130.0</SingleValue>
+    </Property>
+    <Property units="per_ms" name="h_alpha_A">
+      <SingleValue>0.07</SingleValue>
+    </Property>
+    <Property units="mV" name="h_alpha_K">
+      <SingleValue>20.0</SingleValue>
+    </Property>
+    <Property units="mV" name="h_alpha_V0">
+      <SingleValue>-65.0</SingleValue>
+    </Property>
+    <Property units="per_ms" name="h_beta_A">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="mV" name="h_beta_K">
+      <SingleValue>10.0</SingleValue>
+    </Property>
+    <Property units="mV" name="h_beta_V0">
+      <SingleValue>-35.0</SingleValue>
+    </Property>
+    <Property units="per_mV_ms" name="m_alpha_A">
+      <SingleValue>-0.1</SingleValue>
+    </Property>
+    <Property units="mV" name="m_alpha_K">
+      <SingleValue>10.0</SingleValue>
+    </Property>
+    <Property units="mV" name="m_alpha_V0">
+      <SingleValue>-40.0</SingleValue>
+    </Property>
+    <Property units="per_ms" name="m_beta_A">
+      <SingleValue>4.0</SingleValue>
+    </Property>
+    <Property units="mV" name="m_beta_K">
+      <SingleValue>18.0</SingleValue>
+    </Property>
+    <Property units="mV" name="m_beta_V0">
+      <SingleValue>-65.0</SingleValue>
+    </Property>
+    <Property units="per_mV_ms" name="n_alpha_A">
+      <SingleValue>-0.01</SingleValue>
+    </Property>
+    <Property units="mV" name="n_alpha_K">
+      <SingleValue>10.0</SingleValue>
+    </Property>
+    <Property units="mV" name="n_alpha_V0">
+      <SingleValue>-55.0</SingleValue>
+    </Property>
+    <Property units="per_ms" name="n_beta_A">
+      <SingleValue>0.125</SingleValue>
+    </Property>
+    <Property units="mV" name="n_beta_K">
+      <SingleValue>80.0</SingleValue>
+    </Property>
+    <Property units="mV" name="n_beta_V0">
+      <SingleValue>-65.0</SingleValue>
+    </Property>
+    <Property units="degC" name="qfactor">
+      <SingleValue>6.3</SingleValue>
+    </Property>
+    <Property units="degC" name="tendegrees">
+      <SingleValue>10.0</SingleValue>
+    </Property>
+    <Property units="mV" name="v_threshold">
+      <SingleValue>-40.0</SingleValue>
+    </Property>
+    <Initial units="unitless" name="h">
+      <SingleValue>0.9</SingleValue>
+    </Initial>
+    <Initial units="mV" name="V">
+      <SingleValue>-70</SingleValue>
+    </Initial>
+    <Initial units="unitless" name="m">
+      <SingleValue>0.1</SingleValue>
+    </Initial>
+    <Initial units="unitless" name="n">
+      <SingleValue>0</SingleValue>
+    </Initial>
+  </Component>
+  <Dimension k="1" name="temperature"/>
+  <Unit symbol="per_ms" dimension="per_time" power="3"/>
+  <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
+  <Dimension i="1" name="current"/>
+  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
+  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="1" l="-2" m="-1" t="2" name="per_time_voltage"/>
+  <Unit symbol="degC" dimension="temperature" power="0" offset="273.15"/>
+  <Dimension name="dimensionless"/>
+  <Unit symbol="nS" dimension="conductance" power="-9"/>
+  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
   <ComponentClass name="HodgkinHuxley">
+    <AnalogSendPort dimension="voltage" name="V"/>
+    <AnalogReducePort operator="+" dimension="current" name="isyn"/>
+    <EventSendPort name="spikeoutput"/>
     <Parameter dimension="voltage" name="el"/>
     <Parameter dimension="temperature" name="qfactor"/>
-    <Parameter dimension="per_time" name="h_alpha_A"/>
+    <Parameter dimension="voltage" name="h_alpha_V0"/>
     <Parameter dimension="voltage" name="ek"/>
-    <Parameter dimension="voltage" name="h_alpha_K"/>
-    <Parameter dimension="voltage" name="m_alpha_V0"/>
-    <Parameter dimension="temperature" name="celsius"/>
-    <Parameter dimension="voltage" name="n_alpha_K"/>
-    <Parameter dimension="conductance" name="gl"/>
-    <Parameter dimension="per_time_voltage" name="n_alpha_A"/>
-    <Parameter dimension="voltage" name="ena"/>
-    <Parameter dimension="voltage" name="h_beta_K"/>
-    <Parameter dimension="voltage" name="h_beta_V0"/>
-    <Parameter dimension="temperature" name="tendegrees"/>
-    <Parameter dimension="per_time" name="h_beta_A"/>
-    <Parameter dimension="voltage" name="m_alpha_K"/>
-    <Parameter dimension="voltage" name="m_beta_V0"/>
-    <Parameter dimension="per_time_voltage" name="m_alpha_A"/>
-    <Parameter dimension="voltage" name="n_alpha_V0"/>
     <Parameter dimension="capacitance" name="C"/>
+    <Parameter dimension="per_time" name="h_beta_A"/>
+    <Parameter dimension="voltage" name="h_beta_V0"/>
+    <Parameter dimension="per_time" name="m_beta_A"/>
+    <Parameter dimension="voltage" name="h_beta_K"/>
     <Parameter dimension="voltage" name="m_beta_K"/>
+    <Parameter dimension="voltage" name="ena"/>
+    <Parameter dimension="conductance" name="gl"/>
+    <Parameter dimension="temperature" name="tendegrees"/>
+    <Parameter dimension="voltage" name="n_alpha_V0"/>
+    <Parameter dimension="per_time_voltage" name="m_alpha_A"/>
+    <Parameter dimension="voltage" name="m_alpha_K"/>
+    <Parameter dimension="per_time_voltage" name="n_alpha_A"/>
+    <Parameter dimension="voltage" name="n_alpha_K"/>
+    <Parameter dimension="voltage" name="v_threshold"/>
     <Parameter dimension="conductance" name="gnabar"/>
     <Parameter dimension="per_time" name="n_beta_A"/>
-    <Parameter dimension="voltage" name="v_threshold"/>
-    <Parameter dimension="per_time" name="m_beta_A"/>
     <Parameter dimension="voltage" name="n_beta_K"/>
     <Parameter dimension="voltage" name="n_beta_V0"/>
+    <Parameter dimension="voltage" name="m_beta_V0"/>
     <Parameter dimension="conductance" name="gkbar"/>
-    <Parameter dimension="voltage" name="h_alpha_V0"/>
-    <AnalogSendPort dimension="voltage" name="V"/>
-    <AnalogReducePort operator="+" dimension="current" name="iSyn"/>
-    <EventSendPort name="spikeoutput"/>    
+    <Parameter dimension="temperature" name="celsius"/>
+    <Parameter dimension="per_time" name="h_alpha_A"/>
+    <Parameter dimension="voltage" name="m_alpha_V0"/>
+    <Parameter dimension="voltage" name="h_alpha_K"/>
     <Dynamics>
-      <StateVariable dimension="dimensionless" name="h"/>
-      <StateVariable dimension="dimensionless" name="n"/>
-      <StateVariable dimension="dimensionless" name="m"/>
-      <StateVariable dimension="voltage" name="V"/>
       <Regime name="default">
         <TimeDerivative variable="h">
           <MathInline>(-h + hinf)/htau</MathInline>
         </TimeDerivative>
-        <TimeDerivative variable="V">
-          <MathInline>(iSyn + ik + il + ina)/C</MathInline>
+        <TimeDerivative variable="n">
+          <MathInline>(-n + ninf)/ntau</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="m">
           <MathInline>(-m + minf)/mtau</MathInline>
         </TimeDerivative>
-        <TimeDerivative variable="n">
-          <MathInline>(-n + ninf)/ntau</MathInline>
-        </TimeDerivative>        
+        <TimeDerivative variable="V">
+          <MathInline>(ik + il + ina + isyn)/C</MathInline>
+        </TimeDerivative>
         <OnCondition target_regime="default">
           <Trigger>
             <MathInline>V &gt; v_threshold</MathInline>
@@ -57,20 +171,30 @@
           <OutputEvent port="spikeoutput"/>
         </OnCondition>
       </Regime>
+      <StateVariable dimension="dimensionless" name="h"/>
+      <StateVariable dimension="voltage" name="V"/>
+      <StateVariable dimension="dimensionless" name="m"/>
+      <StateVariable dimension="dimensionless" name="n"/>
       <Alias name="ntau">
         <MathInline>1.0/(q10*(n_alpha + n_beta))</MathInline>
       </Alias>
-      <Alias name="ninf">
-        <MathInline>n_alpha/(n_alpha + n_beta)</MathInline>
+      <Alias name="n_beta">
+        <MathInline>n_beta_A*exp((-V + n_beta_V0)/n_beta_K)</MathInline>
+      </Alias>
+      <Alias name="m_alpha">
+        <MathInline>m_alpha_A*(V - m_alpha_V0)/(exp((-V + m_alpha_V0)/m_alpha_K) - 1.0)</MathInline>
+      </Alias>
+      <Alias name="m_beta">
+        <MathInline>m_beta_A*exp((-V + m_beta_V0)/m_beta_K)</MathInline>
       </Alias>
       <Alias name="n_alpha">
         <MathInline>n_alpha_A*(V - n_alpha_V0)/(exp((-V + n_alpha_V0)/n_alpha_K) - 1.0)</MathInline>
       </Alias>
-      <Alias name="gk">
-        <MathInline>gkbar*(n*n*n*n)</MathInline>
+      <Alias name="h_alpha">
+        <MathInline>h_alpha_A*exp((-V + h_alpha_V0)/h_alpha_K)</MathInline>
       </Alias>
-      <Alias name="m_alpha">
-        <MathInline>m_alpha_A*(V - m_alpha_V0)/(exp((-V + m_alpha_V0)/m_alpha_K) - 1.0)</MathInline>
+      <Alias name="hinf">
+        <MathInline>h_alpha/(h_alpha + h_beta)</MathInline>
       </Alias>
       <Alias name="minf">
         <MathInline>m_alpha/(m_alpha + m_beta)</MathInline>
@@ -81,26 +205,20 @@
       <Alias name="gna">
         <MathInline>gnabar*h*(m*m*m)</MathInline>
       </Alias>
-      <Alias name="h_alpha">
-        <MathInline>h_alpha_A*exp((-V + h_alpha_V0)/h_alpha_K)</MathInline>
-      </Alias>
       <Alias name="q10">
         <MathInline>pow(3.0, (celsius - qfactor)/tendegrees)</MathInline>
       </Alias>
-      <Alias name="h_beta">
-        <MathInline>h_beta_A/(exp((-V + h_beta_V0)/h_beta_K) + 1.0)</MathInline>
+      <Alias name="ninf">
+        <MathInline>n_alpha/(n_alpha + n_beta)</MathInline>
       </Alias>
       <Alias name="mtau">
         <MathInline>1.0/(q10*(m_alpha + m_beta))</MathInline>
       </Alias>
-      <Alias name="il">
-        <MathInline>gl*(-V + el)</MathInline>
+      <Alias name="h_beta">
+        <MathInline>h_beta_A/(exp((-V + h_beta_V0)/h_beta_K) + 1.0)</MathInline>
       </Alias>
-      <Alias name="n_beta">
-        <MathInline>n_beta_A*exp((-V + n_beta_V0)/n_beta_K)</MathInline>
-      </Alias>
-      <Alias name="m_beta">
-        <MathInline>m_beta_A*exp((-V + m_beta_V0)/m_beta_K)</MathInline>
+      <Alias name="gk">
+        <MathInline>gkbar*(n*n*n*n)</MathInline>
       </Alias>
       <Alias name="ina">
         <MathInline>gna*(-V + ena)</MathInline>
@@ -108,113 +226,9 @@
       <Alias name="htau">
         <MathInline>1.0/(q10*(h_alpha + h_beta))</MathInline>
       </Alias>
-      <Alias name="hinf">
-        <MathInline>h_alpha/(h_alpha + h_beta)</MathInline>
+      <Alias name="il">
+        <MathInline>gl*(-V + el)</MathInline>
       </Alias>
     </Dynamics>
   </ComponentClass>
-  <Component name="HodgkinHuxleyProperties">
-    <Definition>HodgkinHuxley</Definition>
-    <Property name="m_alpha_A" units="per_ms_mV">
-      <SingleValue>0.32</SingleValue>
-    </Property>
-    <Property name="m_alpha_V0" units="mV">
-      <SingleValue>13</SingleValue>
-    </Property>
-    <Property name="m_alpha_K" units="mV">
-      <SingleValue>4</SingleValue>
-    </Property>
-    <Property name="m_beta_A" units="per_ms_mV">
-      <SingleValue>0.28</SingleValue>
-    </Property>
-    <Property name="m_beta_V0" units="mV">
-      <SingleValue>40</SingleValue>
-    </Property>
-    <Property name="m_beta_K" units="mV">
-      <SingleValue>5</SingleValue>
-    </Property>
-    <Property name="h_alpha_A" units="per_ms">
-      <SingleValue>0.128</SingleValue>
-    </Property>
-    <Property name="h_alpha_V0" units="mV">
-      <SingleValue>17</SingleValue>
-    </Property>
-    <Property name="h_alpha_K" units="mV">
-      <SingleValue>18</SingleValue>
-    </Property>
-    <Property name="h_beta_A" units="per_ms">
-      <SingleValue>4</SingleValue>
-    </Property>
-    <Property name="h_beta_V0" units="mV">
-      <SingleValue>40</SingleValue>
-    </Property>
-    <Property name="h_beta_K" units="mV">
-      <SingleValue>5</SingleValue>
-    </Property>
-    <Property name="n_alpha_A" units="per_ms_mV">
-      <SingleValue>0.032</SingleValue>
-    </Property>
-    <Property name="n_alpha_V0" units="mV">
-      <SingleValue>15</SingleValue>
-    </Property>
-    <Property name="n_alpha_K" units="mV">
-      <SingleValue>5</SingleValue>
-    </Property>
-    <Property name="n_beta_A" units="per_ms">
-      <SingleValue>0.5</SingleValue>
-    </Property>
-    <Property name="n_beta_V0" units="mV">
-      <SingleValue>10</SingleValue>
-    </Property>
-    <Property name="n_beta_K" units="mV">
-      <SingleValue>40</SingleValue>
-    </Property>
-    <Property name="gbarNa" units="nS">
-      <SingleValue>20000</SingleValue>
-    </Property>
-    <Property name="gbarK" units="nS">
-      <SingleValue>6000</SingleValue>
-    </Property>
-    <Property name="gLeak" units="nS">
-      <SingleValue>10</SingleValue>
-    </Property>
-    <Property name="eLeak" units="mV">
-      <SingleValue>-60</SingleValue>
-    </Property>
-    <Property name="eK" units="mV">
-      <SingleValue>-90</SingleValue>
-    </Property>
-    <Property name="eNa" units="mV">
-      <SingleValue>50</SingleValue>
-    </Property>
-    <Property name="C" units="pF">
-      <SingleValue>200</SingleValue>
-    </Property>
-    <Property name="v_rest" units="mV">
-      <SingleValue>-63.0</SingleValue>
-    </Property>
-    <Property name="v_threshold" units="mV">
-      <SingleValue>-20</SingleValue>
-    </Property>
-  </Component>
-  <Dimension name="per_time" t="-1"/>
-  <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
-  <Dimension name="per_time_voltage" m="-1" l="-2" t="2" i="1"/>
-  <Dimension name="conductance" m="-1" l="-2" t="3" i="2"/>
-  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
-  <Dimension name="current" i="1"/>
-  <Dimension name="currentDensity" i="1" l="-2"/>
-  <Dimension name="temperature" k="1"/>
-  <Dimension name="dimensionless"/>
-  <Dimension name="time" t="1"/>  
-  <Unit symbol="per_ms" dimension="per_time" power="3"/>
-  <Unit symbol="mV" dimension="voltage" power="-3"/>
-  <Unit symbol="per_ms_mV" dimension="per_time_voltage" power="6"/>
-  <Unit symbol="nS" dimension="conductance" power="-9"/>
-  <Unit symbol="pF" dimension="capacitance" power="-12"/>
-  <Unit symbol="nA" dimension="current" power="-3"/>
-  <Unit symbol="unitless" dimension="dimensionless" power="0"/>
-  <Unit symbol="ms" dimension="time" power="-3"/>
-  <Unit symbol="S" dimension="conductance" power="0"/>
-  <Unit symbol="K" dimension="temperature" power="0"/>
 </NineML>
