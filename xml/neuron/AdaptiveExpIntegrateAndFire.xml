@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="AdaptiveExpIntegrateAndFire">
+  <Dynamics name="AdaptiveExpIntegrateAndFire">
     <AnalogReducePort operator="+" dimension="current" name="Isyn"/>
     <EventSendPort name="spikeoutput"/>
     <Parameter dimension="voltage" name="V_T"/>
@@ -14,80 +14,105 @@
     <Parameter dimension="voltage" name="Delta"/>
     <Parameter dimension="time" name="tau_w"/>
     <Parameter dimension="voltage" name="E_L"/>
-    <Dynamics>
-      <StateVariable dimension="dimensionless" name="w"/>
-      <StateVariable dimension="voltage" name="V"/>
-      <Regime name="refractoryregime">
-        <OnCondition target_regime="subthresholdregime">
-          <Trigger>
-            <MathInline>t &gt;= trefractory + tspike</MathInline>
-          </Trigger>
-        </OnCondition>
-      </Regime>
-      <Regime name="subthresholdregime">
-        <TimeDerivative variable="w">
-          <MathInline>(a*(-E_L + V) - w)/tau_w</MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="V">
-          <MathInline>Delta*g_L*exp(-w/S + (V - V_T)/Delta)/C_m + Isyn/C_m - g_L*(-E_L + V)/C_m</MathInline>
-        </TimeDerivative>
-        <OnCondition target_regime="refractoryregime">
-          <Trigger>
-            <MathInline>V &gt; V_T</MathInline>
-          </Trigger>
-          <OutputEvent port="spikeoutput"/>
-          <StateAssignment variable="w">
-            <MathInline>b + w</MathInline>
-          </StateAssignment>
-          <StateAssignment variable="V">
-            <MathInline>E_L</MathInline>
-          </StateAssignment>
-        </OnCondition>
-      </Regime>
-    </Dynamics>
-  </ComponentClass>
-  <Component name="SampleAdaptiveExpIntegrateAndFire">
-    <Definition>AdaptiveExpIntegrateAndFire</Definition>
-    <Property units="pF" name="C_m">
-      <SingleValue>1</SingleValue>
+    <StateVariable dimension="dimensionless" name="w"/>
+    <StateVariable dimension="voltage" name="V"/>
+    <Regime name="refractoryregime">
+      <OnCondition target_regime="subthresholdregime">
+        <Trigger>
+          <MathInline>t &gt;= trefractory + tspike</MathInline>
+        </Trigger>
+      </OnCondition>
+    </Regime>
+    <Regime name="subthresholdregime">
+      <TimeDerivative variable="w">
+        <MathInline>(a*(-E_L + V) - w)/tau_w</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="V">
+        <MathInline>Delta*g_L*exp(-w/S + (V - V_T)/Delta)/C_m + Isyn/C_m - g_L*(-E_L +
+          V)/C_m</MathInline>
+      </TimeDerivative>
+      <OnCondition target_regime="refractoryregime">
+        <Trigger>
+          <MathInline>V &gt; V_T</MathInline>
+        </Trigger>
+        <OutputEvent port="spikeoutput"/>
+        <StateAssignment variable="w">
+          <MathInline>b + w</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="V">
+          <MathInline>E_L</MathInline>
+        </StateAssignment>
+      </OnCondition>
+    </Regime>
+  </Dynamics>
+  <DynamicsProperties name="SampleAdaptiveExpIntegrateAndFire">
+    <Definition name="AdaptiveExpIntegrateAndFire"/>
+    <Property name="C_m">
+      <Quantity units="pF">
+        <SingleValue>1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="Delta">
-      <SingleValue>1</SingleValue>
+    <Property name="Delta">
+      <Quantity units="mV">
+        <SingleValue>1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="E_L">
-      <SingleValue>-65</SingleValue>
+    <Property name="E_L">
+      <Quantity units="mV">
+        <SingleValue>-65</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="unitless" name="S">
-      <SingleValue>0.1</SingleValue>
+    <Property name="S">
+      <Quantity units="unitless">
+        <SingleValue>0.1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="V_T">
-      <SingleValue>-58</SingleValue>
+    <Property name="V_T">
+      <Quantity units="mV">
+        <SingleValue>-58</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_mV" name="a">
-      <SingleValue>1</SingleValue>
+    <Property name="a">
+      <Quantity units="per_mV">
+        <SingleValue>1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="unitless" name="b">
-      <SingleValue>2</SingleValue>
+    <Property name="b">
+      <Quantity units="unitless">
+        <SingleValue>2</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nS" name="g_L">
-      <SingleValue>0.1</SingleValue>
+    <Property name="g_L">
+      <Quantity units="nS">
+        <SingleValue>0.1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="tau_w">
-      <SingleValue>4</SingleValue>
+    <Property name="tau_w">
+      <Quantity units="ms">
+        <SingleValue>4</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="trefractory">
-      <SingleValue>0.25</SingleValue>
+    <Property name="trefractory">
+      <Quantity units="ms">
+        <SingleValue>0.25</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="ms" name="tspike">
-      <SingleValue>0.5</SingleValue>
+    <Property name="tspike">
+      <Quantity units="ms">
+        <SingleValue>0.5</SingleValue>
+      </Quantity>
     </Property>
-    <Initial units="mV" name="w">
-      <SingleValue>0.1</SingleValue>
+    <Initial name="w">
+      <Quantity units="mV">
+        <SingleValue>0.1</SingleValue>
+      </Quantity>
     </Initial>
-    <Initial units="mV" name="V">
-      <SingleValue>-70</SingleValue>
+    <Initial name="V">
+      <Quantity units="mV">
+        <SingleValue>-70</SingleValue>
+      </Quantity>
     </Initial>
-  </Component>
+  </DynamicsProperties>
   <Dimension i="1" l="-2" m="-1" t="3" name="per_voltage"/>
   <Dimension i="1" name="current"/>
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>

@@ -1,108 +1,174 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <Dimension name="per_time" t="-1"/>
-  <Component name="SampleHodgkinHuxley">
-    <Definition>HodgkinHuxley</Definition>
-    <Property units="pF" name="C">
-      <SingleValue>1.0</SingleValue>
+  <DynamicsProperties name="SampleHodgkinHuxley">
+    <Definition name="HodgkinHuxley"/>
+    <Property name="C">
+      <Quantity units="pF">
+        <SingleValue>1.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="degC" name="celsius">
-      <SingleValue>20.0</SingleValue>
+    <Property name="celsius">
+      <Quantity units="degC">
+        <SingleValue>20.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="ek">
-      <SingleValue>-90</SingleValue>
+    <Property name="ek">
+      <Quantity units="mV">
+        <SingleValue>-90</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="el">
-      <SingleValue>-65</SingleValue>
+    <Property name="el">
+      <Quantity units="mV">
+        <SingleValue>-65</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="ena">
-      <SingleValue>80</SingleValue>
+    <Property name="ena">
+      <Quantity units="mV">
+        <SingleValue>80</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nS" name="gkbar">
-      <SingleValue>30.0</SingleValue>
+    <Property name="gkbar">
+      <Quantity units="nS">
+        <SingleValue>30.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nS" name="gl">
-      <SingleValue>0.3</SingleValue>
+    <Property name="gl">
+      <Quantity units="nS">
+        <SingleValue>0.3</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="nS" name="gnabar">
-      <SingleValue>130.0</SingleValue>
+    <Property name="gnabar">
+      <Quantity units="nS">
+        <SingleValue>130.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_ms" name="h_alpha_A">
-      <SingleValue>0.07</SingleValue>
+    <Property name="h_alpha_A">
+      <Quantity units="per_ms">
+        <SingleValue>0.07</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="h_alpha_K">
-      <SingleValue>20.0</SingleValue>
+    <Property name="h_alpha_K">
+      <Quantity units="mV">
+        <SingleValue>20.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="h_alpha_V0">
-      <SingleValue>-65.0</SingleValue>
+    <Property name="h_alpha_V0">
+      <Quantity units="mV">
+        <SingleValue>-65.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_ms" name="h_beta_A">
-      <SingleValue>1.0</SingleValue>
+    <Property name="h_beta_A">
+      <Quantity units="per_ms">
+        <SingleValue>1.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="h_beta_K">
-      <SingleValue>10.0</SingleValue>
+    <Property name="h_beta_K">
+      <Quantity units="mV">
+        <SingleValue>10.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="h_beta_V0">
-      <SingleValue>-35.0</SingleValue>
+    <Property name="h_beta_V0">
+      <Quantity units="mV">
+        <SingleValue>-35.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_mV_ms" name="m_alpha_A">
-      <SingleValue>-0.1</SingleValue>
+    <Property name="m_alpha_A">
+      <Quantity units="per_mV_ms">
+        <SingleValue>-0.1</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="m_alpha_K">
-      <SingleValue>10.0</SingleValue>
+    <Property name="m_alpha_K">
+      <Quantity units="mV">
+        <SingleValue>10.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="m_alpha_V0">
-      <SingleValue>-40.0</SingleValue>
+    <Property name="m_alpha_V0">
+      <Quantity units="mV">
+        <SingleValue>-40.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_ms" name="m_beta_A">
-      <SingleValue>4.0</SingleValue>
+    <Property name="m_beta_A">
+      <Quantity units="per_ms">
+        <SingleValue>4.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="m_beta_K">
-      <SingleValue>18.0</SingleValue>
+    <Property name="m_beta_K">
+      <Quantity units="mV">
+        <SingleValue>18.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="m_beta_V0">
-      <SingleValue>-65.0</SingleValue>
+    <Property name="m_beta_V0">
+      <Quantity units="mV">
+        <SingleValue>-65.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_mV_ms" name="n_alpha_A">
-      <SingleValue>-0.01</SingleValue>
+    <Property name="n_alpha_A">
+      <Quantity units="per_mV_ms">
+        <SingleValue>-0.01</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="n_alpha_K">
-      <SingleValue>10.0</SingleValue>
+    <Property name="n_alpha_K">
+      <Quantity units="mV">
+        <SingleValue>10.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="n_alpha_V0">
-      <SingleValue>-55.0</SingleValue>
+    <Property name="n_alpha_V0">
+      <Quantity units="mV">
+        <SingleValue>-55.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="per_ms" name="n_beta_A">
-      <SingleValue>0.125</SingleValue>
+    <Property name="n_beta_A">
+      <Quantity units="per_ms">
+        <SingleValue>0.125</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="n_beta_K">
-      <SingleValue>80.0</SingleValue>
+    <Property name="n_beta_K">
+      <Quantity units="mV">
+        <SingleValue>80.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="n_beta_V0">
-      <SingleValue>-65.0</SingleValue>
+    <Property name="n_beta_V0">
+      <Quantity units="mV">
+        <SingleValue>-65.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="degC" name="qfactor">
-      <SingleValue>6.3</SingleValue>
+    <Property name="qfactor">
+      <Quantity units="degC">
+        <SingleValue>6.3</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="degC" name="tendegrees">
-      <SingleValue>10.0</SingleValue>
+    <Property name="tendegrees">
+      <Quantity units="degC">
+        <SingleValue>10.0</SingleValue>
+      </Quantity>
     </Property>
-    <Property units="mV" name="v_threshold">
-      <SingleValue>-40.0</SingleValue>
+    <Property name="v_threshold">
+      <Quantity units="mV">
+        <SingleValue>-40.0</SingleValue>
+      </Quantity>
     </Property>
-    <Initial units="unitless" name="h">
-      <SingleValue>0.9</SingleValue>
+    <Initial name="h">
+      <Quantity units="unitless">
+        <SingleValue>0.9</SingleValue>
+      </Quantity>
     </Initial>
-    <Initial units="mV" name="V">
-      <SingleValue>-70</SingleValue>
+    <Initial name="V">
+      <Quantity units="mV">
+        <SingleValue>-70</SingleValue>
+      </Quantity>
     </Initial>
-    <Initial units="unitless" name="m">
-      <SingleValue>0.1</SingleValue>
+    <Initial name="m">
+      <Quantity units="unitless">
+        <SingleValue>0.1</SingleValue>
+      </Quantity>
     </Initial>
-    <Initial units="unitless" name="n">
-      <SingleValue>0</SingleValue>
+    <Initial name="n">
+      <Quantity units="unitless">
+        <SingleValue>0</SingleValue>
+      </Quantity>
     </Initial>
-  </Component>
+  </DynamicsProperties>
   <Dimension k="1" name="temperature"/>
   <Unit symbol="per_ms" dimension="per_time" power="3"/>
   <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
@@ -117,7 +183,7 @@
   <Dimension name="dimensionless"/>
   <Unit symbol="nS" dimension="conductance" power="-9"/>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
-  <ComponentClass name="HodgkinHuxley">
+  <Dynamics name="HodgkinHuxley">
     <AnalogSendPort dimension="voltage" name="V"/>
     <AnalogReducePort operator="+" dimension="current" name="isyn"/>
     <EventSendPort name="spikeoutput"/>
@@ -150,85 +216,83 @@
     <Parameter dimension="per_time" name="h_alpha_A"/>
     <Parameter dimension="voltage" name="m_alpha_V0"/>
     <Parameter dimension="voltage" name="h_alpha_K"/>
-    <Dynamics>
-      <Regime name="default">
-        <TimeDerivative variable="h">
-          <MathInline>(-h + hinf)/htau</MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="n">
-          <MathInline>(-n + ninf)/ntau</MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="m">
-          <MathInline>(-m + minf)/mtau</MathInline>
-        </TimeDerivative>
-        <TimeDerivative variable="V">
-          <MathInline>(ik + il + ina + isyn)/C</MathInline>
-        </TimeDerivative>
-        <OnCondition target_regime="default">
-          <Trigger>
-            <MathInline>V &gt; v_threshold</MathInline>
-          </Trigger>
-          <OutputEvent port="spikeoutput"/>
-        </OnCondition>
-      </Regime>
-      <StateVariable dimension="dimensionless" name="h"/>
-      <StateVariable dimension="voltage" name="V"/>
-      <StateVariable dimension="dimensionless" name="m"/>
-      <StateVariable dimension="dimensionless" name="n"/>
-      <Alias name="ntau">
-        <MathInline>1.0/(q10*(n_alpha + n_beta))</MathInline>
-      </Alias>
-      <Alias name="n_beta">
-        <MathInline>n_beta_A*exp((-V + n_beta_V0)/n_beta_K)</MathInline>
-      </Alias>
-      <Alias name="m_alpha">
-        <MathInline>m_alpha_A*(V - m_alpha_V0)/(exp((-V + m_alpha_V0)/m_alpha_K) - 1.0)</MathInline>
-      </Alias>
-      <Alias name="m_beta">
-        <MathInline>m_beta_A*exp((-V + m_beta_V0)/m_beta_K)</MathInline>
-      </Alias>
-      <Alias name="n_alpha">
-        <MathInline>n_alpha_A*(V - n_alpha_V0)/(exp((-V + n_alpha_V0)/n_alpha_K) - 1.0)</MathInline>
-      </Alias>
-      <Alias name="h_alpha">
-        <MathInline>h_alpha_A*exp((-V + h_alpha_V0)/h_alpha_K)</MathInline>
-      </Alias>
-      <Alias name="hinf">
-        <MathInline>h_alpha/(h_alpha + h_beta)</MathInline>
-      </Alias>
-      <Alias name="minf">
-        <MathInline>m_alpha/(m_alpha + m_beta)</MathInline>
-      </Alias>
-      <Alias name="ik">
-        <MathInline>gk*(-V + ek)</MathInline>
-      </Alias>
-      <Alias name="gna">
-        <MathInline>gnabar*h*(m*m*m)</MathInline>
-      </Alias>
-      <Alias name="q10">
-        <MathInline>pow(3.0, (celsius - qfactor)/tendegrees)</MathInline>
-      </Alias>
-      <Alias name="ninf">
-        <MathInline>n_alpha/(n_alpha + n_beta)</MathInline>
-      </Alias>
-      <Alias name="mtau">
-        <MathInline>1.0/(q10*(m_alpha + m_beta))</MathInline>
-      </Alias>
-      <Alias name="h_beta">
-        <MathInline>h_beta_A/(exp((-V + h_beta_V0)/h_beta_K) + 1.0)</MathInline>
-      </Alias>
-      <Alias name="gk">
-        <MathInline>gkbar*(n*n*n*n)</MathInline>
-      </Alias>
-      <Alias name="ina">
-        <MathInline>gna*(-V + ena)</MathInline>
-      </Alias>
-      <Alias name="htau">
-        <MathInline>1.0/(q10*(h_alpha + h_beta))</MathInline>
-      </Alias>
-      <Alias name="il">
-        <MathInline>gl*(-V + el)</MathInline>
-      </Alias>
-    </Dynamics>
-  </ComponentClass>
+    <Regime name="default">
+      <TimeDerivative variable="h">
+        <MathInline>(-h + hinf)/htau</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="n">
+        <MathInline>(-n + ninf)/ntau</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="m">
+        <MathInline>(-m + minf)/mtau</MathInline>
+      </TimeDerivative>
+      <TimeDerivative variable="V">
+        <MathInline>(ik + il + ina + isyn)/C</MathInline>
+      </TimeDerivative>
+      <OnCondition target_regime="default">
+        <Trigger>
+          <MathInline>V &gt; v_threshold</MathInline>
+        </Trigger>
+        <OutputEvent port="spikeoutput"/>
+      </OnCondition>
+    </Regime>
+    <StateVariable dimension="dimensionless" name="h"/>
+    <StateVariable dimension="voltage" name="V"/>
+    <StateVariable dimension="dimensionless" name="m"/>
+    <StateVariable dimension="dimensionless" name="n"/>
+    <Alias name="ntau">
+      <MathInline>1.0/(q10*(n_alpha + n_beta))</MathInline>
+    </Alias>
+    <Alias name="n_beta">
+      <MathInline>n_beta_A*exp((-V + n_beta_V0)/n_beta_K)</MathInline>
+    </Alias>
+    <Alias name="m_alpha">
+      <MathInline>m_alpha_A*(V - m_alpha_V0)/(exp((-V + m_alpha_V0)/m_alpha_K) - 1.0)</MathInline>
+    </Alias>
+    <Alias name="m_beta">
+      <MathInline>m_beta_A*exp((-V + m_beta_V0)/m_beta_K)</MathInline>
+    </Alias>
+    <Alias name="n_alpha">
+      <MathInline>n_alpha_A*(V - n_alpha_V0)/(exp((-V + n_alpha_V0)/n_alpha_K) - 1.0)</MathInline>
+    </Alias>
+    <Alias name="h_alpha">
+      <MathInline>h_alpha_A*exp((-V + h_alpha_V0)/h_alpha_K)</MathInline>
+    </Alias>
+    <Alias name="hinf">
+      <MathInline>h_alpha/(h_alpha + h_beta)</MathInline>
+    </Alias>
+    <Alias name="minf">
+      <MathInline>m_alpha/(m_alpha + m_beta)</MathInline>
+    </Alias>
+    <Alias name="ik">
+      <MathInline>gk*(-V + ek)</MathInline>
+    </Alias>
+    <Alias name="gna">
+      <MathInline>gnabar*h*(m*m*m)</MathInline>
+    </Alias>
+    <Alias name="q10">
+      <MathInline>pow(3.0, (celsius - qfactor)/tendegrees)</MathInline>
+    </Alias>
+    <Alias name="ninf">
+      <MathInline>n_alpha/(n_alpha + n_beta)</MathInline>
+    </Alias>
+    <Alias name="mtau">
+      <MathInline>1.0/(q10*(m_alpha + m_beta))</MathInline>
+    </Alias>
+    <Alias name="h_beta">
+      <MathInline>h_beta_A/(exp((-V + h_beta_V0)/h_beta_K) + 1.0)</MathInline>
+    </Alias>
+    <Alias name="gk">
+      <MathInline>gkbar*(n*n*n*n)</MathInline>
+    </Alias>
+    <Alias name="ina">
+      <MathInline>gna*(-V + ena)</MathInline>
+    </Alias>
+    <Alias name="htau">
+      <MathInline>1.0/(q10*(h_alpha + h_beta))</MathInline>
+    </Alias>
+    <Alias name="il">
+      <MathInline>gl*(-V + el)</MathInline>
+    </Alias>
+  </Dynamics>
 </NineML>
