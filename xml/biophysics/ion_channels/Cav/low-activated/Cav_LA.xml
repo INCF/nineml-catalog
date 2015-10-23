@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NineML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://nineml.net/9ML/1.0"
+  xmlns="http://nineml.net/9ML/2.0"
   xsi:schemaLocation="http://nineml.incf.org/9ML/NineML_v0.3.xsd">
   <Dimension name="dimensionless"/>
   <Dimension name="time" t="1"/>

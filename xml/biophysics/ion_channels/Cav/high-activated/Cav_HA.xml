@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NineML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://nineml.net/9ML/1.0">
+  xmlns="http://nineml.net/9ML/2.0">
   <Dimension name="per_time" t="-1"/>
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="conductanceDensity" m="-1" l="-4" t="3" i="2"/>

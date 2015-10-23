@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.net/9ML/1.0">
+<NineML xmlns="http://nineml.net/9ML/2.0">
   <Unit symbol="nS_per_mV" dimension="conductance_per_voltage" power="-6"/>
   <Unit symbol="pF" dimension="capacitance" power="-12"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>

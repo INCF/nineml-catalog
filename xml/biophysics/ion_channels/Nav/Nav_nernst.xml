@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<NineML xmlns="http://nineml.net/9ML/1.0"
+<NineML xmlns="http://nineml.net/9ML/2.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://nineml.net/9ML/1.0../NineML_h0.3.xsd">
+  xsi:schemaLocation="http://nineml.net/9ML/2.0../NineML_h0.3.xsd">
   <Dimension name="per_time" t="-1"/>
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="per_time_voltage" m="-1" l="-2" t="2" i="1"/>  
@@ -12,7 +12,7 @@
   <Unit symbol="celsius" dimension="temperature" power="0" offset="273.15"/>
   <Unit symbol="K" dimension="temperature" power="0"/>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
-  <Dynamics name="Nav_nernst" xmlns="http://nineml.net/9ML/1.0">
+  <Dynamics name="Nav_nernst" xmlns="http://nineml.net/9ML/2.0">
     <Parameter name="gbar" dimension="conductanceDensity"/>
     <Parameter name="Aalpha_m" dimension="per_time_voltage"/>
     <Parameter name="Kalpha_m" dimension="voltage"/>
