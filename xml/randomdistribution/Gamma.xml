@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="GammaDistribution">
+  <RandomDistribution name="GammaDistribution" standard_library="http://www.uncertml.org/distributions/gamma.xml">
     <Parameter name="shape" dimension="dimensionless"/>
     <Parameter name="scale" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/gamma"/>
-  </ComponentClass>
+  </RandomDistribution>
   <Dimension name="dimensionless"/>
 </NineML>

@@ -1,9 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="NegativeBinomialDistribution">
+  <RandomDistribution name="NegativeBinomialDistribution" standard_library="http://www.uncertml.org/distributions/negative-binomial.xml">
     <Parameter name="numberOfFailures" dimension="dimensionless"/>
     <Parameter name="probability" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/negative-binomial"/>
-  </ComponentClass>
+  </RandomDistribution>
   <Dimension name="dimensionless"/>
 </NineML>

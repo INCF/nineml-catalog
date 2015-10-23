@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="GeometricDistribution">
+  <RandomDistribution name="GeometricDistribution" standard_library="http://www.uncertml.org/distributions/geometric.xml">
     <Parameter name="probability" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/geometric"/>
-  </ComponentClass>
+  </RandomDistribution>
   <Dimension name="dimensionless"/>
 </NineML>
