@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dynamics name="Static">
-    <Parameter name="w" dimension="dimensionless"/>
-    <AnalogSendPort name="weight" dimension="dimensionless"/>
-    <Alias name="weight"><MathInline>w</MathInline></Alias>
-  </Dynamics>
-  <Dimension name="dimensionless"/>
-</NineML>

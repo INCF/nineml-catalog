@@ -1,27 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.net/9ML/1.0">
-  <Dimension name="per_time" t="-1"/>
-  <Unit symbol="ms" dimension="time" power="-3"/>
-  <Unit symbol="per_s" dimension="per_time" power="0"/>
-  <ComponentClass name="Poisson">
+<NineML xmlns="http://nineml.net/9ML/1.0">  
+  <Dynamics name="Poisson">
     <EventSendPort name="spikeOutput"/>
     <Parameter dimension="per_time" name="rate"/>
-    <Dynamics>
-      <Constant units="ms" name="one_ms">1.0</Constant>
-      <Constant units="per_s" name="thousand_per_second">1000.0</Constant>
-      <StateVariable dimension="time" name="t_next"/>
-      <Regime name="default">
-        <OnCondition target_regime="default">
-          <Trigger>
-            <MathInline>t &gt; t_next</MathInline>
-          </Trigger>
-          <OutputEvent port="spikeOutput"/>
-          <StateAssignment variable="t_next">
-            <MathInline>one_ms*random.exponential(thousand_per_second/rate) + t</MathInline>
-          </StateAssignment>
-        </OnCondition>
-      </Regime>
-    </Dynamics>
-  </ComponentClass>
+    <Constant units="ms" name="one_ms">1.0</Constant>
+    <Constant units="ms" name="thousand_milliseconds">1000.0</Constant>
+    <StateVariable dimension="time" name="t_next"/>
+    <Regime name="default">
+      <OnCondition target_regime="default">
+        <Trigger>
+          <MathInline>t &gt; t_next</MathInline>
+        </Trigger>
+        <OutputEvent port="spikeOutput"/>
+        <StateAssignment variable="t_next">
+          <MathInline>one_ms*random.exponential(rate*thousand_milliseconds) + t</MathInline>
+        </StateAssignment>
+      </OnCondition>
+    </Regime>
+  </Dynamics>
   <Dimension name="time" t="1"/>
+  <Dimension name="per_time" t="-1"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>  
 </NineML>
