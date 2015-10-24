@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <NineML xmlns="http://nineml.net/9ML/2.0">
-  <MultiComponent name="HodgkinHuxleyContainer">
-    <SubComponent name="Na">
-      <Component>
+  <MultiDynamics name="HodgkinHuxleyContainer">
+    <SubDynamics name="Na">
+      <Dynamics>
         <Definition name="PyramidalNa"/>
         <Property name="gbar">
           <Quantity units="uS">
             <SingleValue>0.0025</SingleValue>
           </Quantity>
         </Property>
-      </Component>
+      </Dynamics>
       <PortConnection port="V">
         <FromSister component="membrane" port="V"/>
       </PortConnection>
-    </SubComponent>
-    <SubComponent name="K">
-      <Component>
+    </SubDynamics>
+    <SubDynamics name="K">
+      <Dynamics>
         <Prototype>PyramidalK</Prototype>
         <Property name="gbar">
           <Quantity units="uS">
             <SingleValue>0.0036</SingleValue>
           </Quantity>
         </Property>
-      </Component>
+      </Dynamics>
       <PortConnection port="V">
         <FromSister component="membrane" port="V"/>
       </PortConnection>
-    </SubComponent>
-    <SubComponent name="leak">
-      <Component>
+    </SubDynamics>
+    <SubDynamics name="leak">
+      <Dynamics>
         <Definition name="Leak"/>
         <Property name="g">
           <Quantity units="uS">
@@ -40,13 +40,13 @@
             <SingleValue>-21</SingleValue>
           </Quantity>
         </Property>
-      </Component>
+      </Dynamics>
       <PortConnection port="V">
         <FromSister component="membrane" port="V"/>
       </PortConnection>
-    </SubComponent>
-    <SubComponent name="membrane">
-      <Component>
+    </SubDynamics>
+    <SubDynamics name="membrane">
+      <Dynamics>
         <Definition url="http://nineml.net/9ML/2.0/catalog/basicMembrane.9ml"
           name="BasicMembrane"/>
         <Property name="length">
@@ -69,20 +69,20 @@
             <SingleValue>1.0</SingleValue>
           </Quantity>
         </Property>
-      </Component>
+      </Dynamics>
       <PortConnection port="i">
         <FromSister component="Na" name="i"/>
         <FromSister component="K" name="i"/>
         <FromSister component="leak" name="i"/>
       </PortConnection>
-    </SubComponent>
+    </SubDynamics>
     <PortExposure name="membraneVoltage" component="membrane" port="V"/>
     <PortExposure name="membraneCurrent" component="membrane" port="i">
       <Annotations>
         <Comment>This can be used to connect current synaptic input</Comment>
       </Annotations>
     </PortExposure>
-  </MultiComponent>
+  </MultiDynamics>
   <Dimension name="time" t="1"/>
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="conductance" m="-1" t="3" l="-2" i="2"/>

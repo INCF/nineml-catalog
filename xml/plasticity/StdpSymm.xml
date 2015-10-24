@@ -41,7 +41,7 @@
     </Alias>
   </Dynamics>
   <DynamicsProperties name="StdpSymmProperties">
-    <Definition>StdpSymm</Definition>
+    <Definition name="StdpSymm"/>
     <Property name="a">
       <Quantity units="unitless">
         <SingleValue>0.001</SingleValue>

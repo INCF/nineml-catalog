@@ -3,8 +3,8 @@
   <Dynamics name="Poisson">
     <EventSendPort name="spikeOutput"/>
     <Parameter dimension="per_time" name="rate"/>
-    <Constant units="ms" name="one_ms">1.0</Constant>
-    <Constant units="ms" name="thousand_milliseconds">1000.0</Constant>
+    <Constant units="ms" name="one_ms" value="1.0"/>
+    <Constant units="ms" name="thousand_milliseconds" value="1000.0"/>
     <StateVariable dimension="time" name="t_next"/>
     <Regime name="default">
       <OnCondition target_regime="default">

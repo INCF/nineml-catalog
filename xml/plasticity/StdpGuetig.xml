@@ -44,7 +44,7 @@
     </Regime>
   </Dynamics>
   <DynamicsProperties name="PyNNStdpGuetigProperties">
-    <Definition>StdpGuetig</Definition>
+    <Definition name="StdpGuetig"/>
     <Property name="aLTD">
       <Quantity units="unitless">
         <SingleValue>0.00106</SingleValue>

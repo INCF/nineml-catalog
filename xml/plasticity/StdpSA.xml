@@ -44,7 +44,7 @@
     </Regime>
   </Dynamics>
   <DynamicsProperties name="StdpSAProperties">
-    <Definition>StdpSA</Definition>
+    <Definition name="StdpSA"/>
     <Property name="aLTD">
       <Quantity units="unitless">
         <SingleValue>0.00106</SingleValue>

@@ -185,7 +185,7 @@
       </Quantity>
     </Property>
     <Property name="m_alpha_A">
-      <Quantity units="per_mV_ms">
+      <Quantity units="per_ms_mV">
         <SingleValue>-0.1</SingleValue>
       </Quantity>
     </Property>
@@ -215,7 +215,7 @@
       </Quantity>
     </Property>
     <Property name="n_alpha_A">
-      <Quantity units="per_mV_ms">
+      <Quantity units="per_ms_mV">
         <SingleValue>-0.01</SingleValue>
       </Quantity>
     </Property>
@@ -530,7 +530,7 @@
   <Dimension name="dimensionless"/>
   <Dimension name="per_time" t="-1"/>
   <Unit symbol="per_ms" dimension="per_time" power="3"/>
-  <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
+  <Unit symbol="per_ms_mV" dimension="per_time_voltage" power="6"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="pF" dimension="capacitance" power="-12"/>
   <Unit symbol="degC" dimension="temperature" power="0" offset="273.15"/>

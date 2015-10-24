@@ -17,7 +17,7 @@
     </Alias>
   </Dynamics>
   <DynamicsProperties name="TMGSynProperties">
-    <Definition>TMGSyn</Definition>
+    <Definition name="TMGSyn"/>
     <Property name="e">
       <Quantity units="mV">
         <SingleValue>-90.0</SingleValue>

@@ -39,7 +39,7 @@
     </Alias>
   </Dynamics>
   <DynamicsProperties name="StdpVogels2011Properties">
-    <Definition>StdpVogels2011</Definition>
+    <Definition name="StdpVogels2011"/>
     <Property name="allow_update_on_post">
       <Quantity units="unitless">
         <SingleValue>1.0</SingleValue>

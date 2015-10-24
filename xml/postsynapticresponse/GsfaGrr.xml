@@ -36,7 +36,7 @@
     </Alias>
   </Dynamics>
   <DynamicsProperties name="PyNNGsfaGrrProperties">
-    <Definition>GsfaGrr</Definition>
+    <Definition name="GsfaGrr"/>
     <Property name="E_r">
       <Quantity units="mV">
         <SingleValue>-70.0</SingleValue>

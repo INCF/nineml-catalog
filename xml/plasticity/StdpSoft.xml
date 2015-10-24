@@ -46,7 +46,7 @@
     </Regime>
   </Dynamics>
   <DynamicsProperties name="StdpSoftProperties">
-    <Definition>StdwaSoft</Definition>
+    <Definition name="StdwaSoft"/>
     <Property name="aLTD">
       <Quantity units="unitless">
         <SingleValue>0.00106</SingleValue>

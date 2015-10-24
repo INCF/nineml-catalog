@@ -4,10 +4,10 @@
   <Selection name="All">
     <Concatenate>
       <Item index="0">
-        <Reference>Exc</Reference>
+        <Reference name="Exc"/>
       </Item>
       <Item index="1">
-        <Reference>Inh</Reference>
+        <Reference name="Inh"/>
       </Item>
     </Concatenate>
   </Selection>
@@ -51,10 +51,10 @@
   </Population>
   <Projection name="Excitation">
     <Source>
-      <Reference>Exc</Reference>
+      <Reference name="Exc"/>
     </Source>
     <Destination>
-      <Reference>All</Reference>
+      <Reference name="All"/>
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
@@ -118,10 +118,10 @@
   </Population>
   <Projection name="Inhibition">
     <Source>
-      <Reference>Inh</Reference>
+      <Reference name="Inh"/>
     </Source>
     <Destination>
-      <Reference>All</Reference>
+      <Reference name="All"/>
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
@@ -198,10 +198,10 @@
   </Population>
   <Projection name="External">
     <Source>
-      <Reference>Ext</Reference>
+      <Reference name="Ext"/>
     </Source>
     <Destination>
-      <Reference>All</Reference>
+      <Reference name="All"/>
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>

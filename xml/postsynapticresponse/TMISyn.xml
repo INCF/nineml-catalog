@@ -11,7 +11,7 @@
     </Regime>
   </Dynamics>
   <DynamicsProperties name="TMISynProperties">
-    <Definition>TMISyn</Definition>
+    <Definition name="TMISyn"/>
     <Property name="tau">
       <Quantity units="ms">
         <SingleValue>3.0</SingleValue>
