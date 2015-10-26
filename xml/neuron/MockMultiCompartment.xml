@@ -10,49 +10,49 @@
         columnName="domain"/>
     </Mapping>
     <Domain index="0">
-      <MultiComponent name="somaDynamics">
-        <SubComponent name="PyramidalNa">
-          <Component>
-            <Prototype url="http://nineml.net/9ML/2.0/catalog/channels">HHPyramidalNa</Prototype>
+      <MultiDynamics name="somaDynamics">
+        <SubDynamics name="PyramidalNa">
+          <Dynamics>
+            <Prototype name="HHPyramidalNa" url="http://nineml.net/9ML/2.0/catalog/channels"/>
             <Property name="gbar">
               <Quantity units="uS">
                 <SingleValue>0.0036</SingleValue>
               </Quantity>
             </Property>
-          </Component>
+          </Dynamics>
           <PortConnection port="V">
             <FromSister component="membrane" port="V"/>
           </PortConnection>
-        </SubComponent>
-        <SubComponent name="PyramidalK">
-          <Component>
-            <Prototype url="http://nineml.net/9ML/2.0/catalog/channels">HHPyramidalK</Prototype>
+        </SubDynamics>
+        <SubDynamics name="PyramidalK">
+          <Dynamics>
+            <Prototype name="HHPyramidalK" url="http://nineml.net/9ML/2.0/catalog/channels"/>
             <Property name="gbar">
               <Quantity units="uS">
                 <SingleValue>0.0025</SingleValue>
               </Quantity>
             </Property>
-          </Component>
+          </Dynamics>
           <PortConnection port="V">
             <FromSister component="membrane" port="V"/>
           </PortConnection>
-        </SubComponent>
-        <SubComponent name="Kv4">
-          <Component>
-            <Prototype url="http://nineml.net/9ML/2.0/catalog/channels">HHPyramidalK</Prototype>
+        </SubDynamics>
+        <SubDynamics name="Kv4">
+          <Dynamics>
+            <Prototype name="HHPyramidalK" url="http://nineml.net/9ML/2.0/catalog/channels"/>
             <Property name="gbar">
               <Quantity units="uS">
                 <SingleValue>0.0025</SingleValue>
               </Quantity>
             </Property>
-          </Component>
+          </Dynamics>
           <PortConnection port="V">
             <FromSister component="membrane" port="V"/>
           </PortConnection>
-        </SubComponent>
-        <SubComponent name="leak">
-          <Component>
-            <Definition url="http://nineml.net/9ML/2.0/catalog/channels">Leak</Definition>
+        </SubDynamics>
+        <SubDynamics name="leak">
+          <Dynamics>
+            <Definition name="Leak" url="http://nineml.net/9ML/2.0/catalog/channels"/>
             <Property name="g">
               <Quantity units="uS">
                 <SingleValue>0.001</SingleValue>
@@ -63,15 +63,14 @@
                 <SingleValue>-21</SingleValue>
               </Quantity>
             </Property>
-          </Component>
+          </Dynamics>
           <PortConnection port="V">
             <FromSister component="membrane" port="V"/>
           </PortConnection>
-        </SubComponent>
-        <SubComponent name="membrane">
-          <Component>
-            <Definition url="http://nineml.net/9ML/2.0/catalog/channels/basicCompartment.9ml"
-              >BasicCompartment</Definition>
+        </SubDynamics>
+        <SubDynamics name="membrane">
+          <Dynamics>
+            <Definition name="BasicCompartment" url="http://nineml.net/9ML/2.0/catalog/channels/basicCompartment.9ml"/>
             <Property name="length">
               <Quantity units="um">
                 <SingleValue>15.0</SingleValue>
@@ -92,16 +91,16 @@
                 <SingleValue>1.0</SingleValue>
               </Quantity>
             </Property>
-          </Component>
+          </Dynamics>
           <PortConnection port="i">
             <FromSister component="Na" name="i"/>
             <FromSister component="K" name="i"/>
             <FromSister component="leak" name="i"/>
           </PortConnection>
-        </SubComponent>
+        </SubDynamics>
         <PortExposure name="proximalVoltage" component="membrane" port="proximalV"/>
         <PortExposure name="distalVoltage" component="membrane" port="distalV"/>
-      </MultiComponent>
+      </MultiDynamics>
       <PortConnection port="proximalVoltage">
         <FromProximal port="voltage"/>
       </PortConnection>

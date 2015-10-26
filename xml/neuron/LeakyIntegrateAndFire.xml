@@ -33,13 +33,6 @@
       </Quantity>
     </Initial>
   </DynamicsProperties>
-  <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
-  <Dimension i="1" name="current"/>
-  <Unit symbol="mV" dimension="voltage" power="-3"/>
-  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
-  <Unit symbol="ms" dimension="time" power="-3"/>
-  <Dimension name="time" t="1"/>
-  <Unit symbol="Mohm" dimension="resistance" power="6"/>
   <Dynamics name="LeakyIntegrateAndFire">
     <AnalogSendPort dimension="time" name="refractory_end"/>
     <AnalogSendPort dimension="voltage" name="v"/>
@@ -77,4 +70,88 @@
     <StateVariable dimension="time" name="refractory_end"/>
     <StateVariable dimension="voltage" name="v"/>
   </Dynamics>
+  <Dynamics name="PyNNLeakyIntegrateAndFire">
+    <AnalogSendPort name="v" dimension="voltage"/>
+    <AnalogReducePort operator="+" name="i_synaptic" dimension="current"/>
+    <EventSendPort name="spikeoutput"/>
+    <Parameter dimension="capacitance" name="Cm"/>
+    <Parameter dimension="time" name="refractory_period"/>
+    <Parameter dimension="conductance" name="g_leak"/>
+    <Parameter dimension="voltage" name="v_reset"/>
+    <Parameter dimension="voltage" name="e_leak"/>
+    <Parameter dimension="voltage" name="v_threshold"/>
+    <Regime name="subthreshold">
+      <TimeDerivative variable="v">
+        <MathInline>(g_leak*(e_leak - v) + i_synaptic)/Cm</MathInline>
+      </TimeDerivative>
+      <OnCondition target_regime="refractory">
+        <StateAssignment variable="end_refractory">
+          <MathInline>t + refractory_period</MathInline>
+        </StateAssignment>
+        <StateAssignment variable="v">
+          <MathInline>v_reset</MathInline>
+        </StateAssignment>
+        <OutputEvent port="spikeoutput"/>
+        <Trigger>
+          <MathInline>v &gt; v_threshold</MathInline>
+        </Trigger>
+      </OnCondition>
+    </Regime>
+    <Regime name="refractory">
+      <OnCondition target_regime="subthreshold">
+        <Trigger>
+          <MathInline>t &gt; end_refractory</MathInline>
+        </Trigger>
+      </OnCondition>
+    </Regime>
+    <StateVariable dimension="voltage" name="v"/>
+    <StateVariable dimension="time" name="end_refractory"/>
+  </Dynamics>
+  <DynamicsProperties name="PyNNLeakyIntegrateAndFireProperties">
+    <Annotations>
+      <Comment>Parameters are taken from the Brunel 2000 model</Comment>
+    </Annotations>
+    <Definition name="PyNNLeakyIntegrateAndFire"/>
+    <Property name="v_reset">
+      <Quantity units="mV">
+        <SingleValue>-70</SingleValue>
+      </Quantity>
+    </Property>
+    <Property name="refractory_period">
+      <Quantity units="ms">
+        <SingleValue>2</SingleValue>
+      </Quantity>
+    </Property>
+    <Property name="Cm">
+      <Quantity units="pF">
+        <SingleValue>250</SingleValue>
+      </Quantity>
+    </Property>
+    <Property name="g_leak">
+      <Quantity units="nS">
+        <SingleValue>25</SingleValue>
+      </Quantity>
+    </Property>
+    <Property name="v_threshold">
+      <Quantity units="mV">
+        <SingleValue>-55</SingleValue>
+      </Quantity>
+    </Property>
+    <Property name="e_leak">
+      <Quantity units="mV">
+        <SingleValue>-70</SingleValue>
+      </Quantity>
+    </Property>
+  </DynamicsProperties>  
+  <Dimension name="time" t="1"/>
+  <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
+  <Dimension name="conductance" m="-1" l="-2" t="3" i="2"/>
+  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
+  <Dimension name="current" i="1"/>
+  <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="nS" dimension="conductance" power="-9"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
+  <Unit symbol="Mohm" dimension="resistance" power="6"/>
 </NineML>
