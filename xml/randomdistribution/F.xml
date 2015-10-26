@@ -3,7 +3,7 @@
   <ComponentClass name="FDistribution">
     <Parameter name="denominator" dimension="dimensionless"/>
     <Parameter name="numerator" dimension="dimensionless"/>
-     <RandomDistribution standardLibrary="http://www.uncertml.org/distributions/f.xml"/>
+     <RandomDistribution standard_library="http://www.uncertml.org/distributions/f.xml"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

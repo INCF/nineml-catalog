@@ -3,7 +3,7 @@
   <ComponentClass name="WeibullDistribution">
     <Parameter name="scale" dimension="dimensionless"/>
     <Parameter name="shape" dimension="dimensionless"/>
-    <RandomDistribution standardLibrary="http://www.uncertml.org/distributions/weibull.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/weibull.xml"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>
