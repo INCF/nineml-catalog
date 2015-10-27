@@ -15,8 +15,8 @@
   <Population name="Exc">
     <Size>4000</Size>
     <Cell>
-      <Component name="nrn">
-        <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
+      <DynamicsProperties name="nrn">
+        <Definition name="LeakyIntegrateAndFire" url="../../neuron/LeakyIntegrateAndFire.xml"/>
         <Property units="Mohm" name="R">
           <SingleValue>1.5</SingleValue>
         </Property>
@@ -36,17 +36,17 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
         <Initial units="mV" name="v">
-          <Component name="uniform_rest_to_threshold">
-            <Definition url="../../randomdistribution/Uniform.xml">UniformDistribution</Definition>
+          <RandomDistributionProperties name="uniform_rest_to_threshold">
+            <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
             <Property units="unitless" name="maximum">
               <SingleValue>20.0</SingleValue>
             </Property>
             <Property units="unitless" name="minimum">
               <SingleValue>0.0</SingleValue>
             </Property>
-          </Component>
+          </RandomDistributionProperties>
         </Initial>
-      </Component>
+      </DynamicsProperties>
     </Cell>
   </Population>
   <Projection name="Excitation">
@@ -58,16 +58,16 @@
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
-      <Component name="RandomExc">
-        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
+      <ConnectionRuleProperties name="RandomExc">
+        <Definition name="RandomFanIn" url="../../connectionrule/RandomFanIn.xml"/>
         <Property units="unitless" name="number">
           <SingleValue>400</SingleValue>
         </Property>
-      </Component>
+      </ConnectionRuleProperties>
     </Connectivity>
     <Response>
-      <Component name="syn">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
+      <DynamicsProperties name="syn">
+        <Definition name="Alpha" url="../../postsynapticresponse/Alpha.xml"/>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -77,16 +77,16 @@
         <Initial units="nA" name="b">
           <SingleValue>0.0</SingleValue>
         </Initial>
-      </Component>
+      </DynamicsProperties>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
-      <Component name="ExcitatoryPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
+      <DynamicsProperties name="ExcitatoryPlasticity">
+        <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property units="nA" name="weight">
           <SingleValue>2.4</SingleValue>
         </Property>
-      </Component>
+      </DynamicsProperties>
     </Plasticity>
     <Delay units="ms">
       <SingleValue>1.5</SingleValue>
@@ -100,20 +100,20 @@
   <Population name="Ext">
     <Size>5000</Size>
     <Cell>
-      <Component name="stim">
-        <Definition url="../../input/Poisson.xml">Poisson</Definition>
+      <DynamicsProperties name="stim">
+        <Definition name="Poisson" url="../../input/Poisson.xml"/>
         <Property units="Hz" name="rate">
           <SingleValue>20000.0</SingleValue>
         </Property>
         <Initial units="ms" name="t_next">
-          <Component name="exponential_beta">
-            <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
+          <RandomDistributionProperties name="exponential_beta">
+            <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
             <Property units="unitless" name="rate">
               <SingleValue>0.05</SingleValue>
             </Property>
-          </Component>
+          </RandomDistributionProperties>
         </Initial>
-      </Component>
+      </DynamicsProperties>
     </Cell>
   </Population>
   <Projection name="Inhibition">
@@ -125,16 +125,16 @@
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
-      <Component name="RandomInh">
-        <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
+      <ConnectionRuleProperties name="RandomInh">
+        <Definition name="RandomFanIn" url="../../connectionrule/RandomFanIn.xml"/>
         <Property units="unitless" name="number">
           <SingleValue>100</SingleValue>
         </Property>
-      </Component>
+      </ConnectionRuleProperties>
     </Connectivity>
     <Response>
-      <Component name="syn">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
+      <DynamicsProperties name="syn">
+        <Definition name="Alpha" url="../../postsynapticresponse/Alpha.xml"/>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -144,16 +144,16 @@
         <Initial units="nA" name="b">
           <SingleValue>0.0</SingleValue>
         </Initial>
-      </Component>
+      </DynamicsProperties>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
-      <Component name="InhibitoryPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
+      <DynamicsProperties name="InhibitoryPlasticity">
+        <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property units="nA" name="weight">
           <SingleValue>0.0</SingleValue>
         </Property>
-      </Component>
+      </DynamicsProperties>
     </Plasticity>
     <Delay units="ms">
       <SingleValue>1.5</SingleValue>
@@ -162,8 +162,8 @@
   <Population name="Inh">
     <Size>1000</Size>
     <Cell>
-      <Component name="nrn">
-        <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
+      <DynamicsProperties name="nrn">
+        <Definition name="LeakyIntegrateAndFire" url="../../neuron/LeakyIntegrateAndFire.xml"/>
         <Property units="Mohm" name="R">
           <SingleValue>1.5</SingleValue>
         </Property>
@@ -183,17 +183,17 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
         <Initial units="mV" name="v">
-          <Component name="uniform_rest_to_threshold">
-            <Definition url="../../randomdistribution/Uniform.xml">UniformDistribution</Definition>
+          <RandomDistributionProperties name="uniform_rest_to_threshold">
+            <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
             <Property units="unitless" name="maximum">
               <SingleValue>20.0</SingleValue>
             </Property>
             <Property units="unitless" name="minimum">
               <SingleValue>0.0</SingleValue>
             </Property>
-          </Component>
+          </RandomDistributionProperties>
         </Initial>
-      </Component>
+      </DynamicsProperties>
     </Cell>
   </Population>
   <Projection name="External">
@@ -205,13 +205,13 @@
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
-      <Component name="OneToOne">
-        <Definition url="../../connectionrule/OneToOne.xml">OneToOne</Definition>
-      </Component>
+      <ConnectionRuleProperties name="OneToOne">
+        <Definition name="OneToOne" url="../../connectionrule/OneToOne.xml"/>
+      </ConnectionRuleProperties>
     </Connectivity>
     <Response>
-      <Component name="syn">
-        <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
+      <DynamicsProperties name="syn">
+        <Definition name="Alpha" url="../../postsynapticresponse/Alpha.xml"/>
         <Property units="ms" name="tau">
           <SingleValue>0.1</SingleValue>
         </Property>
@@ -221,16 +221,16 @@
         <Initial units="nA" name="b">
           <SingleValue>0.0</SingleValue>
         </Initial>
-      </Component>
+      </DynamicsProperties>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
-      <Component name="ExternalPlasticity">
-        <Definition url="../../plasticity/Static.xml">Static</Definition>
+      <DynamicsProperties name="ExternalPlasticity">
+        <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property units="nA" name="weight">
           <SingleValue>2.4</SingleValue>
         </Property>
-      </Component>
+      </DynamicsProperties>
     </Plasticity>
     <Delay units="ms">
       <SingleValue>1.5</SingleValue>
