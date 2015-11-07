@@ -2,7 +2,7 @@
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="BernoulliDistribution">
     <Parameter name="probabilities" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/bernoulli.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/bernoulli"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

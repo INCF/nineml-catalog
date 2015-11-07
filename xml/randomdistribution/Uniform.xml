@@ -3,7 +3,7 @@
   <ComponentClass name="UniformDistribution">
     <Parameter name="minimum" dimension="dimensionless"/>
     <Parameter name="maximum" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/uniform.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/uniform"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

@@ -3,7 +3,7 @@
   <ComponentClass name="NegativeBinomialDistribution">
     <Parameter name="numberOfFailures" dimension="dimensionless"/>
     <Parameter name="probability" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/negative-binomial.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/negative-binomial"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

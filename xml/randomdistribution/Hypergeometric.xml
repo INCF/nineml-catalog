@@ -4,7 +4,7 @@
     <Parameter name="numberOfSuccesses" dimension="dimensionless"/>
     <Parameter name="numberOfTrials" dimension="dimensionless"/>
     <Parameter name="populationSize" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/hypergeometric.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/hypergeometric"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

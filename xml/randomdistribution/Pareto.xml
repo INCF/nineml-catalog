@@ -3,7 +3,7 @@
   <ComponentClass name="ParetoDistribution">
     <Parameter name="scale" dimension="dimensionless"/>
     <Parameter name="shape" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/pareto.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/pareto"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

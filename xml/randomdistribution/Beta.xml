@@ -3,7 +3,7 @@
   <ComponentClass name="BetaDistribution">
     <Parameter name="alpha" dimension="dimensionless"/>
     <Parameter name="beta" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/beta.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/beta"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

@@ -3,7 +3,7 @@
   <ComponentClass name="LogisticDistribution">
     <Parameter name="location" dimension="dimensionless"/>
     <Parameter name="scale" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/logistic.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/logistic"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

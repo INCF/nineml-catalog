@@ -3,7 +3,7 @@
   <ComponentClass name="MultinomialDistribution">
     <Parameter name="numberOfTrials" dimension="dimensionless"/>
     <Parameter name="probabilities" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/multinomial.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/multinomial"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

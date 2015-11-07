@@ -3,7 +3,7 @@
   <ComponentClass name="GammaDistribution">
     <Parameter name="shape" dimension="dimensionless"/>
     <Parameter name="scale" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/gamma.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/gamma"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

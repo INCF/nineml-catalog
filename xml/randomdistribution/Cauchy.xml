@@ -3,7 +3,7 @@
   <ComponentClass name="CauchyDistribution">
     <Parameter name="location" dimension="dimensionless"/>
     <Parameter name="scale" dimension="dimensionless"/>
-    <RandomDistribution standard_library="http://www.uncertml.org/distributions/cauchy.xml"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/cauchy"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>
