@@ -28,7 +28,7 @@
           <MathInline>((w &gt;= 0) ? ( t ) : ( tlast_pre ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="deltaw">
-          <MathInline>((allow_update_on_post || w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( M*(-wmin + wsyn)*exp(interval/tauLTD) + deltaw ) : ( P*(wmax - wsyn)*exp(-interval/tauLTP) + deltaw )))</MathInline>
+          <MathInline>((w &gt;= 0) ? ( 0.0 ) : ((w &gt;= 0) ? ( M*(-wmin + wsyn)*exp(interval/tauLTD) + deltaw ) : ( P*(wmax - wsyn)*exp(-interval/tauLTP) + deltaw )))</MathInline>
         </StateAssignment>
         <StateAssignment variable="interval">
           <MathInline>((w &gt;= 0) ? ( -t + tlast_post ) : ( t - tlast_pre ))</MathInline>
@@ -40,7 +40,7 @@
           <MathInline>((w &gt;= 0) ? ( P*exp((-t + tlast_pre)/tauLTP) + aLTP ) : ( P ))</MathInline>
         </StateAssignment>
         <StateAssignment variable="wsyn">
-          <MathInline>(((allow_update_on_post || w &gt;= 0) &amp;&amp; wsyn &gt; wprune) ? ( deltaw + wsyn ) : ((allow_update_on_post || w &gt;= 0) ? ( 0 ) : ( wsyn )))</MathInline>
+          <MathInline>(((w &gt;= 0) &amp;&amp; wsyn &gt; wprune) ? ( deltaw + wsyn ) : ((w &gt;= 0) ? ( 0 ) : ( wsyn )))</MathInline>
         </StateAssignment>
       </OnEvent>
     </Regime>
