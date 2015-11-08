@@ -1,7 +1,7 @@
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="ProbabilisticConnectivity">
     <Parameter name="probability" dimension="dimensionless"/>
-    <ConnectionRule standard_library="http://nineml.net/standardlibraries/connectionrules/ProbabilisticConnectivity"/>
+    <ConnectionRule standard_library="http://nineml.net/9ML/1.0/connectionrules/ProbabilisticConnectivity"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>
