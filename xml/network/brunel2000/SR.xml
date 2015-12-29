@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/2.0">
+  <Population name="Exc">
+    <Size>4000</Size>
+    <Cell>
+      <DynamicsProperties name="nrn">
+        <Definition url="../../neuron/LeakyIntegrateAndFire.xml" name="LeakyIntegrateAndFire"/>
+        <Property name="Cm">
+          <Quantity units="pF">
+            <SingleValue>250.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="e_leak">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="refractory_period">
+          <Quantity units="ms">
+            <SingleValue>2.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="v_reset">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="v_threshold">
+          <Quantity units="mV">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Initial name="end_refractory">
+          <Quantity units="ms">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+        <Initial name="v">
+          <Quantity units="mV">
+            <RandomValue>
+              <RandomDistributionProperties name="uniform_rest_to_threshold">
+                <Definition url="../../randomdistribution/Uniform.xml" name="UniformDistribution"/>
+                <Property name="maximum">
+                  <Quantity units="unitless">
+                    <SingleValue>20.0</SingleValue>
+                  </Quantity>
+                </Property>
+                <Property name="minimum">
+                  <Quantity units="unitless">
+                    <SingleValue>0.0</SingleValue>
+                  </Quantity>
+                </Property>
+              </RandomDistributionProperties>
+            </RandomValue>
+          </Quantity>
+        </Initial>
+      </DynamicsProperties>
+    </Cell>
+  </Population>
+  <Population name="Ext">
+    <Size>5000</Size>
+    <Cell>
+      <DynamicsProperties name="stim">
+        <Definition url="../../input/Poisson.xml" name="Poisson"/>
+        <Property name="rate">
+          <Quantity units="Hz">
+            <SingleValue>20000.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Initial name="t_next">
+          <Quantity units="ms">
+            <RandomValue>
+              <RandomDistributionProperties name="exponential_beta">
+                <Definition url="../../randomdistribution/Exponential.xml" name="ExponentialDistribution"/>
+                <Property name="rate">
+                  <Quantity units="unitless">
+                    <SingleValue>0.05</SingleValue>
+                  </Quantity>
+                </Property>
+              </RandomDistributionProperties>
+            </RandomValue>
+          </Quantity>
+        </Initial>
+      </DynamicsProperties>
+    </Cell>
+  </Population>
+  <Population name="Inh">
+    <Size>1000</Size>
+    <Cell>
+      <DynamicsProperties name="nrn">
+        <Definition url="../../neuron/LeakyIntegrateAndFire.xml" name="LeakyIntegrateAndFire"/>
+        <Property name="Cm">
+          <Quantity units="pF">
+            <SingleValue>250.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="e_leak">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="refractory_period">
+          <Quantity units="ms">
+            <SingleValue>2.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="v_reset">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="v_threshold">
+          <Quantity units="mV">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Initial name="end_refractory">
+          <Quantity units="ms">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+        <Initial name="v">
+          <Quantity units="mV">
+            <RandomValue>
+              <RandomDistributionProperties name="uniform_rest_to_threshold">
+                <Definition url="../../randomdistribution/Uniform.xml" name="UniformDistribution"/>
+                <Property name="maximum">
+                  <Quantity units="unitless">
+                    <SingleValue>20.0</SingleValue>
+                  </Quantity>
+                </Property>
+                <Property name="minimum">
+                  <Quantity units="unitless">
+                    <SingleValue>0.0</SingleValue>
+                  </Quantity>
+                </Property>
+              </RandomDistributionProperties>
+            </RandomValue>
+          </Quantity>
+        </Initial>
+      </DynamicsProperties>
+    </Cell>
+  </Population>
+  <Projection name="Excitation">
+    <Pre>
+      <Reference name="Exc"/>
+    </Pre>
+    <Post>
+      <Reference name="All"/>
+    </Post>
+    <Response>
+      <DynamicsProperties name="syn">
+        <Definition url="../../postsynapticresponse/Alpha.xml" name="Alpha"/>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>0.1</SingleValue>
+          </Quantity>
+        </Property>
+        <Initial name="a">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+        <Initial name="b">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+      </DynamicsProperties>
+    </Response>
+    <Connectivity>
+      <ConnectionRuleProperties name="RandomExc">
+        <Definition url="../../connectionrule/RandomFanIn.xml" name="RandomFanIn"/>
+        <Property name="number">
+          <Quantity units="unitless">
+            <SingleValue>400.0</SingleValue>
+          </Quantity>
+        </Property>
+      </ConnectionRuleProperties>
+    </Connectivity>
+    <Delay>
+      <Quantity units="ms">
+        <SingleValue>1.5</SingleValue>
+      </Quantity>
+    </Delay>
+    <Plasticity>
+      <DynamicsProperties name="ExcitatoryPlasticity">
+        <Definition url="../../plasticity/Static.xml" name="Static"/>
+        <Property name="weight">
+          <Quantity units="pA">
+            <SingleValue>94.9871385871</SingleValue>
+          </Quantity>
+        </Property>
+      </DynamicsProperties>
+    </Plasticity>
+    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response" receive_port="i_synaptic"/>
+    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity" receive_port="q"/>
+    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre" receive_port="spike"/>
+  </Projection>
+  <Projection name="External">
+    <Pre>
+      <Reference name="Ext"/>
+    </Pre>
+    <Post>
+      <Reference name="All"/>
+    </Post>
+    <Response>
+      <DynamicsProperties name="syn">
+        <Definition url="../../postsynapticresponse/Alpha.xml" name="Alpha"/>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>0.1</SingleValue>
+          </Quantity>
+        </Property>
+        <Initial name="a">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+        <Initial name="b">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+      </DynamicsProperties>
+    </Response>
+    <Connectivity>
+      <ConnectionRuleProperties name="OneToOne">
+        <Definition url="../../connectionrule/OneToOne.xml" name="OneToOne"/>
+      </ConnectionRuleProperties>
+    </Connectivity>
+    <Delay>
+      <Quantity units="ms">
+        <SingleValue>1.5</SingleValue>
+      </Quantity>
+    </Delay>
+    <Plasticity>
+      <DynamicsProperties name="ExternalPlasticity">
+        <Definition url="../../plasticity/Static.xml" name="Static"/>
+        <Property name="weight">
+          <Quantity units="pA">
+            <SingleValue>94.9871385871</SingleValue>
+          </Quantity>
+        </Property>
+      </DynamicsProperties>
+    </Plasticity>
+    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response" receive_port="i_synaptic"/>
+    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity" receive_port="q"/>
+    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre" receive_port="spike"/>
+  </Projection>
+  <Projection name="Inhibition">
+    <Pre>
+      <Reference name="Inh"/>
+    </Pre>
+    <Post>
+      <Reference name="All"/>
+    </Post>
+    <Response>
+      <DynamicsProperties name="syn">
+        <Definition url="../../postsynapticresponse/Alpha.xml" name="Alpha"/>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>0.1</SingleValue>
+          </Quantity>
+        </Property>
+        <Initial name="a">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+        <Initial name="b">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Initial>
+      </DynamicsProperties>
+    </Response>
+    <Connectivity>
+      <ConnectionRuleProperties name="RandomInh">
+        <Definition url="../../connectionrule/RandomFanIn.xml" name="RandomFanIn"/>
+        <Property name="number">
+          <Quantity units="unitless">
+            <SingleValue>100.0</SingleValue>
+          </Quantity>
+        </Property>
+      </ConnectionRuleProperties>
+    </Connectivity>
+    <Delay>
+      <Quantity units="ms">
+        <SingleValue>1.5</SingleValue>
+      </Quantity>
+    </Delay>
+    <Plasticity>
+      <DynamicsProperties name="InhibitoryPlasticity">
+        <Definition url="../../plasticity/Static.xml" name="Static"/>
+        <Property name="weight">
+          <Quantity units="pA">
+            <SingleValue>-284.961415761</SingleValue>
+          </Quantity>
+        </Property>
+      </DynamicsProperties>
+    </Plasticity>
+    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response" receive_port="i_synaptic"/>
+    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity" receive_port="q"/>
+    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre" receive_port="spike"/>
+  </Projection>
+  <Selection name="All">
+    <Concatenate>
+      <Item index="0">
+        <Reference name="Exc"/>
+      </Item>
+      <Item index="1">
+        <Reference name="Inh"/>
+      </Item>
+    </Concatenate>
+  </Selection>
+  <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
+  <Dimension i="1" name="current"/>
+  <Dimension name="per_time" t="-1"/>
+  <Dimension name="time" t="1"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="Hz" dimension="per_time" power="0"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+  <Unit symbol="nA" dimension="current" power="-9"/>
+  <Unit symbol="pA" dimension="current" power="-12"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
+</NineML>

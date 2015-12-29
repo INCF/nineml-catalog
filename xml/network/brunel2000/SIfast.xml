@@ -48,14 +48,14 @@
       <Component name="stim">
         <Definition url="../../input/Poisson.xml">Poisson</Definition>
         <Property units="Hz" name="rate">
-          <SingleValue>20000.0</SingleValue>
+          <SingleValue>40000.0</SingleValue>
         </Property>
         <Initial units="ms" name="t_next">
           <RandomValue>
             <Component name="exponential_beta">
               <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
               <Property units="unitless" name="rate">
-                <SingleValue>0.05</SingleValue>
+                <SingleValue>0.025</SingleValue>
               </Property>
             </Component>
           </RandomValue>
@@ -226,7 +226,7 @@
       <Component name="InhibitoryPlasticity">
         <Definition url="../../plasticity/Static.xml">Static</Definition>
         <Property units="pA" name="weight">
-          <SingleValue>-284.961415761</SingleValue>
+          <SingleValue>-569.922831523</SingleValue>
         </Property>
       </Component>
     </Plasticity>
@@ -237,18 +237,20 @@
   <Selection name="All">
     <Concatenate>
       <Item index="0">
-        <Reference name="Exc"/>
+        <Reference>Exc</Reference>
       </Item>
       <Item index="1">
-        <Reference name="Inh"/>
+        <Reference>Inh</Reference>
       </Item>
     </Concatenate>
   </Selection>
+  <Dimension name="dimensionless"/>
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
   <Dimension i="1" name="current"/>
   <Dimension name="per_time" t="-1"/>
   <Dimension name="time" t="1"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="unitless" dimension="dimensionless"/>
   <Unit symbol="Hz" dimension="per_time" power="0"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
