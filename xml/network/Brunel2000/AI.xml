@@ -47,32 +47,36 @@
             <SingleValue>0.0</SingleValue>
           </Quantity>
         </Initial>
-        <Initial units="mV" name="v">
-          <RandomDistributionProperties name="uniform_rest_to_threshold">
-            <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
-            <Property name="maximum">
-              <Quantity units="unitless">
-                <SingleValue>20.0</SingleValue>
-              </Quantity>
-            </Property>
-            <Property name="minimum">
-              <Quantity units="unitless">
-                <SingleValue>0.0</SingleValue>
-              </Quantity>
-            </Property>
-          </RandomDistributionProperties>
+        <Initial name="v">
+          <Quantity units="mV">
+            <RandomValue>
+              <RandomDistributionProperties name="uniform_rest_to_threshold">
+                <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
+                <Property name="maximum">
+                  <Quantity units="unitless">
+                    <SingleValue>20.0</SingleValue>
+                  </Quantity>
+                </Property>
+                <Property name="minimum">
+                  <Quantity units="unitless">
+                    <SingleValue>0.0</SingleValue>
+                  </Quantity>
+                </Property>
+              </RandomDistributionProperties>
+            </RandomValue>
+          </Quantity>
         </Initial>
       </DynamicsProperties>
     </Cell>
   </Population>
   <Projection name="Excitation">
-    <Source>
+    <Pre>
       <Reference name="Exc"/>
-    </Source>
-    <Destination>
+    </Pre>
+    <Post>
       <Reference name="All"/>
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
-    </Destination>
+    </Post>
     <Connectivity>
       <ConnectionRuleProperties name="RandomExc">
         <Definition name="RandomFanIn" url="../../connectionrule/RandomFanIn.xml"/>
@@ -114,8 +118,10 @@
         </Property>
       </DynamicsProperties>
     </Plasticity>
-    <Delay units="ms">
-      <SingleValue>1.5</SingleValue>
+    <Delay>
+      <Quantity units="ms">
+        <SingleValue>1.5</SingleValue>
+      </Quantity>
     </Delay>
   </Projection>
   <Unit symbol="nA" dimension="current" power="-9"/>
@@ -135,27 +141,29 @@
         </Property>
         <Initial name="t_next">
           <Quantity units="ms" >
-            <RandomDistributionProperties name="exponential_beta">
-              <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
-              <Property name="rate">
-                <Quantity units="unitless">
-                  <SingleValue>0.05</SingleValue>
-                </Quantity>
-              </Property>
-            </RandomDistributionProperties>
+            <RandomValue>
+              <RandomDistributionProperties name="exponential_beta">
+                <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
+                <Property name="rate">
+                  <Quantity units="unitless">
+                    <SingleValue>0.05</SingleValue>
+                  </Quantity>
+                </Property>
+              </RandomDistributionProperties>
+            </RandomValue>
           </Quantity>
         </Initial>
       </DynamicsProperties>
     </Cell>
   </Population>
   <Projection name="Inhibition">
-    <Source>
+    <Pre>
       <Reference name="Inh"/>
-    </Source>
-    <Destination>
+    </Pre>
+    <Post>
       <Reference name="All"/>
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
-    </Destination>
+    </Post>
     <Connectivity>
       <ConnectionRuleProperties name="RandomInh">
         <Definition name="RandomFanIn" url="../../connectionrule/RandomFanIn.xml"/>
@@ -197,8 +205,10 @@
         </Property>
       </DynamicsProperties>
     </Plasticity>
-    <Delay units="ms">
-      <SingleValue>1.5</SingleValue>
+    <Delay>
+      <Quantity units="ms">
+        <SingleValue>1.5</SingleValue>
+      </Quantity>
     </Delay>
   </Projection>
   <Population name="Inh">
@@ -238,32 +248,34 @@
         </Initial>
         <Initial name="v">
           <Quantity units="mV">
-            <RandomDistributionProperties name="uniform_rest_to_threshold">
-              <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
-              <Property name="maximum">
-                <Quantity units="unitless">
-                  <SingleValue>20.0</SingleValue>
-                </Quantity>
-              </Property>
-              <Property name="minimum">
-                <Quantity units="unitless">
-                  <SingleValue>0.0</SingleValue>
-                </Quantity>
-              </Property>
-            </RandomDistributionProperties>
+            <RandomValue>
+              <RandomDistributionProperties name="uniform_rest_to_threshold">
+                <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
+                <Property name="maximum">
+                  <Quantity units="unitless">
+                    <SingleValue>20.0</SingleValue>
+                  </Quantity>
+                </Property>
+                <Property name="minimum">
+                  <Quantity units="unitless">
+                    <SingleValue>0.0</SingleValue>
+                  </Quantity>
+                </Property>
+              </RandomDistributionProperties>
+            </RandomValue>
           </Quantity>
         </Initial>
       </DynamicsProperties>
     </Cell>
   </Population>
   <Projection name="External">
-    <Source>
+    <Pre>
       <Reference name="Ext"/>
-    </Source>
-    <Destination>
+    </Pre>
+    <Post>
       <Reference name="All"/>
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
-    </Destination>
+    </Post>
     <Connectivity>
       <ConnectionRuleProperties name="OneToOne">
         <Definition name="OneToOne" url="../../connectionrule/OneToOne.xml"/>
@@ -300,11 +312,11 @@
         </Property>
       </DynamicsProperties>
     </Plasticity>
-    <Delays>
+    <Delay>
       <Quantity units="ms">
         <SingleValue>1.5</SingleValue>
       </Quantity>
-    </Delays>
+    </Delay>
   </Projection>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>
