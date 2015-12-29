@@ -13,38 +13,56 @@
   </Selection>
   <Dimension name="per_time" t="-1"/>
   <Population name="Exc">
-    <Size>10000</Size>
+    <Size>4000</Size>
     <Cell>
       <DynamicsProperties name="nrn">
         <Definition name="LeakyIntegrateAndFire" url="../../neuron/LeakyIntegrateAndFire.xml"/>
-        <Property units="Mohm" name="R">
-          <SingleValue>1.5</SingleValue>
+        <Property name="R">
+          <Quantity units="Mohm">
+            <SingleValue>1.5</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="ms" name="refractory_period">
-          <SingleValue>2.0</SingleValue>
+        <Property name="refractory_period">
+          <Quantity units="ms">
+            <SingleValue>2.0</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="ms" name="tau">
-          <SingleValue>20.0</SingleValue>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="mV" name="v_reset">
-          <SingleValue>10.0</SingleValue>
+        <Property name="v_reset">
+          <Quantity units="mV">
+            <SingleValue>10.0</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="mV" name="v_threshold">
-          <SingleValue>20.0</SingleValue>
+        <Property name="v_threshold">
+          <Quantity units="mV">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
         </Property>
-        <Initial units="ms" name="refractory_end">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="refractory_end">
+          <Quantity units="ms">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
-        <Initial units="mV" name="v">
-          <RandomDistributionProperties name="uniform_rest_to_threshold">
-            <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
-            <Property units="unitless" name="maximum">
-              <SingleValue>20.0</SingleValue>
-            </Property>
-            <Property units="unitless" name="minimum">
-              <SingleValue>0.0</SingleValue>
-            </Property>
-          </RandomDistributionProperties>
+        <Initial name="v">
+          <Quantity units="mV">
+            <RandomDistributionProperties name="uniform_rest_to_threshold">
+              <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
+              <Property name="maximum">
+                <Quantity units="unitless">
+                  <SingleValue>20.0</SingleValue>
+                </Quantity>
+              </Property>
+              <Property name="minimum">
+                <Quantity units="unitless">
+                  <SingleValue>0.0</SingleValue>
+                </Quantity>
+              </Property>
+            </RandomDistributionProperties>
+          </Quantity>
         </Initial>
       </DynamicsProperties>
     </Cell>
@@ -60,22 +78,30 @@
     <Connectivity>
       <ConnectionRuleProperties name="RandomExc">
         <Definition name="RandomFanIn" url="../../connectionrule/RandomFanIn.xml"/>
-        <Property units="unitless" name="number">
-          <SingleValue>1000</SingleValue>
+        <Property name="number">
+          <Quantity units="unitless">
+            <SingleValue>400.0</SingleValue>
+          </Quantity>
         </Property>
       </ConnectionRuleProperties>
     </Connectivity>
     <Response>
       <DynamicsProperties name="syn">
         <Definition name="Alpha" url="../../postsynapticresponse/Alpha.xml"/>
-        <Property units="ms" name="tau">
-          <SingleValue>0.1</SingleValue>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>0.1</SingleValue>
+          </Quantity>
         </Property>
-        <Initial units="nA" name="a">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="a">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
-        <Initial units="nA" name="b">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="b">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
       </DynamicsProperties>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
@@ -83,8 +109,10 @@
     <Plasticity>
       <DynamicsProperties name="ExcitatoryPlasticity">
         <Definition name="Static" url="../../plasticity/Static.xml"/>
-        <Property units="nA" name="weight">
-          <SingleValue>13.7707633471</SingleValue>
+        <Property name="weight">
+          <Quantity units="nA">
+            <SingleValue>2.4</SingleValue>
+          </Quantity>
         </Property>
       </DynamicsProperties>
     </Plasticity>
@@ -93,61 +121,82 @@
     </Delay>
   </Projection>
   <Unit symbol="nA" dimension="current" power="-9"/>
-  <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
   <Dimension i="1" name="current"/>
   <Population name="Ext">
-    <Size>12500</Size>
+    <Size>5000</Size>
     <Cell>
       <DynamicsProperties name="stim">
         <Definition name="Poisson" url="../../input/Poisson.xml"/>
-        <Property units="Hz" name="rate">
-          <SingleValue>19364.6975077</SingleValue>
+        <Property name="rate">
+          <Quantity units="Hz">
+            <SingleValue>20000.0</SingleValue>
+          </Quantity>
         </Property>
-        <Initial units="ms" name="t_next">
-          <RandomDistributionProperties name="exponential_beta">
-            <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
-            <Property units="unitless" name="rate">
-              <SingleValue>19364.6975077</SingleValue>
-            </Property>
-          </RandomDistributionProperties>
+        <Initial name="t_next">
+          <Quantity units="ms">
+            <RandomDistributionProperties name="exponential_beta">
+              <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
+              <Property name="rate">
+                <Quantity units="unitless">
+                  <SingleValue>0.05</SingleValue>
+                </Quantity>
+              </Property>
+            </RandomDistributionProperties>
+          </Quantity>
         </Initial>
       </DynamicsProperties>
     </Cell>
   </Population>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Population name="Inh">
-    <Size>2500</Size>
+    <Size>1000</Size>
     <Cell>
       <DynamicsProperties name="nrn">
         <Definition name="LeakyIntegrateAndFire" url="../../neuron/LeakyIntegrateAndFire.xml"/>
-        <Property units="Mohm" name="R">
-          <SingleValue>1.5</SingleValue>
+        <Property name="R">
+          <Quantity units="Mohm">
+            <SingleValue>1.5</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="ms" name="refractory_period">
-          <SingleValue>2.0</SingleValue>
+        <Property name="refractory_period">
+          <Quantity units="ms">
+            <SingleValue>2.0</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="ms" name="tau">
-          <SingleValue>20.0</SingleValue>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="mV" name="v_reset">
-          <SingleValue>10.0</SingleValue>
+        <Property name="v_reset">
+          <Quantity units="mV">
+            <SingleValue>10.0</SingleValue>
+          </Quantity>
         </Property>
-        <Property units="mV" name="v_threshold">
-          <SingleValue>20.0</SingleValue>
+        <Property name="v_threshold">
+          <Quantity units="mV">
+            <SingleValue>20.0</SingleValue>
+          </Quantity>
         </Property>
-        <Initial units="ms" name="refractory_end">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="refractory_end">
+          <Quantity units="ms">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
         <Initial units="mV" name="v">
           <RandomDistributionProperties name="uniform_rest_to_threshold">
             <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
-            <Property units="unitless" name="maximum">
-              <SingleValue>20.0</SingleValue>
+            <Property name="maximum">
+              <Quantity units="unitless">
+                <SingleValue>20.0</SingleValue>
+              </Quantity>
             </Property>
-            <Property units="unitless" name="minimum">
-              <SingleValue>0.0</SingleValue>
+            <Property name="minimum">
+              <Quantity units="unitless">
+                <SingleValue>0.0</SingleValue>
+              </Quantity>
             </Property>
           </RandomDistributionProperties>
         </Initial>
@@ -170,14 +219,20 @@
     <Response>
       <DynamicsProperties name="syn">
         <Definition name="Alpha" url="../../postsynapticresponse/Alpha.xml"/>
-        <Property units="ms" name="tau">
-          <SingleValue>0.1</SingleValue>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>0.1</SingleValue>
+          </Quantity>
         </Property>
-        <Initial units="nA" name="a">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="a">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
-        <Initial units="nA" name="b">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="b">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
       </DynamicsProperties>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
@@ -185,8 +240,10 @@
     <Plasticity>
       <DynamicsProperties name="ExternalPlasticity">
         <Definition name="Static" url="../../plasticity/Static.xml"/>
-        <Property units="nA" name="weight">
-          <SingleValue>13.7707633471</SingleValue>
+        <Property name="weight">
+          <Quantity units="nA">
+            <SingleValue>2.4</SingleValue>
+          </Quantity>
         </Property>
       </DynamicsProperties>
     </Plasticity>
@@ -209,22 +266,30 @@
     <Connectivity>
       <ConnectionRuleProperties name="RandomInh">
         <Definition name="RandomFanIn" url="../../connectionrule/RandomFanIn.xml"/>
-        <Property units="unitless" name="number">
-          <SingleValue>1000.0</SingleValue>
+        <Property name="number">
+          <Quantity units="unitless">
+            <SingleValue>100.0</SingleValue>
+          </Quantity>
         </Property>
       </ConnectionRuleProperties>
     </Connectivity>
     <Response>
       <DynamicsProperties name="syn">
         <Definition name="Alpha" url="../../postsynapticresponse/Alpha.xml"/>
-        <Property units="ms" name="tau">
-          <SingleValue>0.1</SingleValue>
+        <Property name="tau">
+          <Quantity units="ms">
+            <SingleValue>0.1</SingleValue>
+          </Quantity>
         </Property>
-        <Initial units="nA" name="a">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="a">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
-        <Initial units="nA" name="b">
-          <SingleValue>0.0</SingleValue>
+        <Initial name="b">
+          <Quantity units="nA">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
         </Initial>
       </DynamicsProperties>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
@@ -232,8 +297,10 @@
     <Plasticity>
       <DynamicsProperties name="InhibitoryPlasticity">
         <Definition name="Static" url="../../plasticity/Static.xml"/>
-        <Property units="nA" name="weight">
-          <SingleValue>-41.3122900414</SingleValue>
+        <Property name="weight">
+          <Quantity units="nA">
+            <SingleValue>-7.2</SingleValue>
+          </Quantity>
         </Property>
       </DynamicsProperties>
     </Plasticity>
