@@ -143,7 +143,7 @@
         <SingleValue>-70.0</SingleValue>
       </Quantity>
     </Initial>
-  </DynamicsProperties>  
+  </DynamicsProperties>
   <DynamicsProperties name="SampleIzhikevichFastSpiking">
     <Definition name="IzhikevichFastSpiking"/>
     <Property name="Cm">
@@ -249,8 +249,8 @@
         <SingleValue>1.0</SingleValue>
       </Quantity>
     </Property>
-  </DynamicsProperties> 
-  <Dimension i="3" l="-4" m="-2" t="6" name="conductance_per_voltage"/>  
+  </DynamicsProperties>
+  <Dimension i="3" l="-4" m="-2" t="6" name="conductance_per_voltage"/>
   <Dimension i="1" name="current"/>
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
   <Dimension i="1" l="-2" m="-1" t="2" name="per_time_voltage"/>
