@@ -144,7 +144,7 @@
           </Quantity>
         </Property>
         <Initial name="t_next">
-          <Quantity units="ms" >
+          <Quantity units="ms">
             <RandomValue>
               <RandomDistributionProperties name="exponential_beta">
                 <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>

@@ -51,17 +51,17 @@
           <Quantity units="mV">
             <RandomValue>
               <RandomDistributionProperties name="uniform_rest_to_threshold">
-              <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
-              <Property name="maximum">
-                <Quantity units="unitless">
-                  <SingleValue>20.0</SingleValue>
-                </Quantity>
-              </Property>
-              <Property name="minimum">
-                <Quantity units="unitless">
-                  <SingleValue>0.0</SingleValue>
-                </Quantity>
-              </Property>
+                <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
+                <Property name="maximum">
+                  <Quantity units="unitless">
+                    <SingleValue>20.0</SingleValue>
+                  </Quantity>
+                </Property>
+                <Property name="minimum">
+                  <Quantity units="unitless">
+                    <SingleValue>0.0</SingleValue>
+                  </Quantity>
+                </Property>
               </RandomDistributionProperties>
             </RandomValue>
           </Quantity>
@@ -142,12 +142,12 @@
           <Quantity units="ms">
             <RandomValue>
               <RandomDistributionProperties name="exponential_beta">
-              <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
-              <Property name="rate">
-                <Quantity units="unitless">
-                  <SingleValue>0.05</SingleValue>
-                </Quantity>
-              </Property>
+                <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
+                <Property name="rate">
+                  <Quantity units="unitless">
+                    <SingleValue>0.05</SingleValue>
+                  </Quantity>
+                </Property>
               </RandomDistributionProperties>
             </RandomValue>
           </Quantity>
@@ -194,17 +194,17 @@
         <Initial units="mV" name="v">
           <RandomValue>
             <RandomDistributionProperties name="uniform_rest_to_threshold">
-            <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
-            <Property name="maximum">
-              <Quantity units="unitless">
-                <SingleValue>20.0</SingleValue>
-              </Quantity>
-            </Property>
-            <Property name="minimum">
-              <Quantity units="unitless">
-                <SingleValue>0.0</SingleValue>
-              </Quantity>
-            </Property>
+              <Definition name="UniformDistribution" url="../../randomdistribution/Uniform.xml"/>
+              <Property name="maximum">
+                <Quantity units="unitless">
+                  <SingleValue>20.0</SingleValue>
+                </Quantity>
+              </Property>
+              <Property name="minimum">
+                <Quantity units="unitless">
+                  <SingleValue>0.0</SingleValue>
+                </Quantity>
+              </Property>
             </RandomDistributionProperties>
           </RandomValue>
         </Initial>
