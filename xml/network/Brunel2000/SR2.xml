@@ -75,7 +75,6 @@
     </Pre>
     <Post>
       <Reference name="All"/>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Post>
     <Connectivity>
       <ConnectionRuleProperties name="RandomExc">
@@ -106,7 +105,6 @@
           </Quantity>
         </Initial>
       </DynamicsProperties>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
       <DynamicsProperties name="ExcitatoryPlasticity">
@@ -123,6 +121,12 @@
         <SingleValue>1.5</SingleValue>
       </Quantity>
     </Delay>
+    <AnalogPortConnection sender_role="response" receiver_role="post" send_port="i_synaptic"
+      receive_port="i_synaptic"/>
+    <AnalogPortConnection sender_role="plasticity" receiver_role="response" send_port="fixed_weight"
+      receive_port="weight" />
+    <EventPortConnection sender_role="pre" receiver_role="response" send_port="spike_output"
+      receive_port="spike"/>
   </Projection>
   <Unit symbol="nA" dimension="current" power="-9"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
@@ -162,7 +166,6 @@
     </Pre>
     <Post>
       <Reference name="All"/>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Post>
     <Connectivity>
       <ConnectionRuleProperties name="RandomInh">
@@ -193,7 +196,6 @@
           </Quantity>
         </Initial>
       </DynamicsProperties>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
       <DynamicsProperties name="InhibitoryPlasticity">
@@ -210,6 +212,12 @@
         <SingleValue>1.5</SingleValue>
       </Quantity>
     </Delay>
+    <AnalogPortConnection sender_role="response" receiver_role="post" send_port="i_synaptic"
+      receive_port="i_synaptic"/>
+    <AnalogPortConnection sender_role="plasticity" receiver_role="response" send_port="fixed_weight"
+      receive_port="weight" />
+    <EventPortConnection sender_role="pre" receiver_role="response" send_port="spike_output"
+      receive_port="spike"/>
   </Projection>
   <Population name="Inh">
     <Size>1000</Size>
@@ -274,7 +282,6 @@
     </Pre>
     <Post>
       <Reference name="All"/>
-      <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Post>
     <Connectivity>
       <ConnectionRuleProperties name="OneToOne">
@@ -300,7 +307,6 @@
           </Quantity>
         </Initial>
       </DynamicsProperties>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
       <DynamicsProperties name="ExternalPlasticity">
@@ -317,6 +323,12 @@
         <SingleValue>1.5</SingleValue>
       </Quantity>
     </Delay>
+    <AnalogPortConnection sender_role="response" receiver_role="post" send_port="i_synaptic"
+      receive_port="i_synaptic"/>
+    <AnalogPortConnection sender_role="plasticity" receiver_role="response" send_port="fixed_weight"
+      receive_port="weight" />
+    <EventPortConnection sender_role="pre" receiver_role="response" send_port="spike_output"
+      receive_port="spike"/>
   </Projection>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Dimension name="time" t="1"/>
