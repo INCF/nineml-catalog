@@ -196,7 +196,6 @@
           </Quantity>
         </Initial>
       </DynamicsProperties>
-      <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
     </Response>
     <Plasticity>
       <DynamicsProperties name="InhibitoryPlasticity">

@@ -3,7 +3,7 @@
   <Dynamics name="Alpha">
     <Parameter dimension="time" name="tau"/>
     <EventReceivePort name="spike"/>
-    <AnalogReceivePort dimension="current" name="q"/>
+    <AnalogReceivePort dimension="current" name="weight"/>
     <AnalogSendPort dimension="current" name="i_synaptic"/>
     <StateVariable dimension="current" name="a"/>
     <StateVariable dimension="current" name="b"/>
@@ -16,7 +16,7 @@
       </TimeDerivative>
       <OnEvent target_regime="sole" port="spike">
         <StateAssignment variable="b">
-          <MathInline>b + q</MathInline>
+          <MathInline>b + weight</MathInline>
         </StateAssignment>
       </OnEvent>
     </Regime>
