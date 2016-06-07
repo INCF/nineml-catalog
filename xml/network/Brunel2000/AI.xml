@@ -39,7 +39,7 @@
         </Property>
         <Property name="v_reset">
           <Quantity units="mV">
-            <SingleValue>10.0</SingleValue>
+            <SingleValue>0.0</SingleValue>
           </Quantity>
         </Property>
         <Property name="v_threshold">
@@ -234,6 +234,11 @@
             <SingleValue>250</SingleValue>
           </Quantity>
         </Property>
+        <Property name="e_leak">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Property>
         <Property name="refractory_period">
           <Quantity units="ms">
             <SingleValue>2.0</SingleValue>
@@ -246,7 +251,7 @@
         </Property>
         <Property name="v_reset">
           <Quantity units="mV">
-            <SingleValue>10.0</SingleValue>
+            <SingleValue>0.0</SingleValue>
           </Quantity>
         </Property>
         <Property name="v_threshold">

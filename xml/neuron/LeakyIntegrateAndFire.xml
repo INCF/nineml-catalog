@@ -3,7 +3,7 @@
   <Dynamics name="LeakyIntegrateAndFire">
     <AnalogSendPort name="v" dimension="voltage"/>
     <AnalogReducePort operator="+" name="i_synaptic" dimension="current"/>
-    <EventSendPort name="spikeoutput"/>
+    <EventSendPort name="spike_output"/>
     <Parameter dimension="capacitance" name="Cm"/>
     <Parameter dimension="time" name="refractory_period"/>
     <Parameter dimension="time" name="tau"/>
@@ -21,7 +21,7 @@
         <StateAssignment variable="v">
           <MathInline>v_reset</MathInline>
         </StateAssignment>
-        <OutputEvent port="spikeoutput"/>
+        <OutputEvent port="spike_output"/>
         <Trigger>
           <MathInline>v &gt; v_threshold</MathInline>
         </Trigger>

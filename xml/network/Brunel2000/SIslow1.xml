@@ -39,7 +39,7 @@
         </Property>
         <Property name="v_reset">
           <Quantity units="mV">
-            <SingleValue>10.0</SingleValue>
+            <SingleValue>0.0</SingleValue>
           </Quantity>
         </Property>
         <Property name="v_threshold">
@@ -251,7 +251,7 @@
         </Property>
         <Property name="v_reset">
           <Quantity units="mV">
-            <SingleValue>10.0</SingleValue>
+            <SingleValue>0.0</SingleValue>
           </Quantity>
         </Property>
         <Property name="v_threshold">
