@@ -1,88 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/2.0">
-  <DynamicsProperties name="LeakyIntegrateAndFireProperties">
-    <Definition name="LeakyIntegrateAndFire"/>
-    <Property name="R">
-      <Quantity units="Mohm">
-        <SingleValue>1.5</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="refractory_period">
-      <Quantity units="ms">
-        <SingleValue>2.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="tau">
-      <Quantity units="ms">
-        <SingleValue>20.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="v_reset">
-      <Quantity units="mV">
-        <SingleValue>10.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="v_threshold">
-      <Quantity units="mV">
-        <SingleValue>20.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Initial name="V">
-      <Quantity units="mV">
-        <SingleValue>-70</SingleValue>
-      </Quantity>
-    </Initial>
-  </DynamicsProperties>
   <Dynamics name="LeakyIntegrateAndFire">
-    <AnalogSendPort dimension="time" name="refractory_end"/>
-    <AnalogSendPort dimension="voltage" name="v"/>
-    <AnalogReducePort operator="+" dimension="current" name="i_synaptic"/>
-    <EventSendPort name="spike_output"/>
-    <Parameter dimension="time" name="refractory_period"/>
-    <Parameter dimension="time" name="tau"/>
-    <Parameter dimension="resistance" name="R"/>
-    <Parameter dimension="voltage" name="v_reset"/>
-    <Parameter dimension="voltage" name="v_threshold"/>
-    <Regime name="refractory">
-      <OnCondition target_regime="subthreshold">
-        <Trigger>
-          <MathInline>t &gt; refractory_end</MathInline>
-        </Trigger>
-      </OnCondition>
-    </Regime>
-    <Regime name="subthreshold">
-      <TimeDerivative variable="v">
-        <MathInline>(R*i_synaptic - v)/tau</MathInline>
-      </TimeDerivative>
-      <OnCondition target_regime="refractory">
-        <Trigger>
-          <MathInline>v &gt; v_threshold</MathInline>
-        </Trigger>
-        <OutputEvent port="spike_output"/>
-        <StateAssignment variable="refractory_end">
-          <MathInline>refractory_period + t</MathInline>
-        </StateAssignment>
-        <StateAssignment variable="v">
-          <MathInline>v_reset</MathInline>
-        </StateAssignment>
-      </OnCondition>
-    </Regime>
-    <StateVariable dimension="time" name="refractory_end"/>
-    <StateVariable dimension="voltage" name="v"/>
-  </Dynamics>
-  <Dynamics name="PyNNLeakyIntegrateAndFire">
     <AnalogSendPort name="v" dimension="voltage"/>
     <AnalogReducePort operator="+" name="i_synaptic" dimension="current"/>
     <EventSendPort name="spikeoutput"/>
     <Parameter dimension="capacitance" name="Cm"/>
     <Parameter dimension="time" name="refractory_period"/>
-    <Parameter dimension="conductance" name="g_leak"/>
+    <Parameter dimension="time" name="tau"/>
     <Parameter dimension="voltage" name="v_reset"/>
     <Parameter dimension="voltage" name="e_leak"/>
     <Parameter dimension="voltage" name="v_threshold"/>
     <Regime name="subthreshold">
       <TimeDerivative variable="v">
-        <MathInline>(g_leak*(e_leak - v) + i_synaptic)/Cm</MathInline>
+        <MathInline>(e_leak - v) / tau + i_synaptic/Cm</MathInline>
       </TimeDerivative>
       <OnCondition target_regime="refractory">
         <StateAssignment variable="end_refractory">
@@ -107,11 +37,11 @@
     <StateVariable dimension="voltage" name="v"/>
     <StateVariable dimension="time" name="end_refractory"/>
   </Dynamics>
-  <DynamicsProperties name="PyNNLeakyIntegrateAndFireProperties">
+  <DynamicsProperties name="LeakyIntegrateAndFireProperties">
     <Annotations>
       <Comment>Parameters are taken from the Brunel 2000 model</Comment>
     </Annotations>
-    <Definition name="PyNNLeakyIntegrateAndFire"/>
+    <Definition name="LeakyIntegrateAndFire"/>
     <Property name="v_reset">
       <Quantity units="mV">
         <SingleValue>-70</SingleValue>
@@ -127,9 +57,9 @@
         <SingleValue>250</SingleValue>
       </Quantity>
     </Property>
-    <Property name="g_leak">
-      <Quantity units="nS">
-        <SingleValue>25</SingleValue>
+    <Property name="tau">
+      <Quantity units="ms">
+        <SingleValue>10</SingleValue>
       </Quantity>
     </Property>
     <Property name="v_threshold">

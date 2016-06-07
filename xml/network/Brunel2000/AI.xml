@@ -17,9 +17,9 @@
     <Cell>
       <DynamicsProperties name="nrn">
         <Definition name="LeakyIntegrateAndFire" url="../../neuron/LeakyIntegrateAndFire.xml"/>
-        <Property name="R">
-          <Quantity units="Mohm">
-            <SingleValue>1.5</SingleValue>
+        <Property name="Cm">
+          <Quantity units="pF">
+            <SingleValue>250.0</SingleValue>
           </Quantity>
         </Property>
         <Property name="refractory_period">
@@ -224,9 +224,9 @@
     <Cell>
       <DynamicsProperties name="nrn">
         <Definition name="LeakyIntegrateAndFire" url="../../neuron/LeakyIntegrateAndFire.xml"/>
-        <Property name="R">
-          <Quantity units="Mohm">
-            <SingleValue>1.5</SingleValue>
+        <Property name="Cm">
+          <Quantity units="pF">
+            <SingleValue>250</SingleValue>
           </Quantity>
         </Property>
         <Property name="refractory_period">
