@@ -22,6 +22,11 @@
             <SingleValue>250.0</SingleValue>
           </Quantity>
         </Property>
+        <Property name="e_leak">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
+          </Quantity>
+        </Property>
         <Property name="refractory_period">
           <Quantity units="ms">
             <SingleValue>2.0</SingleValue>
@@ -227,6 +232,11 @@
         <Property name="Cm">
           <Quantity units="pF">
             <SingleValue>250.0</SingleValue>
+          </Quantity>
+        </Property>
+        <Property name="e_leak">
+          <Quantity units="mV">
+            <SingleValue>0.0</SingleValue>
           </Quantity>
         </Property>
         <Property name="refractory_period">
