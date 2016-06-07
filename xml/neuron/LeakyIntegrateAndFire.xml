@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/2.0">
-  <DynamicsProperties name="SampleLeakyIntegrateAndFire">
+  <DynamicsProperties name="LeakyIntegrateAndFireProperties">
     <Definition name="LeakyIntegrateAndFire"/>
     <Property name="R">
       <Quantity units="Mohm">
@@ -142,7 +142,7 @@
         <SingleValue>-70</SingleValue>
       </Quantity>
     </Property>
-  </DynamicsProperties>  
+  </DynamicsProperties>
   <Dimension name="time" t="1"/>
   <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
   <Dimension name="conductance" m="-1" l="-2" t="3" i="2"/>
