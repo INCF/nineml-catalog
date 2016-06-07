@@ -335,4 +335,6 @@
   <Unit symbol="Mohm" dimension="resistance" power="6"/>
   <Dimension name="dimensionless"/>
   <Unit symbol="unitless" dimension="dimensionless" power="0"/>
+  <Dimension name="capacitance" m="-1" l="-2" t="4" i="2"/>
+  <Unit symbol="pF" dimension="capacitance" power="-12"/>
 </NineML>
