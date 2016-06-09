@@ -116,7 +116,7 @@
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
           <Quantity units="pA">
-            <SingleValue>20.6801552437</SingleValue>
+            <SingleValue>112.42898194320382</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>
@@ -208,7 +208,7 @@
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
           <Quantity units="pA">
-            <SingleValue>-103.400776218</SingleValue>
+            <SingleValue>-562.1449020838992</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>
@@ -324,7 +324,7 @@
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
           <Quantity units="pA">
-            <SingleValue>20.6801552437</SingleValue>
+            <SingleValue>112.42898194320382</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>
