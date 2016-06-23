@@ -132,12 +132,12 @@
         <Definition name="RegularInterval" url="../../input/RegularInterval.xml"/>
         <Property name="rate">
           <Quantity units="Hz">
-            <SingleValue>10</SingleValue>
+            <SingleValue>30</SingleValue>
           </Quantity>
         </Property>
         <Initial name="t_next">
           <Quantity units="ms">
-            <SingleValue>10</SingleValue>
+            <SingleValue>5</SingleValue>
           </Quantity>
         </Initial>
       </DynamicsProperties>
@@ -185,8 +185,7 @@
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
           <Quantity units="pA">
-            <SingleValue>
--132.43115271645624</SingleValue>
+            <SingleValue>-132.43115271645624</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>

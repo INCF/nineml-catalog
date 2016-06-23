@@ -9,7 +9,7 @@
     <StateVariable dimension="current" name="b"/>
     <Regime name="sole">
       <TimeDerivative variable="a">
-        <MathInline>(-a + b)/tau</MathInline>
+        <MathInline>(-a + b*2.7182818284590451)/tau</MathInline>
       </TimeDerivative>
       <TimeDerivative variable="b">
         <MathInline>-b/tau</MathInline>
