@@ -36,4 +36,5 @@
   <Dimension name="time" t="1"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
   <Unit symbol="nA" dimension="current" power="-9"/>
+  <Unit symbol="pA" dimension="current" power="-12"/>
 </NineML>

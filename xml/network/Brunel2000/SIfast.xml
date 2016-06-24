@@ -134,6 +134,7 @@
       receive_port="spike"/>
   </Projection>
   <Unit symbol="nA" dimension="current" power="-9"/>
+  <Unit symbol="pA" dimension="current" power="-12"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
   <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
