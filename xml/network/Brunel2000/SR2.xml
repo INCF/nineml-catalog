@@ -206,8 +206,8 @@
       <DynamicsProperties name="InhibitoryPlasticity">
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
-          <Quantity units="nA">
-            <SingleValue>-4.8</SingleValue>
+          <Quantity units="pA">
+            <SingleValue>-189.974277174</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>
