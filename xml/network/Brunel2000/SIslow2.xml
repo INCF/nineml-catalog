@@ -115,8 +115,8 @@
       <DynamicsProperties name="ExcitatoryPlasticity">
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
-          <Quantity units="nA">
-            <SingleValue>2.4</SingleValue>
+          <Quantity units="pA">
+            <SingleValue>94.9871385871</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>
@@ -322,8 +322,8 @@
       <DynamicsProperties name="ExternalPlasticity">
         <Definition name="Static" url="../../plasticity/Static.xml"/>
         <Property name="weight">
-          <Quantity units="nA">
-            <SingleValue>2.4</SingleValue>
+          <Quantity units="pA">
+            <SingleValue>94.9871385871</SingleValue>
           </Quantity>
         </Property>
       </DynamicsProperties>
