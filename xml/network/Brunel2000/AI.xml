@@ -156,7 +156,7 @@
                 <Definition name="ExponentialDistribution" url="../../randomdistribution/Exponential.xml"/>
                 <Property name="rate">
                   <Quantity units="unitless">
-                    <SingleValue>0.05</SingleValue>
+                    <SingleValue>0.05164036</SingleValue>
                   </Quantity>
                 </Property>
               </RandomDistributionProperties>
