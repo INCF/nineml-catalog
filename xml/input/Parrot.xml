@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/2.0">
+  <Dynamics name="Parrot">
+    <EventSendPort name="spike_output"/>
+    <EventReceivePort name="spike_input"/>
+    <Regime name="default">
+      <OnEvent port="spike_input" target_regime="default">
+        <OutputEvent port="spike_output"/>
+      </OnEvent>
+    </Regime>
+  </Dynamics>
+</NineML>
