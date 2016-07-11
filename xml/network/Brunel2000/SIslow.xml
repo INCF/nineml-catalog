@@ -47,7 +47,7 @@
             <SingleValue>20.0</SingleValue>
           </Quantity>
         </Property>
-        <Initial name="refractory_end">
+        <Initial name="end_refractory">
           <Quantity units="ms">
             <SingleValue>0.0</SingleValue>
           </Quantity>
@@ -260,7 +260,7 @@
             <SingleValue>20.0</SingleValue>
           </Quantity>
         </Property>
-        <Initial name="refractory_end">
+        <Initial name="end_refractory">
           <Quantity units="ms">
             <SingleValue>0.0</SingleValue>
           </Quantity>
