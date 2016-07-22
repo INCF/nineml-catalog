@@ -1,271 +1,213 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.net/9ML/2.0">
-  <Dynamics name="Izhikevich">
-    <AnalogSendPort dimension="voltage" name="V"/>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="Izhikevich">
+    <Parameter dimension="capacitance" name="C_m"/>
+    <Parameter dimension="per_time" name="a"/>
+    <Parameter dimension="per_time_voltage" name="alpha"/>
+    <Parameter dimension="per_time" name="b"/>
+    <Parameter dimension="per_time" name="beta"/>
+    <Parameter dimension="voltage" name="c"/>
+    <Parameter dimension="voltage_per_time" name="d"/>
+    <Parameter dimension="voltage" name="theta"/>
+    <Parameter dimension="voltage_per_time" name="zeta"/>
     <AnalogReducePort operator="+" dimension="current" name="Isyn"/>
     <EventSendPort name="spike"/>
-    <Parameter dimension="per_time" name="a"/>
-    <Parameter dimension="voltage" name="c"/>
-    <Parameter dimension="per_time" name="b"/>
-    <Parameter dimension="voltage_per_time" name="d"/>
-    <Parameter dimension="capacitance" name="C_m"/>
-    <Parameter dimension="per_time" name="beta"/>
-    <Parameter dimension="voltage" name="theta"/>
-    <Parameter dimension="per_time_voltage" name="alpha"/>
-    <Parameter dimension="voltage_per_time" name="zeta"/>
-    <StateVariable dimension="voltage_per_time" name="U"/>
-    <StateVariable dimension="voltage" name="V"/>
-    <Regime name="subthreshold_regime">
-      <OnCondition target_regime="subthreshold_regime">
-        <Trigger>
-          <MathInline>V &gt; theta</MathInline>
-        </Trigger>
-        <OutputEvent port="spike"/>
-        <StateAssignment variable="U">
-          <MathInline>U + d</MathInline>
-        </StateAssignment>
-        <StateAssignment variable="V">
-          <MathInline>c</MathInline>
-        </StateAssignment>
-      </OnCondition>
-      <TimeDerivative variable="U">
-        <MathInline>a*(-U + V*b)</MathInline>
-      </TimeDerivative>
-      <TimeDerivative variable="V">
-        <MathInline>-U + V*beta + alpha*(V*V) + zeta + Isyn/C_m</MathInline>
-      </TimeDerivative>
-    </Regime>
-  </Dynamics>
-  <Dynamics name="IzhikevichFastSpiking">
-    <AnalogSendPort dimension="current" name="U"/>
     <AnalogSendPort dimension="voltage" name="V"/>
-    <AnalogReducePort operator="+" dimension="current" name="iSyn"/>
-    <EventSendPort name="spikeOutput"/>
-    <Parameter dimension="per_time" name="a"/>
-    <Parameter dimension="voltage" name="c"/>
-    <Parameter dimension="conductance_per_voltage2" name="b"/>
+    <Dynamics>
+      <StateVariable dimension="voltage_per_time" name="U"/>
+      <StateVariable dimension="voltage" name="V"/>
+      <Regime name="subthreshold_regime">
+        <TimeDerivative variable="U">
+          <MathInline>a*(-U + V*b)</MathInline>
+        </TimeDerivative>
+        <TimeDerivative variable="V">
+          <MathInline>-U + V*beta + alpha*(V*V) + zeta + Isyn/C_m</MathInline>
+        </TimeDerivative>
+        <OnCondition target_regime="subthreshold_regime">
+          <Trigger>
+            <MathInline>V &gt; theta</MathInline>
+          </Trigger>
+          <StateAssignment variable="U">
+            <MathInline>U + d</MathInline>
+          </StateAssignment>
+          <StateAssignment variable="V">
+            <MathInline>c</MathInline>
+          </StateAssignment>
+          <OutputEvent port="spike"/>
+        </OnCondition>
+      </Regime>
+    </Dynamics>
+  </ComponentClass>
+  <ComponentClass name="IzhikevichFastSpiking">
     <Parameter dimension="capacitance" name="Cm"/>
-    <Parameter dimension="voltage" name="Vpeak"/>
-    <Parameter dimension="conductance_per_voltage" name="k"/>
     <Parameter dimension="voltage" name="Vb"/>
+    <Parameter dimension="voltage" name="Vpeak"/>
     <Parameter dimension="voltage" name="Vr"/>
     <Parameter dimension="voltage" name="Vt"/>
-    <StateVariable dimension="current" name="U"/>
-    <StateVariable dimension="voltage" name="V"/>
-    <Alias name="V_deriv">
-      <MathInline>(-U + iSyn + k*(V - Vr)*(V - Vt))/Cm</MathInline>
-    </Alias>
-    <Regime name="subVb">
-      <OnCondition target_regime="subthreshold">
-        <Trigger>
-          <MathInline>V &gt; Vb</MathInline>
-        </Trigger>
-      </OnCondition>
-      <TimeDerivative variable="U">
-        <MathInline>-U*a</MathInline>
-      </TimeDerivative>
-      <TimeDerivative variable="V">
-        <MathInline>V_deriv</MathInline>
-      </TimeDerivative>
-    </Regime>
-    <Regime name="subthreshold">
-      <OnCondition target_regime="subthreshold">
-        <Trigger>
-          <MathInline>V &gt; Vpeak</MathInline>
-        </Trigger>
-        <OutputEvent port="spikeOutput"/>
-        <StateAssignment variable="V">
-          <MathInline>c</MathInline>
-        </StateAssignment>
-      </OnCondition>
-      <TimeDerivative variable="U">
-        <MathInline>a*(-U + b*((V - Vb)*(V - Vb)*(V - Vb)))</MathInline>
-      </TimeDerivative>
-      <TimeDerivative variable="V">
-        <MathInline>V_deriv</MathInline>
-      </TimeDerivative>
-    </Regime>
-  </Dynamics>
-  <DynamicsProperties name="SampleIzhikevich">
-    <Definition name="Izhikevich"/>
-    <Property name="C_m">
-      <Quantity units="pF">
-        <SingleValue>1.0</SingleValue>
-      </Quantity>
+    <Parameter dimension="per_time" name="a"/>
+    <Parameter dimension="conductance_per_voltage2" name="b"/>
+    <Parameter dimension="voltage" name="c"/>
+    <Parameter dimension="conductance_per_voltage" name="k"/>
+    <AnalogReducePort operator="+" dimension="current" name="iSyn"/>
+    <EventSendPort name="spikeOutput"/>
+    <AnalogSendPort dimension="current" name="U"/>
+    <AnalogSendPort dimension="voltage" name="V"/>
+    <Dynamics>
+      <StateVariable dimension="current" name="U"/>
+      <StateVariable dimension="voltage" name="V"/>
+      <Regime name="subVb">
+        <TimeDerivative variable="U">
+          <MathInline>-U*a</MathInline>
+        </TimeDerivative>
+        <TimeDerivative variable="V">
+          <MathInline>V_deriv</MathInline>
+        </TimeDerivative>
+        <OnCondition target_regime="subthreshold">
+          <Trigger>
+            <MathInline>V &gt; Vb</MathInline>
+          </Trigger>
+        </OnCondition>
+      </Regime>
+      <Regime name="subthreshold">
+        <TimeDerivative variable="U">
+          <MathInline>a*(-U + b*((V - Vb)*(V - Vb)*(V - Vb)))</MathInline>
+        </TimeDerivative>
+        <TimeDerivative variable="V">
+          <MathInline>V_deriv</MathInline>
+        </TimeDerivative>
+        <OnCondition target_regime="subthreshold">
+          <Trigger>
+            <MathInline>V &gt; Vpeak</MathInline>
+          </Trigger>
+          <StateAssignment variable="V">
+            <MathInline>c</MathInline>
+          </StateAssignment>
+          <OutputEvent port="spikeOutput"/>
+        </OnCondition>
+      </Regime>
+      <Alias name="V_deriv">
+        <MathInline>(-U + iSyn + k*(V - Vr)*(V - Vt))/Cm</MathInline>
+      </Alias>
+    </Dynamics>
+  </ComponentClass>
+  <Component name="IzhikevichFastSpikingDefault">
+    <Definition>IzhikevichFastSpiking</Definition>
+    <Property units="uF" name="Cm">
+      <SingleValue>20.0</SingleValue>
     </Property>
-    <Property name="a">
-      <Quantity units="per_ms">
-        <SingleValue>0.2</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vb">
+      <SingleValue>-55.0</SingleValue>
     </Property>
-    <Property name="alpha">
-      <Quantity units="per_mV_ms">
-        <SingleValue>0.04</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vpeak">
+      <SingleValue>25.0</SingleValue>
     </Property>
-    <Property name="b">
-      <Quantity units="per_ms">
-        <SingleValue>0.025</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vr">
+      <SingleValue>-55.0</SingleValue>
     </Property>
-    <Property name="beta">
-      <Quantity units="per_ms">
-        <SingleValue>5.0</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vt">
+      <SingleValue>-40.0</SingleValue>
     </Property>
-    <Property name="c">
-      <Quantity units="mV">
-        <SingleValue>-75.0</SingleValue>
-      </Quantity>
+    <Property units="per_ms" name="a">
+      <SingleValue>0.2</SingleValue>
     </Property>
-    <Property name="d">
-      <Quantity units="mV_per_ms">
-        <SingleValue>0.2</SingleValue>
-      </Quantity>
+    <Property units="uS_per_mV2" name="b">
+      <SingleValue>0.025</SingleValue>
     </Property>
-    <Property name="theta">
-      <Quantity units="mV">
-        <SingleValue>-50.0</SingleValue>
-      </Quantity>
+    <Property units="mV" name="c">
+      <SingleValue>-45.0</SingleValue>
     </Property>
-    <Property name="zeta">
-      <Quantity units="mV_per_ms">
-        <SingleValue>140.0</SingleValue>
-      </Quantity>
+    <Property units="uS_per_mV" name="k">
+      <SingleValue>1.0</SingleValue>
     </Property>
-    <Initial name="U">
-      <Quantity units="mV_per_ms">
-        <SingleValue>-1.625</SingleValue>
-      </Quantity>
+  </Component>
+  <Component name="SampleIzhikevich">
+    <Definition>Izhikevich</Definition>
+    <Property units="pF" name="C_m">
+      <SingleValue>1.0</SingleValue>
+    </Property>
+    <Property units="per_ms" name="a">
+      <SingleValue>0.2</SingleValue>
+    </Property>
+    <Property units="per_mV_ms" name="alpha">
+      <SingleValue>0.04</SingleValue>
+    </Property>
+    <Property units="per_ms" name="b">
+      <SingleValue>0.025</SingleValue>
+    </Property>
+    <Property units="per_ms" name="beta">
+      <SingleValue>5.0</SingleValue>
+    </Property>
+    <Property units="mV" name="c">
+      <SingleValue>-75.0</SingleValue>
+    </Property>
+    <Property units="mV_per_ms" name="d">
+      <SingleValue>0.2</SingleValue>
+    </Property>
+    <Property units="mV" name="theta">
+      <SingleValue>-50.0</SingleValue>
+    </Property>
+    <Property units="mV_per_ms" name="zeta">
+      <SingleValue>140.0</SingleValue>
+    </Property>
+    <Initial units="mV_per_ms" name="U">
+      <SingleValue>-1.625</SingleValue>
     </Initial>
-    <Initial name="V">
-      <Quantity units="mV">
-        <SingleValue>-70.0</SingleValue>
-      </Quantity>
+    <Initial units="mV" name="V">
+      <SingleValue>-70.0</SingleValue>
     </Initial>
-  </DynamicsProperties>
-  <DynamicsProperties name="SampleIzhikevichFastSpiking">
-    <Definition name="IzhikevichFastSpiking"/>
-    <Property name="Cm">
-      <Quantity units="pF">
-        <SingleValue>20</SingleValue>
-      </Quantity>
+  </Component>
+  <Component name="SampleIzhikevichFastSpiking">
+    <Definition>IzhikevichFastSpiking</Definition>
+    <Property units="pF" name="Cm">
+      <SingleValue>20.0</SingleValue>
     </Property>
-    <Property name="Vb">
-      <Quantity units="mV">
-        <SingleValue>-55</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vb">
+      <SingleValue>-55.0</SingleValue>
     </Property>
-    <Property name="Vpeak">
-      <Quantity units="mV">
-        <SingleValue>25</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vpeak">
+      <SingleValue>25.0</SingleValue>
     </Property>
-    <Property name="Vr">
-      <Quantity units="mV">
-        <SingleValue>-55</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vr">
+      <SingleValue>-55.0</SingleValue>
     </Property>
-    <Property name="Vt">
-      <Quantity units="mV">
-        <SingleValue>-40</SingleValue>
-      </Quantity>
+    <Property units="mV" name="Vt">
+      <SingleValue>-40.0</SingleValue>
     </Property>
-    <Property name="a">
-      <Quantity units="per_ms">
-        <SingleValue>0.2</SingleValue>
-      </Quantity>
+    <Property units="per_ms" name="a">
+      <SingleValue>0.2</SingleValue>
     </Property>
-    <Property name="b">
-      <Quantity units="nS_per_mV2">
-        <SingleValue>0.025</SingleValue>
-      </Quantity>
+    <Property units="nS_per_mV2" name="b">
+      <SingleValue>0.025</SingleValue>
     </Property>
-    <Property name="c">
-      <Quantity units="mV">
-        <SingleValue>-45</SingleValue>
-      </Quantity>
+    <Property units="mV" name="c">
+      <SingleValue>-45.0</SingleValue>
     </Property>
-    <Property name="k">
-      <Quantity units="nS_per_mV">
-        <SingleValue>1</SingleValue>
-      </Quantity>
+    <Property units="nS_per_mV" name="k">
+      <SingleValue>1.0</SingleValue>
     </Property>
-    <Initial name="U">
-      <Quantity units="mV_per_ms">
-        <SingleValue>-1.625</SingleValue>
-      </Quantity>
+    <Initial units="mV_per_ms" name="U">
+      <SingleValue>-1.625</SingleValue>
     </Initial>
-    <Initial name="V">
-      <Quantity units="mV">
-        <SingleValue>-70</SingleValue>
-      </Quantity>
+    <Initial units="mV" name="V">
+      <SingleValue>-70.0</SingleValue>
     </Initial>
-  </DynamicsProperties>
-  <DynamicsProperties name="IzhikevichFastSpikingDefault">
-    <Definition name="IzhikevichFastSpiking"/>
-    <Property name="Cm">
-      <Quantity units="uF">
-        <SingleValue>20.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="Vb">
-      <Quantity units="mV">
-        <SingleValue>-55.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="Vpeak">
-      <Quantity units="mV">
-        <SingleValue>25.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="Vr">
-      <Quantity units="mV">
-        <SingleValue>-55.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="Vt">
-      <Quantity units="mV">
-        <SingleValue>-40.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="a">
-      <Quantity units="per_ms">
-        <SingleValue>0.2</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="b">
-      <Quantity units="uS_per_mV2">
-        <SingleValue>0.025</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="c">
-      <Quantity units="mV">
-        <SingleValue>-45.0</SingleValue>
-      </Quantity>
-    </Property>
-    <Property name="k">
-      <Quantity units="uS_per_mV">
-        <SingleValue>1.0</SingleValue>
-      </Quantity>
-    </Property>
-  </DynamicsProperties>
-  <Dimension i="3" l="-4" m="-2" t="6" name="conductance_per_voltage"/>
-  <Dimension i="1" name="current"/>
+  </Component>
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
-  <Dimension i="1" l="-2" m="-1" t="2" name="per_time_voltage"/>
-  <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/>
-  <Dimension name="per_time" t="-1"/>
-  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="3" l="-4" m="-2" t="6" name="conductance_per_voltage"/>
   <Dimension i="4" l="-6" m="-3" t="9" name="conductance_per_voltage2"/>
+  <Dimension i="1" name="current"/>
+  <Dimension name="per_time" t="-1"/>
+  <Dimension i="1" l="-2" m="-1" t="2" name="per_time_voltage"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Dimension i="-1" l="2" m="1" t="-4" name="voltage_per_time"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="mV_per_ms" dimension="voltage_per_time" power="0"/>
   <Unit symbol="nS_per_mV" dimension="conductance_per_voltage" power="-6"/>
+  <Unit symbol="nS_per_mV2" dimension="conductance_per_voltage2" power="-3"/>
   <Unit symbol="pF" dimension="capacitance" power="-12"/>
   <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
-  <Unit symbol="mV_per_ms" dimension="voltage_per_time" power="0"/>
-  <Unit symbol="uS_per_mV" dimension="conductance_per_voltage" power="0"/>
-  <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="per_ms" dimension="per_time" power="3"/>
   <Unit symbol="uF" dimension="capacitance" power="-6"/>
-  <Unit symbol="nS_per_mV2" dimension="conductance_per_voltage2" power="-3"/>
+  <Unit symbol="uS_per_mV" dimension="conductance_per_voltage" power="0"/>
   <Unit symbol="uS_per_mV2" dimension="conductance_per_voltage2" power="0"/>
 </NineML>

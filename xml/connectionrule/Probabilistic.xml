@@ -1,6 +1,8 @@
-<NineML xmlns="http://nineml.net/9ML/2.0">
-  <ConnectionRule name="Probabilistic" standard_library="http://nineml.net/9ML/1.0/connectionrules/Probabilistic">
-    <Parameter name="probability" dimension="dimensionless"/>
-  </ConnectionRule>
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="Probabilistic">
+    <Parameter dimension="dimensionless" name="probability"/>
+    <ConnectionRule standard_library="http://nineml.net/9ML/1.0/connectionrules/probabilistic"/>
+  </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

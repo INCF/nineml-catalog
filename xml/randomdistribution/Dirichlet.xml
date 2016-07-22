@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<NineML xmlns="http://nineml.net/9ML/2.0">
-  <RandomDistribution name="DirichletDistribution" standard_library="http://www.uncertml.org/distributions/dirichlet">
-    <Parameter name="concentration" dimension="dimensionless"/>
-  </RandomDistribution>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="DirichletDistribution">
+    <Parameter dimension="dimensionless" name="concentration"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/dirichlet"/>
+  </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>
