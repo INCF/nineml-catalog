@@ -1,3 +1,4 @@
 prune .deprecated
+recursive-include ninemlcatalog/catalog/ *.xml
 recursive-exclude * .gitignore
 recursive-exclude * .DS_Store

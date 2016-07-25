@@ -9,7 +9,7 @@ import ninemlcatalog
 class TestLoadCatalog(TestCase):
 
     repo_root = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), '..', '..'))
+        os.path.join(os.path.dirname(__file__), '..'))
     xml_root = os.path.join(repo_root, 'xml')
 
     def setUp(self):

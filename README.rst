@@ -23,16 +23,28 @@ Installation
 To "install" the XML models in the NineML Catalog simply clone the repository
 to somewhere sensible on your local computer (e.g. $HOME/git/ninemlcatalog),
 and then you can reference the models from other NineML documents using either
-relative or absolute URLs.
+relative or absolute URLs. Before cloning, it is best to create a fork of the central
+repo (https://github.com/INCF/NineMLCatalog) so you can backup any modifications
+to your own GitHub repo, and then open merge requests with the central repo.
+
+To make merging with the central repository feasible it is strongly recommeded that
+you make any distinct sets of changes in separate feature branches from the 
+central repo's master branch and then merge them together to create your "develop"
+branch of the catalog with all your customisations.
 
 To install the python module you will need to install the lib9ML python package
 (see http://github.com/INCF/lib9ML). Then simply add the 'python' directory in
 the catalog repository to your PYTHONPATH. Once lib9ML is installed you will
 then be able to run the unit-tests by the command
  
-  python -m unittest <ninemlcatlog-home>/test/unittests/test_validation.py
+  python -m unittest <ninemlcatlog-home>/unittests/test_validation.py
   
 and it will attempt to load and validate every model in the catalog.
+
+NB: The Python ninemlcatalog package can also be installed using setuptools (e.g. 
+pip or easy_install) via the setup.py script in the python directory. However, this
+is approach is not recommended for general use (only for testing environment
+installations), as it is better to have a separate catalog per user.
 
 
 Contributing
