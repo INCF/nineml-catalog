@@ -1,5 +1,5 @@
 NineML Catalog
-========
+==============
 
 The NineML Catalog is a collection of NineML models (see http://nineml.net)
 written in XML. See http://nineml.net/software/ for a list of software that
@@ -11,14 +11,14 @@ Python library (see http://github.com/INCF/lib9ML).
 
 
 Editors
----
+-------
 
 The NineML Calalog is maintained by the NineML committee
 (http://nineml.net/committee).
 
 
 Installation
----
+------------
 
 To "install" the XML models in the NineML Catalog simply clone the repository
 to somewhere sensible on your local computer (e.g. $HOME/git/ninemlcatalog),
@@ -36,7 +36,7 @@ and it will attempt to load and validate every model in the catalog.
 
 
 Contributing
----
+------------
 
 Contributions to the catalog are most welcome. To add a model or amend an 
 existing one simply make the changes to your local model, push them to your

@@ -1,0 +1,3 @@
+prune .deprecated
+recursive-exclude * .gitignore
+recursive-exclude * .DS_Store
