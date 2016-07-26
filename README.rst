@@ -33,9 +33,10 @@ To install the python module you will need to install the lib9ML python package
 the catalog repository to your PYTHONPATH. Once lib9ML is installed you will
 then be able to run the unit-tests by the command
  
-  python -m unittest <ninemlcatlog-home>/unittests/test_validation.py
+  python -m unittest test.test_load_all
   
-and it will attempt to load and validate every model in the catalog.
+from the repo root directory and it will attempt to load and validate every
+model in the catalog.
 
 NB: The Python ninemlcatalog package can also be installed using setuptools (e.g. 
 pip or easy_install) via the setup.py script in the python directory. However, this
