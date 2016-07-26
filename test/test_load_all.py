@@ -1,7 +1,6 @@
 import sys
 import os.path
 from unittest import TestCase
-import nineml
 import traceback
 import ninemlcatalog
 
@@ -25,8 +24,8 @@ class TestLoadCatalog(TestCase):
             if not f.startswith('.') and f not in self.gitignore:
                 pth = os.path.abspath(os.path.join(dirname, f))
                 if os.path.isdir(pth):
-                     for p in self.iterate_paths(pth):
-                         yield p
+                        for p in self.iterate_paths(pth):
+                            yield p
                 elif f.endswith('.xml'):
                     yield pth[len(self.xml_root):-4]
 
@@ -36,7 +35,7 @@ class TestLoadCatalog(TestCase):
             # Just check to see whether all elements of the document load
             # without error
             try:
-                all_elems = list(ninemlcatalog.load(pth).elements)
+                _ = list(ninemlcatalog.load(pth).elements)
             except Exception:
                 errors.append(
                     (pth, traceback.format_exception(*sys.exc_info())))
@@ -46,5 +45,3 @@ class TestLoadCatalog(TestCase):
             "models from the catalog:\n\n{}"
             .format('\n\n'.join("{}\n---\n{}".format(pth, '\n'.join(trace))
                                 for pth, trace in errors)))
-            
-             

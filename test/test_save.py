@@ -1,25 +1,26 @@
 from unittest import TestCase
 from ninemlcatalog import load, save
 
+LIAF_PATH = 'neuron/LeakyIntegrateAndFire'
+LIAF_NAME = 'LeakyIntegrateAndFire'
+BRUNEL_SR_PATH = 'network/brunel2000/SR'
+
 
 class TestSave(TestCase):
 
     def test_liaf_round_trip(self):
-        path = 'neuron/LeakyIntegrateAndFire'
-        name = 'LeakyIntegrateAndFire'
-        liaf_doc = load(path)
-        liaf = load(path, name)
-        save(liaf, path, name)
-        reloaded_doc = load(path)
+        liaf_doc = load(LIAF_PATH)
+        liaf = load(LIAF_PATH, LIAF_NAME)
+        save(liaf, LIAF_PATH, LIAF_NAME)
+        reloaded_doc = load(LIAF_PATH)
         # FIXME: Should check a modified version of the model and then resave
         #        the original
         self.assertEqual(liaf_doc, reloaded_doc)
 
     def test_brunel_round_trip(self):
-        path = 'network/Brunel2000/SR'
-        brunel = load(path)
-        save(brunel, path)
-        reloaded_brunel = load(path)
+        brunel = load(BRUNEL_SR_PATH)
+        save(brunel, BRUNEL_SR_PATH)
+        reloaded_brunel = load(BRUNEL_SR_PATH)
         # FIXME: Should check a modified version of the model and then resave
         #        the original
         self.assertEqual(brunel, reloaded_brunel)
