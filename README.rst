@@ -67,4 +67,8 @@ It is also encouraged to create or link your model with an existing entry on
 Open Source Brain
 (see http://www.opensourcebrain.org/docs#Creating_Your_Own_Project).
 
-https://travis-ci.org/tclose/NineMLCatalog.svg?branch=develop_backport
+.. image:: https://travis-ci.org/tclose/NineMLCatalog.svg?branch=develop_backport
+   :target: https://travis-ci.org/tclose/NineMLCatalog?branch=develop_backport
+
+.. image:: https://coveralls.io/repos/github/tclose/NineMLCatalog/badge.svg?branch=develop_backport
+   :target: https://coveralls.io/github/tclose/NineMLCatalog?branch=develop_backport
