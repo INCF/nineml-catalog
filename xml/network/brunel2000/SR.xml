@@ -203,9 +203,12 @@
         </Property>
       </DynamicsProperties>
     </Plasticity>
-    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response" receive_port="i_synaptic"/>
-    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity" receive_port="q"/>
-    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre" receive_port="spike"/>
+    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response"
+      receive_port="i_synaptic"/>
+    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity"
+      receive_port="q"/>
+    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre"
+      receive_port="spike"/>
   </Projection>
   <Projection name="External">
     <Pre>
@@ -254,9 +257,12 @@
         </Property>
       </DynamicsProperties>
     </Plasticity>
-    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response" receive_port="i_synaptic"/>
-    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity" receive_port="q"/>
-    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre" receive_port="spike"/>
+    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response"
+      receive_port="i_synaptic"/>
+    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity"
+      receive_port="q"/>
+    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre"
+      receive_port="spike"/>
   </Projection>
   <Projection name="Inhibition">
     <Pre>
@@ -310,9 +316,12 @@
         </Property>
       </DynamicsProperties>
     </Plasticity>
-    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response" receive_port="i_synaptic"/>
-    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity" receive_port="q"/>
-    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre" receive_port="spike"/>
+    <AnalogPortConnection receiver_role="post" send_port="i_synaptic" sender_role="response"
+      receive_port="i_synaptic"/>
+    <AnalogPortConnection receiver_role="response" send_port="fixed_weight" sender_role="plasticity"
+      receive_port="q"/>
+    <EventPortConnection receiver_role="response" send_port="spike_output" sender_role="pre"
+      receive_port="spike"/>
   </Projection>
   <Selection name="All">
     <Concatenate>
@@ -324,11 +333,13 @@
       </Item>
     </Concatenate>
   </Selection>
+  <Dimension name="dimensionless"/>
   <Dimension i="2" l="-2" m="-1" t="4" name="capacitance"/>
   <Dimension i="1" name="current"/>
   <Dimension name="per_time" t="-1"/>
   <Dimension name="time" t="1"/>
   <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="unitless" dimension="dimensionless"/>
   <Unit symbol="Hz" dimension="per_time" power="0"/>
   <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Unit symbol="ms" dimension="time" power="-3"/>
