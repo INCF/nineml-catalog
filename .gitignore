@@ -3,3 +3,4 @@
 .pydevproject
 9build
 *.pyc
+*.swp

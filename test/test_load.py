@@ -4,6 +4,8 @@ from unittest import TestCase
 import traceback
 import ninemlcatalog
 
+LIAF_PATH = 'neuron/LeakyIntegrateAndFire'
+LIAF_NAME = 'LeakyIntegrateAndFire'
 
 class TestLoadCatalog(TestCase):
 
@@ -45,3 +47,15 @@ class TestLoadCatalog(TestCase):
             "models from the catalog:\n\n{}"
             .format('\n\n'.join("{}\n---\n{}".format(pth, '\n'.join(trace))
                                 for pth, trace in errors)))
+
+    def test_load_name(self):
+        liaf = ninemlcatalog.load(LIAF_PATH, LIAF_NAME)
+        self.assertEqual(liaf.name, LIAF_NAME,
+                         "Element loaded from '{}' did not match name "
+                         "supplied '{}'".format(LIAF_PATH, LIAF_NAME))
+
+    def test_load_xml_path(self):
+        liaf_doc = ninemlcatalog.load(LIAF_PATH + '.xml')
+        self.assert_(LIAF_NAME in liaf_doc,
+                     "Did not load file with path ending in '.xml'")
+
