@@ -237,10 +237,10 @@
   <Selection name="All">
     <Concatenate>
       <Item index="0">
-        <Reference name="Exc"/>
+        <Reference>Exc</Reference>
       </Item>
       <Item index="1">
-        <Reference name="Inh"/>
+        <Reference>Inh</Reference>
       </Item>
     </Concatenate>
   </Selection>
