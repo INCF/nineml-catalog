@@ -58,7 +58,7 @@ def save(element, path, name=None):
                             .format(url_path))
                 else:
                     raise NineMLCatalogError(
-                        "Cannot save references to relative files outside the"
+                        "Cannot save references to relative files outside the "
                         "catalog '{}', please add them to the catalog first"
                         .format(url))
             elif url.startswith(root + '/'):  # references a catalog file
