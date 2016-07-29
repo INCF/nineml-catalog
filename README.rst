@@ -34,7 +34,7 @@ To install the python module you will need to install the lib9ML python package
 the catalog repository to your PYTHONPATH. Once lib9ML is installed you will
 then be able to run the unit-tests by the command
  
-  python -m unittest test.test_load_all
+  python -m unittest test.test_load
   
 from the git repository directory and it will attempt to load and validate
 every model in the catalog.
