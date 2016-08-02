@@ -3,6 +3,7 @@ python:
   - "2.7"
 # command to install dependencies
 install:
+  - wget https://github.com/sympy/sympy/archive/master.zip && unzip master.zip && pip install ./sympy-master
   - wget https://github.com/tclose/lib9ML/archive/develop.zip
   - unzip develop.zip
   - pip install ./lib9ML-develop 
