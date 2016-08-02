@@ -117,7 +117,7 @@
       <Component name="syn">
         <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
-          <SingleValue>0.5</SingleValue>
+          <SingleValue>0.1</SingleValue>
         </Property>
         <Initial units="nA" name="a">
           <SingleValue>0.0</SingleValue>
@@ -202,7 +202,7 @@
       <Component name="syn">
         <Definition url="../../postsynapticresponse/Alpha.xml">Alpha</Definition>
         <Property units="ms" name="tau">
-          <SingleValue>0.5</SingleValue>
+          <SingleValue>0.1</SingleValue>
         </Property>
         <Initial units="nA" name="a">
           <SingleValue>0.0</SingleValue>
