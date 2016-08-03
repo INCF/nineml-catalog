@@ -109,12 +109,14 @@
           <SingleValue>9198.23131614</SingleValue>
         </Property>
         <Initial units="ms" name="t_next">
-          <Component name="exponential_beta">
-            <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
-            <Property units="unitless" name="rate">
-              <SingleValue>0.1</SingleValue>
-            </Property>
-          </Component>
+          <RandomValue>
+            <Component name="exponential_beta">
+              <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
+              <Property units="unitless" name="rate">
+                <SingleValue>0.1</SingleValue>
+              </Property>
+            </Component>
+          </RandomValue>
         </Initial>
       </Component>
     </Cell>

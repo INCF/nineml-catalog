@@ -121,7 +121,6 @@
       </Component>
     </Cell>
   </Population>
-  <Unit symbol="mV" dimension="voltage" power="-3"/>
   <Population name="Inh">
     <Size>2500</Size>
     <Cell>
