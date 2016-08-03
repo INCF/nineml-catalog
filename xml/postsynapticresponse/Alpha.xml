@@ -1,38 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="Alpha">
-    <Parameter dimension="time" name="tau"/>
-    <EventReceivePort name="spike"/>
-    <AnalogReceivePort dimension="current" name="q"/>
+    <AnalogSendPort dimension="current" name="a"/>
     <AnalogSendPort dimension="current" name="i_synaptic"/>
+    <AnalogSendPort dimension="current" name="b"/>
+    <AnalogReceivePort dimension="current" name="weight"/>
+    <EventReceivePort name="input_spike"/>
+    <Parameter dimension="time" name="tau"/>
     <Dynamics>
       <StateVariable dimension="current" name="a"/>
       <StateVariable dimension="current" name="b"/>
       <Regime name="sole">
         <TimeDerivative variable="a">
-          <MathInline>(-a + 2.71828182845905*b)/tau</MathInline>
+          <MathInline>(-a + b)/tau</MathInline>
         </TimeDerivative>
         <TimeDerivative variable="b">
           <MathInline>-b/tau</MathInline>
         </TimeDerivative>
-        <OnEvent target_regime="sole" port="spike">
+        <OnEvent target_regime="sole" port="input_spike">
           <StateAssignment variable="b">
-            <MathInline>b + q</MathInline>
+            <MathInline>b + weight</MathInline>
           </StateAssignment>
-        </OnEvent>
+        </OnEvent>        
       </Regime>
       <Alias name="i_synaptic">
         <MathInline>a</MathInline>
       </Alias>
     </Dynamics>
   </ComponentClass>
-  <Component name="AlphaProperties">
-    <Definition>Alpha</Definition>
-    <Property units="ms" name="tau">
-      <SingleValue>0.1</SingleValue>
-    </Property>
-  </Component>
-  <Dimension i="1" name="current"/>
+  <Dimension name="current" i="1"/>
   <Dimension name="time" t="1"/>
-  <Unit symbol="ms" dimension="time" power="-3"/>
 </NineML>
