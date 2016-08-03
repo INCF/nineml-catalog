@@ -13,7 +13,7 @@
   </Selection>
   <Dimension name="per_time" t="-1"/>
   <Population name="Exc">
-    <Size>4000</Size>
+    <Size>10000</Size>
     <Cell>
       <Component name="nrn">
         <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
@@ -63,7 +63,7 @@
       <Component name="RandomExc">
         <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
         <Property units="unitless" name="number">
-          <SingleValue>400</SingleValue>
+          <SingleValue>1000</SingleValue>
         </Property>
       </Component>
     </Connectivity>
@@ -87,7 +87,7 @@
       <Component name="ExcitatoryPlasticity">
         <Definition url="../../plasticity/Static.xml">Static</Definition>
         <Property units="nA" name="weight">
-          <SingleValue>2.4</SingleValue>
+          <SingleValue>13.7707633471</SingleValue>
         </Property>
       </Component>
     </Plasticity>
@@ -101,12 +101,12 @@
   <Dimension i="-2" l="2" m="1" t="-3" name="resistance"/>
   <Dimension i="1" name="current"/>
   <Population name="Ext">
-    <Size>5000</Size>
+    <Size>12500</Size>
     <Cell>
       <Component name="stim">
         <Definition url="../../input/Poisson.xml">Poisson</Definition>
         <Property units="Hz" name="rate">
-          <SingleValue>20000.0</SingleValue>
+          <SingleValue>19364.6975077</SingleValue>
         </Property>
         <Initial units="ms" name="t_next">
           <RandomValue>
@@ -133,7 +133,7 @@
       <Component name="RandomInh">
         <Definition url="../../connectionrule/RandomFanIn.xml">RandomFanIn</Definition>
         <Property units="unitless" name="number">
-          <SingleValue>100</SingleValue>
+          <SingleValue>250</SingleValue>
         </Property>
       </Component>
     </Connectivity>
@@ -157,7 +157,7 @@
       <Component name="InhibitoryPlasticity">
         <Definition url="../../plasticity/Static.xml">Static</Definition>
         <Property units="nA" name="weight">
-          <SingleValue>-12.0</SingleValue>
+          <SingleValue>-68.8538167356</SingleValue>
         </Property>
       </Component>
     </Plasticity>
@@ -166,7 +166,7 @@
     </Delay>
   </Projection>
   <Population name="Inh">
-    <Size>1000</Size>
+    <Size>2500</Size>
     <Cell>
       <Component name="nrn">
         <Definition url="../../neuron/LeakyIntegrateAndFire.xml">LeakyIntegrateAndFire</Definition>
@@ -237,7 +237,7 @@
       <Component name="ExternalPlasticity">
         <Definition url="../../plasticity/Static.xml">Static</Definition>
         <Property units="nA" name="weight">
-          <SingleValue>2.4</SingleValue>
+          <SingleValue>13.7707633471</SingleValue>
         </Property>
       </Component>
     </Plasticity>
