@@ -105,7 +105,7 @@
       <Component name="stim">
         <Definition url="../../input/Poisson.xml">Poisson</Definition>
         <Property units="Hz" name="rate">
-          <SingleValue>38729.3950153</SingleValue>
+          <SingleValue>105277.410697</SingleValue>
         </Property>
         <Initial units="ms" name="t_next">
           <RandomValue>
