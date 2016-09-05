@@ -63,7 +63,7 @@ the central repo's master branch and then merge them together to create your
 
 Before opening a pull request, please add the author information and relevant 
 scientific citations to comments within the annotations block of the document.
-It is also encouraged to create or link your model with an existing entry on
+It is also encouraged to create or link your model with an entry on
 Open Source Brain
 (see http://www.opensourcebrain.org/docs#Creating_Your_Own_Project).
 
