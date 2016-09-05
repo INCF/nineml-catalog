@@ -112,7 +112,7 @@
             <Component name="exponential_beta">
               <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
               <Property units="unitless" name="rate">
-                <SingleValue>0.025</SingleValue>
+                <SingleValue>105277.410697</SingleValue>
               </Property>
             </Component>
           </RandomValue>
