@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="StepCurrent">
+    <Parameter dimension="current" name="amplitude"/>
+    <Parameter dimension="time" name="onset"/>
+    <AnalogSendPort name="current_output" dimension="current"/>
+    <Dynamics>
+      <StateVariable dimension="current" name="current_output"/>
+      <Regime name="default">
+        <OnCondition target_regime="default">
+          <Trigger>
+            <MathInline>t &gt; onset</MathInline>
+          </Trigger>
+          <StateAssignment variable="current_output">
+            <MathInline>amplitude</MathInline>
+          </StateAssignment>
+        </OnCondition>
+      </Regime>
+    </Dynamics>
+  </ComponentClass>
+  <Dimension name="current" i="1"/>
+  <Dimension name="time" t="1"/>
+</NineML>
