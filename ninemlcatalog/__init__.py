@@ -10,11 +10,16 @@ if not os.path.exists(root):
                                         'xml'))
 
 
+class NineMLCatalogSpecifiedMultipleNamesError(Exception):
+    pass
+
+
 def load(path, name=None):
     """
     Retrieves a model from the catalog from the given path
     """
-    doc = nineml.read(get_full_path(path))
+    path, name = get_full_path(path, name)
+    doc = nineml.read(path)
     if name is not None:
         elem = doc[name]
     else:
@@ -22,9 +27,16 @@ def load(path, name=None):
     return elem
 
 
-def get_full_path(path):
+def get_full_path(path, name):
     if isinstance(path, basestring):
+        if '#' in path:
+            parts = path.split('#')
+            if name is not None:
+                raise NineMLCatalogSpecifiedMultipleNamesError(
+                    "Name specified both in kwarg ('{}') and in path string "
+                    "'{}' (i.e. section following #)".format(name, parts[1]))
+            path, name = parts
         if path.endswith('.xml'):
             path = path[:-4]
         path = path.strip('/').split('/')
-    return os.path.join(root, *path) + '.xml'
+    return os.path.join(root, *path) + '.xml', name
