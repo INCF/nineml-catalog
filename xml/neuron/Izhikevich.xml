@@ -84,6 +84,11 @@
           </StateAssignment>
           <OutputEvent port="spikeOutput"/>
         </OnCondition>
+        <OnCondition target_regime="subVb">
+          <Trigger>
+            <MathInline>V &lt; Vb</MathInline>
+          </Trigger>
+        </OnCondition>        
       </Regime>
       <Alias name="V_deriv">
         <MathInline>(-U + iSyn + k*(V - Vr)*(V - Vt))/Cm</MathInline>
