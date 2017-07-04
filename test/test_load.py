@@ -16,7 +16,7 @@ class TestLoadCatalog(TestCase):
 
     def setUp(self):
         with open(os.path.join(self.repo_root, '.gitignore')) as f:
-            self.gitignore = list(f)
+            self.gitignore = f.read().split('\n')
 
     def iterate_paths(self, dirname):
         """
