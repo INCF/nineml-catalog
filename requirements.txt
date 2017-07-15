@@ -1,1 +1,1 @@
-nineml
+git+git://github.com/tclose/nineml-python.git@develop
