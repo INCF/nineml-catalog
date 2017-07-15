@@ -1,6 +1,12 @@
 NineML Catalog
 ==============
 
+.. image:: https://travis-ci.org/tclose/nineml-catalog.svg?branch=develop_backport
+   :target: https://travis-ci.org/tclose/nineml-catalog?branch=develop_backport
+
+.. image:: https://coveralls.io/repos/github/tclose/nineml-catalog/badge.svg?branch=develop_backport
+   :target: https://coveralls.io/github/tclose/nineml-catalog?branch=develop_backport
+
 The `NineML Catalog`_ is a collection of
 NineML models (see http://nineml.net) written in XML. See
 http://nineml.net/software/ for a list of software that have support for
@@ -66,12 +72,6 @@ scientific citations to comments within the annotations block of the document.
 It is also encouraged to create or link your model with an entry on
 Open Source Brain
 (see http://www.opensourcebrain.org/docs#Creating_Your_Own_Project).
-
-.. image:: https://travis-ci.org/tclose/nineml-catalog.svg?branch=develop_backport
-   :target: https://travis-ci.org/tclose/nineml-catalog?branch=develop_backport
-
-.. image:: https://coveralls.io/repos/github/tclose/nineml-catalog/badge.svg?branch=develop_backport
-   :target: https://coveralls.io/github/tclose/nineml-catalog?branch=develop_backport
 
 .. _NineML Catalog: http://github.com/INCF/nineml-catalog
 .. _NineML Python Library: http://github.com/INCF/nineml-python
