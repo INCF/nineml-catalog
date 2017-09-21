@@ -213,7 +213,7 @@
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
-      <Component name="OneToOne">
+      <Component name="OneToOneProps">
         <Definition url="../../connectionrule/OneToOne.xml">OneToOne</Definition>
       </Component>
     </Connectivity>
