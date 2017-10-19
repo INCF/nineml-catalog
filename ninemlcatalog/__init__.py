@@ -1,3 +1,4 @@
+from past.builtins import basestring
 import os.path
 import nineml
 
