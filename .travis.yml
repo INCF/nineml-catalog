@@ -1,11 +1,15 @@
 language: python
-python:
-  - "2.7"
+sudo: false
+matrix:
+    include:
+        - python: 2.7
+        - python: 3.4
+        - python: 3.6
 # command to install dependencies
 install:
   - pip install git+git://github.com/sympy/sympy.git@master
-  - pip install git+git://github.com/tclose/nineml-python.git@serialization
-  - pip install coveralls --use-mirrors
+  - pip install git+git://github.com/tclose/nineml-python.git@@pype9_port
+  - pip install coveralls
 # command to run tests, e.g. python setup.py test
 script:
   nosetests test --with-coverage --cover-package=ninemlcatalog
