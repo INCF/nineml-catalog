@@ -7,8 +7,7 @@ matrix:
         - python: 3.6
 # command to install dependencies
 install:
-  - pip install git+git://github.com/sympy/sympy.git@master
-  - pip install git+git://github.com/tclose/nineml-python.git@@pype9_port
+  - pip install -r requirements.txt
   - pip install coveralls
 # command to run tests, e.g. python setup.py test
 script:
