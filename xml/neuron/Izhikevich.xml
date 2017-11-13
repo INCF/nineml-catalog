@@ -190,7 +190,7 @@
     <Property units="nS_per_mV" name="k">
       <SingleValue>1.0</SingleValue>
     </Property>
-    <Initial units="mV_per_ms" name="U">
+    <Initial units="pA" name="U">
       <SingleValue>-1.625</SingleValue>
     </Initial>
     <Initial units="mV" name="V">
@@ -209,6 +209,7 @@
   <Unit symbol="mV_per_ms" dimension="voltage_per_time" power="0"/>
   <Unit symbol="nS_per_mV" dimension="conductance_per_voltage" power="-6"/>
   <Unit symbol="nS_per_mV2" dimension="conductance_per_voltage2" power="-3"/>
+  <Unit symbol="pA" dimension="current" power="-12"/>
   <Unit symbol="pF" dimension="capacitance" power="-12"/>
   <Unit symbol="per_mV_ms" dimension="per_time_voltage" power="6"/>
   <Unit symbol="per_ms" dimension="per_time" power="3"/>
