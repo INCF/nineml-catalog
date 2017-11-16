@@ -28,7 +28,7 @@ def load(path, name=None):
     return elem
 
 
-def get_full_path(path, name):
+def get_full_path(path, name=None):
     if isinstance(path, basestring):
         if '#' in path:
             parts = path.split('#')
