@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="LogisticDistribution">
-    <Parameter name="location" dimension="dimensionless"/>
-    <Parameter name="scale" dimension="dimensionless"/>
+    <Parameter dimension="dimensionless" name="location"/>
+    <Parameter dimension="dimensionless" name="scale"/>
     <RandomDistribution standard_library="http://www.uncertml.org/distributions/logistic"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>

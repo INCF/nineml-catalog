@@ -36,15 +36,17 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
         <Initial units="mV" name="v">
-          <Component name="uniform_rest_to_threshold">
-            <Definition url="../../randomdistribution/Uniform.xml">UniformDistribution</Definition>
-            <Property units="unitless" name="maximum">
-              <SingleValue>20.0</SingleValue>
-            </Property>
-            <Property units="unitless" name="minimum">
-              <SingleValue>0.0</SingleValue>
-            </Property>
-          </Component>
+          <RandomDistributionValue>
+            <Component name="uniform_rest_to_threshold">
+              <Definition url="../../randomdistribution/Uniform.xml">UniformDistribution</Definition>
+              <Property units="unitless" name="maximum">
+                <SingleValue>20.0</SingleValue>
+              </Property>
+              <Property units="unitless" name="minimum">
+                <SingleValue>0.0</SingleValue>
+              </Property>
+            </Component>
+          </RandomDistributionValue>
         </Initial>
       </Component>
     </Cell>
@@ -103,15 +105,17 @@
       <Component name="stim">
         <Definition url="../../input/Poisson.xml">Poisson</Definition>
         <Property units="Hz" name="rate">
-          <SingleValue>38729.3950153</SingleValue>
+          <SingleValue>105277.410697</SingleValue>
         </Property>
         <Initial units="ms" name="t_next">
-          <Component name="exponential_beta">
-            <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
-            <Property units="unitless" name="rate">
-              <SingleValue>38729.3950153</SingleValue>
-            </Property>
-          </Component>
+          <RandomDistributionValue>
+            <Component name="exponential_beta">
+              <Definition url="../../randomdistribution/Exponential.xml">ExponentialDistribution</Definition>
+              <Property units="unitless" name="rate">
+                <SingleValue>105277.410697</SingleValue>
+              </Property>
+            </Component>
+          </RandomDistributionValue>
         </Initial>
       </Component>
     </Cell>
@@ -146,6 +150,7 @@
         </Initial>
       </Component>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
+      <FromSource send_port="spike_output" receive_port="input_spike"/>
     </Response>
     <Plasticity>
       <Component name="InhibitoryPlasticity">
@@ -183,15 +188,17 @@
           <SingleValue>0.0</SingleValue>
         </Initial>
         <Initial units="mV" name="v">
-          <Component name="uniform_rest_to_threshold">
-            <Definition url="../../randomdistribution/Uniform.xml">UniformDistribution</Definition>
-            <Property units="unitless" name="maximum">
-              <SingleValue>20.0</SingleValue>
-            </Property>
-            <Property units="unitless" name="minimum">
-              <SingleValue>0.0</SingleValue>
-            </Property>
-          </Component>
+          <RandomDistributionValue>
+            <Component name="uniform_rest_to_threshold">
+              <Definition url="../../randomdistribution/Uniform.xml">UniformDistribution</Definition>
+              <Property units="unitless" name="maximum">
+                <SingleValue>20.0</SingleValue>
+              </Property>
+              <Property units="unitless" name="minimum">
+                <SingleValue>0.0</SingleValue>
+              </Property>
+            </Component>
+          </RandomDistributionValue>
         </Initial>
       </Component>
     </Cell>
@@ -205,7 +212,7 @@
       <FromResponse send_port="i_synaptic" receive_port="i_synaptic"/>
     </Destination>
     <Connectivity>
-      <Component name="OneToOne">
+      <Component name="OneToOneProps">
         <Definition url="../../connectionrule/OneToOne.xml">OneToOne</Definition>
       </Component>
     </Connectivity>
@@ -223,6 +230,7 @@
         </Initial>
       </Component>
       <FromPlasticity send_port="fixed_weight" receive_port="weight"/>
+      <FromSource send_port="spike_output" receive_port="input_spike"/>
     </Response>
     <Plasticity>
       <Component name="ExternalPlasticity">

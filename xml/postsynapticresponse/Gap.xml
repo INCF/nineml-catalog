@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="Gap">
+    <Parameter dimension="conductance" name="g"/>
+    <AnalogReceivePort dimension="voltage" name="v"/>
+    <AnalogReceivePort dimension="voltage" name="vgap"/>
+    <AnalogSendPort dimension="current" name="i"/>
+    <Dynamics>
+      <Regime name="regime_0"/>
+      <Alias name="i">
+        <MathInline>g*(v - vgap)</MathInline>
+      </Alias>
+    </Dynamics>
+  </ComponentClass>
+  <Component name="PyNNGapProperties">
+    <Definition>Gap</Definition>
+    <Property units="uS" name="g">
+      <SingleValue>0.0</SingleValue>
+    </Property>
+  </Component>
+  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
+  <Dimension i="1" name="current"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="uS" dimension="conductance" power="-6"/>
+</NineML>

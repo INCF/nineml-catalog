@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="TMGSyn">
+    <Parameter dimension="voltage" name="e"/>
+    <Parameter dimension="time" name="tau"/>
+    <AnalogReceivePort dimension="voltage" name="v"/>
+    <AnalogSendPort dimension="current" name="i"/>
+    <Dynamics>
+      <StateVariable dimension="conductance" name="g"/>
+      <Regime name="regime_0">
+        <TimeDerivative variable="g">
+          <MathInline>-g/tau</MathInline>
+        </TimeDerivative>
+      </Regime>
+      <Alias name="i">
+        <MathInline>g*(-e + v)</MathInline>
+      </Alias>
+    </Dynamics>
+  </ComponentClass>
+  <Component name="TMGSynProperties">
+    <Definition>TMGSyn</Definition>
+    <Property units="mV" name="e">
+      <SingleValue>-90.0</SingleValue>
+    </Property>
+    <Property units="ms" name="tau">
+      <SingleValue>3.0</SingleValue>
+    </Property>
+  </Component>
+  <Dimension i="2" l="-2" m="-1" t="3" name="conductance"/>
+  <Dimension i="1" name="current"/>
+  <Dimension name="time" t="1"/>
+  <Dimension i="-1" l="2" m="1" t="-3" name="voltage"/>
+  <Unit symbol="mV" dimension="voltage" power="-3"/>
+  <Unit symbol="ms" dimension="time" power="-3"/>
+</NineML>

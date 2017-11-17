@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="FDistribution">
-    <Parameter name="denominator" dimension="dimensionless"/>
-    <Parameter name="numerator" dimension="dimensionless"/>
-     <RandomDistribution standard_library="http://www.uncertml.org/distributions/f"/>
+    <Parameter dimension="dimensionless" name="denominator"/>
+    <Parameter dimension="dimensionless" name="numerator"/>
+    <RandomDistribution standard_library="http://www.uncertml.org/distributions/f"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>
 </NineML>

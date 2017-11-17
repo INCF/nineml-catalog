@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
   <ComponentClass name="MultinomialDistribution">
-    <Parameter name="numberOfTrials" dimension="dimensionless"/>
-    <Parameter name="probabilities" dimension="dimensionless"/>
+    <Parameter dimension="dimensionless" name="numberOfTrials"/>
+    <Parameter dimension="dimensionless" name="probabilities"/>
     <RandomDistribution standard_library="http://www.uncertml.org/distributions/multinomial"/>
   </ComponentClass>
   <Dimension name="dimensionless"/>

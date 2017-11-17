@@ -1,0 +1,16 @@
+language: python
+sudo: false
+matrix:
+    include:
+        - python: 2.7
+        - python: 3.4
+        - python: 3.6
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+# command to run tests, e.g. python setup.py test
+script:
+  nosetests test --with-coverage --cover-package=ninemlcatalog
+after_success:
+  coveralls

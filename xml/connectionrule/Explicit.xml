@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="Explicit">
+    <Parameter dimension="dimensionless" name="destinationIndices"/>
+    <Parameter dimension="dimensionless" name="sourceIndices"/>
+    <ConnectionRule standard_library="http://nineml.net/9ML/1.0/connectionrules/Explicit"/>
+  </ComponentClass>
+  <Dimension name="dimensionless"/>
+</NineML>

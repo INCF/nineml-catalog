@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <NineML xmlns="http://nineml.net/9ML/1.0">
-  <ComponentClass name="Poisson">
+  <ComponentClass name="ConstantRate">
     <Parameter dimension="per_time" name="rate"/>
     <EventSendPort name="spike_output"/>
     <Dynamics>
@@ -11,7 +11,7 @@
             <MathInline>t &gt; t_next</MathInline>
           </Trigger>
           <StateAssignment variable="t_next">
-            <MathInline>one_second*random.exponential(one_second*rate) + t</MathInline>
+            <MathInline>t + 1.0/rate</MathInline>
           </StateAssignment>
           <OutputEvent port="spike_output"/>
         </OnCondition>

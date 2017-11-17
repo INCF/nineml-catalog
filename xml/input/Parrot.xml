@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<NineML xmlns="http://nineml.net/9ML/1.0">
+  <ComponentClass name="Parrot">
+    <EventReceivePort name="spike_input"/>
+    <EventSendPort name="spike_output"/>
+    <Dynamics>
+      <Regime name="default">
+        <OnEvent target_regime="default" port="spike_input">
+          <OutputEvent port="spike_output"/>
+        </OnEvent>
+      </Regime>
+    </Dynamics>
+  </ComponentClass>
+</NineML>
