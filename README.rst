@@ -1,11 +1,11 @@
 NineML Catalog
 ==============
 
-.. image:: https://travis-ci.org/tclose/nineml-catalog.svg?branch=develop_backport
-   :target: https://travis-ci.org/tclose/nineml-catalog?branch=develop_backport
+.. image:: https://travis-ci.org/INCF/nineml-catalog.svg?branch=develop_backport
+   :target: https://travis-ci.org/INCF/nineml-catalog?branch=develop_backport
 
-.. image:: https://coveralls.io/repos/github/tclose/nineml-catalog/badge.svg?branch=develop_backport
-   :target: https://coveralls.io/github/tclose/nineml-catalog?branch=develop_backport
+.. image:: https://coveralls.io/repos/github/INCF/nineml-catalog/badge.svg?branch=develop_backport
+   :target: https://coveralls.io/github/INCF/nineml-catalog?branch=develop_backport
 
 The `NineML Catalog`_ is a collection of
 NineML models (see http://nineml.net) written in XML. See
