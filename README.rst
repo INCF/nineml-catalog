@@ -35,12 +35,12 @@ central repo (https://github.com/INCF/nineml-catalog) so you can backup any
 modifications to your own GitHub repo, and then open merge requests with the
 central repo (see Contributing).
 
-To install the python module you will need to install the lib9ML python package
-(see `NineML Python Library`_). Then simply add the 'python' directory in
-the catalog repository to your PYTHONPATH. Once lib9ML is installed you will
-then be able to run the unit-tests by the command
+To install the python module you will need to install the `NineML Python library`_.
+Then simply add the 'python' directory in the catalog repository to your
+PYTHONPATH. Once `NineML Python library`_ is installed you will then be able
+to run the unit-tests by the command
  
-  python -m unittest test.test_load
+  $ python -m unittest test.test_load
   
 from the git repository directory and it will attempt to load and validate
 every model in the catalog.
