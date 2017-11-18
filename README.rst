@@ -28,12 +28,12 @@ Installation
 ------------
 
 To "install" the XML models in the NineML Catalog simply clone the repository
-to somewhere sensible on your local computer (e.g. $HOME/git/ninemlcatalog),
+to somewhere sensible on your local computer (e.g. $HOME/git/nineml-catalog),
 and then you can reference the models from other NineML documents using either
 relative or absolute URLs. Before cloning, it is best to create a fork of the
 central repo (https://github.com/INCF/nineml-catalog) so you can backup any
 modifications to your own GitHub repo, and then open merge requests with the
-central repo (see Contributing).
+central repo (see Contributing_).
 
 To install the python module you will need to install the `NineML Python library`_.
 Then simply add the 'python' directory in the catalog repository to your
