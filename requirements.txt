@@ -1,2 +1,2 @@
-git+git://github.com/tclose/nineml-python.git@pype9_port
-future
+nineml >= 1.0rc1
+future >= 0.16.0

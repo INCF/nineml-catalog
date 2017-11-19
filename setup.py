@@ -25,18 +25,18 @@ try:
     os.symlink(xml_dir, catalog_dir)
     setup(
         name="ninemlcatalog",
-        version="1.0",
+        version="0.1",
         packages=find_packages(),
         package_data={PACKAGE_NAME: package_data},
-        author=("Thomas G. Close"),
-        author_email="nineml-users@incf.org",
+        author=("The NineML Committee"),
+        author_email="tom.g.close@gmail.com",
         description=(
             "A collection of 9ML models and basic Python functions for "
             "accessing them"),
         long_description=open("README.rst").read(),
         license="MIT Licence",
         keywords="computational neuroscience modeling interoperability XML",
-        url="http://nineml.incf.org",
+        url="http://nineml.net",
         classifiers=['Development Status :: 4 - Beta',
                      'Environment :: Console',
                      'Intended Audience :: Science/Research',
@@ -45,7 +45,7 @@ try:
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2',
                      'Topic :: Scientific/Engineering'],
-        install_requires=[],  # ['nineml'],
+        install_requires=['nineml'],
         tests_require=['nose']
     )
 finally:
