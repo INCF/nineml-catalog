@@ -23,7 +23,7 @@ for convenient access to the models stored in the catalog using the
 Editors
 -------
 
-The `NineML Calalog`_ is maintained by the NineML committee
+The `NineML Catalog`_ is maintained by the NineML committee
 (http://nineml.net/committee).
 
 
@@ -76,5 +76,5 @@ Open Source Brain
 (see http://www.opensourcebrain.org/docs#Creating_Your_Own_Project).
 
 .. _NineML: http://nineml.net
-.. _NineML Catalog: http://github.com/INCF/nineml-catalog
-.. _NineML Python Library: http://github.com/INCF/nineml-python
+.. _`NineML Catalog`: http://github.com/INCF/nineml-catalog
+.. _`NineML Python Library`: http://nineml-python.readthedocs.io
