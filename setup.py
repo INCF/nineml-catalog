@@ -45,7 +45,8 @@ try:
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2',
                      'Topic :: Scientific/Engineering'],
-        install_requires=['nineml'],
+        install_requires=['nineml>=1.0rc2',
+                          'future>=0.16'],
         tests_require=['nose']
     )
 finally:

@@ -1,16 +1,19 @@
 NineML Catalog
 ==============
 
-.. image:: https://travis-ci.org/INCF/nineml-catalog.svg?branch=develop_backport
-   :target: https://travis-ci.org/INCF/nineml-catalog?branch=develop_backport
+.. image:: https://travis-ci.org/INCF/nineml-catalog.svg
+   :target: https://travis-ci.org/INCF/nineml-catalog
+.. image:: https://coveralls.io/repos/github/INCF/nineml-catalog/badge.svg
+   :target: https://coveralls.io/github/INCF/nineml-catalog
+.. image:: https://img.shields.io/pypi/pyversions/ninemlcatalog.svg
+    :target: https://pypi.python.org/pypi/ninemlcatalog/
+    :alt: Supported Python versions
+.. image:: https://img.shields.io/pypi/v/ninemlcatalog.svg
+    :target: https://pypi.python.org/pypi/ninemlcatalog/
+    :alt: Latest Version       
 
-.. image:: https://coveralls.io/repos/github/INCF/nineml-catalog/badge.svg?branch=develop_backport
-   :target: https://coveralls.io/github/INCF/nineml-catalog?branch=develop_backport
-
-The `NineML Catalog`_ is a collection of
-NineML models (see http://nineml.net) written in XML. See
-http://nineml.net/software/ for a list of software that have support for
-NineML.
+The `NineML Catalog`_ is a collection of NineML_ models written in XML. See
+http://nineml.net/software/ for a list of software that support NineML_.
 
 Also included is a simple Python module 'ninemlcatalog'
 for convenient access to the models stored in the catalog using the
@@ -20,7 +23,7 @@ for convenient access to the models stored in the catalog using the
 Editors
 -------
 
-The NineML Calalog is maintained by the NineML committee
+The `NineML Calalog`_ is maintained by the NineML committee
 (http://nineml.net/committee).
 
 
@@ -40,16 +43,15 @@ Then simply add the 'python' directory in the catalog repository to your
 PYTHONPATH. Once `NineML Python library`_ is installed you will then be able
 to run the unit-tests by the command
  
-  $ python -m unittest test.test_load
+  $ python -m unittest test
   
 from the git repository directory and it will attempt to load and validate
 every model in the catalog.
 
-NB: The Python ninemlcatalog package can also be installed using setuptools
-(e.g. pip or easy_install) via the setup.py script in the python directory.
-However, this approach is not recommended for general use (it is designed for
-installations in testing environments), as it is better to have a separate
-catalog per user.
+.. note: The Python ninemlcatalog package can also be installed from the
+         Python Package Index (PyPI). However, this approach is not recommended
+         for general use (it is designed for installations in testing
+         environments), as it is better to have a separate catalog per user.
 
 
 Contributing
@@ -73,5 +75,6 @@ It is also encouraged to create or link your model with an entry on
 Open Source Brain
 (see http://www.opensourcebrain.org/docs#Creating_Your_Own_Project).
 
+.. _NineML: http://nineml.net
 .. _NineML Catalog: http://github.com/INCF/nineml-catalog
 .. _NineML Python Library: http://github.com/INCF/nineml-python
