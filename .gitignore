@@ -4,3 +4,6 @@
 9build
 *.pyc
 *.swp
+/build/
+/dist/
+/ninemlcatalog.egg-info/
