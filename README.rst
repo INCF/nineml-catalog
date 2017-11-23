@@ -12,7 +12,7 @@ NineML Catalog
     :target: https://pypi.python.org/pypi/ninemlcatalog/
     :alt: Latest Version       
 
-The `NineML Catalog`_ is a collection of NineML_ models written in XML. See
+The NineML Catalog is a collection of NineML_ models written in XML. See
 http://nineml.net/software/ for a list of software that support NineML_.
 
 Also included is a simple Python module 'ninemlcatalog'
@@ -23,7 +23,7 @@ for convenient access to the models stored in the catalog using the
 Editors
 -------
 
-The `NineML Catalog`_ is maintained by the NineML committee
+The NineML Catalog is maintained by the NineML committee
 (http://nineml.net/committee).
 
 
@@ -76,5 +76,4 @@ Open Source Brain
 (see http://www.opensourcebrain.org/docs#Creating_Your_Own_Project).
 
 .. _NineML: http://nineml.net
-.. _`NineML Catalog`: http://github.com/INCF/nineml-catalog
 .. _`NineML Python Library`: http://nineml-python.readthedocs.io

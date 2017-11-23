@@ -36,7 +36,8 @@ try:
             "accessing them"),
         long_description=open("README.rst").read(),
         license="MIT Licence",
-        keywords="computational neuroscience modeling interoperability XML",
+        keywords=("computational neuroscience modeling interoperability XML "
+                  "YAML JSON HDF5"),
         url="http://nineml.net",
         classifiers=['Development Status :: 4 - Beta',
                      'Environment :: Console',
@@ -45,9 +46,16 @@ try:
                      'Natural Language :: English',
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2',
+                     'Programming Language :: Python :: 2.7',
+                     'Programming Language :: Python :: 3',
+                     'Programming Language :: Python :: 3.3',
+                     'Programming Language :: Python :: 3.4',
+                     'Programming Language :: Python :: 3.5',
+                     'Programming Language :: Python :: 3.6',
                      'Topic :: Scientific/Engineering'],
         install_requires=['nineml>=1.0',
                           'future>=0.16'],
+        python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, <4',
         tests_require=['nose']
     )
 finally:
