@@ -6,6 +6,7 @@ from setuptools import setup, find_packages
 SUB_CATALOG_NAME = 'catalog'
 XML_NAME = 'xml'
 PACKAGE_NAME = 'ninemlcatalog'
+VERSION = '0.1'
 
 src_dir = os.path.abspath(os.path.dirname(__file__))
 xml_dir = os.path.join(src_dir, XML_NAME)
@@ -24,8 +25,8 @@ try:
     # gets installed within the python package
     os.symlink(xml_dir, catalog_dir)
     setup(
-        name="ninemlcatalog",
-        version="0.1",
+        name=PACKAGE_NAME,
+        version=VERSION,
         packages=find_packages(),
         package_data={PACKAGE_NAME: package_data},
         author=("The NineML Committee"),
@@ -45,7 +46,7 @@ try:
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2',
                      'Topic :: Scientific/Engineering'],
-        install_requires=['nineml>=1.0rc2',
+        install_requires=['nineml>=1.0',
                           'future>=0.16'],
         tests_require=['nose']
     )
