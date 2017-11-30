@@ -1,2 +1,1 @@
-prune .gitignore
-recursive-include ninemlcatalog/xml/ *.xml
+recursive-include ninemlcatalog/catalog/ *.xml
