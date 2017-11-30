@@ -10,9 +10,8 @@ LIAF_NAME = 'LeakyIntegrateAndFire'
 
 class TestLoadCatalog(TestCase):
 
-    repo_root = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), '..'))
-    xml_root = os.path.join(repo_root, 'xml')
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    catalog_root = os.path.join(repo_root, 'ninemlcatalog', 'catalog')
 
     def setUp(self):
         with open(os.path.join(self.repo_root, '.gitignore')) as f:
@@ -30,11 +29,11 @@ class TestLoadCatalog(TestCase):
                         for p in self.iterate_paths(pth):
                             yield p
                 elif f.endswith('.xml'):
-                    yield pth[len(self.xml_root):-4]
+                    yield pth[len(self.catalog_root):-4]
 
     def test_load_all(self):
         errors = []
-        for pth in self.iterate_paths(self.xml_root):
+        for pth in self.iterate_paths(self.catalog_root):
             # Just check to see whether all elements of the document load
             # without error
             try:
@@ -68,6 +67,3 @@ class TestLoadCatalog(TestCase):
         liaf_doc = ninemlcatalog.load(LIAF_PATH + '.xml')
         self.assert_(LIAF_NAME in liaf_doc,
                      "Did not load file with path ending in '.xml'")
-
-
-
