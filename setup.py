@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 
+import sys
 import os.path
+import shutil
 from setuptools import setup, find_packages
 
 SUB_CATALOG_NAME = 'catalog'
 XML_NAME = 'xml'
 PACKAGE_NAME = 'ninemlcatalog'
-VERSION = '0.1'
 
 src_dir = os.path.abspath(os.path.dirname(__file__))
 xml_dir = os.path.join(src_dir, XML_NAME)
 catalog_dir = os.path.join(src_dir, PACKAGE_NAME, SUB_CATALOG_NAME)
+
+# Get version number
+sys.path.insert(0, src_dir)
+from ninemlcatalog import __version__
+sys.path.pop(0)
 
 # Build package data paths to model description files
 package_data = []
@@ -23,10 +29,10 @@ for path, dirs, files in os.walk(xml_dir):
 try:
     # Create a symlink to the catalog path inside the package directory so it
     # gets installed within the python package
-    os.symlink(xml_dir, catalog_dir)
+    shutil.copytree(xml_dir, catalog_dir)
     setup(
         name=PACKAGE_NAME,
-        version=VERSION,
+        version=__version__,
         packages=find_packages(),
         package_data={PACKAGE_NAME: package_data},
         author=("The NineML Committee"),
@@ -42,7 +48,7 @@ try:
         classifiers=['Development Status :: 4 - Beta',
                      'Environment :: Console',
                      'Intended Audience :: Science/Research',
-                     'License :: OSI Approved :: MIT Licence',
+                     'License :: OSI Approved :: MIT License',
                      'Natural Language :: English',
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2',
@@ -58,4 +64,4 @@ try:
         tests_require=['nose']
     )
 finally:
-    os.unlink(catalog_dir)
+    shutil.rmtree(catalog_dir, ignore_errors=True)

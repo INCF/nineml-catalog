@@ -2,6 +2,8 @@ from past.builtins import basestring
 import os.path
 import nineml
 
+__version__ = '0.1.1'
+
 root = os.path.abspath(os.path.join(os.path.dirname(__file__), 'catalog'))
 # Check to see if package has been installed via pip (not actually recommended)
 # and catalog has been linked inside the package directory, else use the one
