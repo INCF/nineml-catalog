@@ -23,8 +23,7 @@ for convenient access to the models stored in the catalog using the
 Editors
 -------
 
-The NineML Catalog is maintained by the NineML committee
-(http://nineml.net/committee).
+The NineML Catalog is maintained by the `NineML committee`_.
 
 
 Installation
@@ -41,9 +40,9 @@ central repo (see Contributing_).
 To install the python module you will need to install the `NineML Python library`_.
 Then simply add the 'python' directory in the catalog repository to your
 PYTHONPATH. Once `NineML Python library`_ is installed you will then be able
-to run the unit-tests by the command
+to run the unit-tests by the command::
  
-  $ python -m unittest test
+    $ python -m unittest test
   
 from the git repository directory and it will attempt to load and validate
 every model in the catalog.
@@ -77,3 +76,4 @@ Open Source Brain
 
 .. _NineML: http://nineml.net
 .. _`NineML Python Library`: http://nineml-python.readthedocs.io
+.. _`NineML Committee`: http://nineml.net/committee
