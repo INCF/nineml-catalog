@@ -144,6 +144,7 @@
     <Parameter dimension="voltage" name="v_threshold"/>
     <AnalogReducePort operator="+" dimension="current" name="iExt"/>
     <EventSendPort name="outgoingSpike"/>
+    <AnalogSendPort name="v" dimension="voltage"/>
     <Dynamics>
       <StateVariable dimension="dimensionless" name="h"/>
       <StateVariable dimension="dimensionless" name="m"/>
